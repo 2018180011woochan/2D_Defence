@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
+    public static PoolManager instance { get; set; }
+
     public GameObject monsterPrefab;
     public int initSize = 30;
 
@@ -10,12 +12,19 @@ public class PoolManager : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < initSize; ++i)
+        if (instance == null)
         {
-            GameObject monster = Instantiate(monsterPrefab);
-            monster.SetActive(false);
-            pool.Enqueue(monster);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            for (int i = 0; i < initSize; ++i)
+            {
+                GameObject monster = Instantiate(monsterPrefab);
+                monster.SetActive(false);
+                pool.Enqueue(monster);
+            }
         }
+        else Destroy(gameObject);
     }
 
     public GameObject Get(Vector3 position)

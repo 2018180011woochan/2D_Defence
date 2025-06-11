@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public Transform WayPointParent;
-    public GameObject EnemyPrefab;
 
     public List<Transform> WayPoints = new List<Transform>();
 
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        StartCoroutine(SpawnWaves());
     }
 
     private IEnumerator SpawnWaves()
@@ -36,7 +35,7 @@ public class GameManager : MonoBehaviour
             {
                 Vector3 spawnPos = WayPoints[0].position;
 
-                GameObject enemy = MANAGER.PoolManager.Get(spawnPos);
+                GameObject enemy = PoolManager.instance.Get(spawnPos);
                 enemy.GetComponent<Enemy>().Initialize(WayPoints);
 
                 yield return new WaitForSeconds(1f);
