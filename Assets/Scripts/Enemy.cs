@@ -7,24 +7,37 @@ public class Enemy : MonoBehaviour
 
     private List<Transform> WayPoints;
     private int WayPointIndex = 0;
+    private SpriteRenderer spriteRenderer;
 
     public void Initialize(List<Transform> points)
     {
+        
         WayPoints = points;
         transform.position = WayPoints[0].position;
     }
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
 
     private void Update()
     {
-        if (WayPoints == null)
-        {
-            Debug.Log("웨이포인트가 없음");
-            return;
-        }
+        if (WayPoints == null) return;
+        
         if (WayPointIndex >= WayPoints.Count)
         {
             WayPointIndex = 0;
+        }
+
+        // 방향 설정
+        if (WayPointIndex == 3 || WayPointIndex == 0)
+        {
+            transform.localScale = new Vector3(-0.1f, 0.1f, 0.1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         }
 
         Transform target = WayPoints[WayPointIndex];
