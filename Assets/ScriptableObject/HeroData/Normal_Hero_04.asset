@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
+  m_Name: Normal_Hero_04
+  m_EditorClassIdentifier: 
+  heroName: Normal_Hero_04
+  prefab: {fileID: 3506451371824615835, guid: f311017692ac67d418c66742b40d60cb, type: 3}
+  grade: 0
+  attack: 100
+  attackSpeed: 1
+  range: 5
