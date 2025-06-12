@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public int Round = 80;
     public float roundTime = 15f;
 
+    private int monsterCount = 0;
+
     private void Awake()
     {
         foreach (Transform t in WayPointParent)
@@ -28,6 +30,8 @@ public class GameManager : MonoBehaviour
     {
         for (int curRound = 1; curRound <= Round; curRound++)
         {
+            UIManager.instance.UpdateRoundText(curRound);
+
             Debug.Log($"[Round {curRound}] 시작");
             float curTime = 0f;
 
@@ -37,9 +41,13 @@ public class GameManager : MonoBehaviour
 
                 GameObject enemy = PoolManager.instance.Get(spawnPos);
                 enemy.GetComponent<Enemy>().Initialize(WayPoints);
+                monsterCount++;
+
+                MonsterBarUI.instance.UpdateMonsterCount(monsterCount);
 
                 yield return new WaitForSeconds(1f);
                 curTime += 1f;
+                UIManager.instance.UpdateTimerText(roundTime - curTime);
             }
             Debug.Log($"[Round {curRound}] 종료");
         }
