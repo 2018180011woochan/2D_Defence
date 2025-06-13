@@ -15,6 +15,8 @@ class CellData
 
 public class SummonManager : MonoBehaviour
 {
+    public static SummonManager instance { get; set; }
+
     public List<HeroData> NormalheroDatas;
 
     public int rows = 3;
@@ -31,6 +33,16 @@ public class SummonManager : MonoBehaviour
     private float cellHeight;
     private static int xindex = 0;
     private static int yindex = 0;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+    }
 
     private void Start()
     {
@@ -205,5 +217,79 @@ public class SummonManager : MonoBehaviour
         }
 
         sr.color = color;
+    }
+
+    /// <summary>
+    /// /////////////////////////////마우스 끌기로 교체 구현중
+    /// </summary>
+    public Vector2Int GetCellIndexFromWorld(Vector3 worldPos)
+    {
+        int col = Mathf.FloorToInt((worldPos.x - startX) / cellWidth);
+        int row = Mathf.FloorToInt((startY - worldPos.y) / cellHeight);
+
+        return new Vector2Int(row, col);
+    }
+
+    public void TrySwapGroup(Vector2Int from, Vector2Int to)
+    {
+        if (!IsValidCell(from) || !IsValidCell(to)) return;
+
+        var fromCell = cellData[from.x, from.y];
+        var toCell = cellData[to.x, to.y];
+
+        if (fromCell.heroGroups.Count == 0) return;
+
+        // 첫 번째 그룹만 이동 대상으로 가정
+        HeroGroup groupFrom = fromCell.heroGroups[0];
+        HeroGroup groupTo = toCell.heroGroups.Count > 0 ? toCell.heroGroups[0] : null;
+
+        // 위치 교환
+        Vector3 fromPos = summonPos[from.x, from.y];
+        Vector3 toPos = summonPos[to.x, to.y];
+
+        foreach (GameObject hero in groupFrom.instances)
+        {
+            Vector3 offset = hero.transform.position - groupFrom.instances[0].transform.position;
+            hero.transform.position = toPos + offset;
+
+            HeroSelectable sel = hero.GetComponent<HeroSelectable>();
+            if (sel != null)
+            {
+                sel.gridPos = to;
+                sel.groupCenterPosition = toPos;
+            }
+        }
+
+        if (groupTo != null)
+        {
+            foreach (GameObject hero in groupTo.instances)
+            {
+                Vector3 offset = hero.transform.position - groupTo.instances[0].transform.position;
+                hero.transform.position = fromPos + offset;
+
+                HeroSelectable sel = hero.GetComponent<HeroSelectable>();
+                if (sel != null)
+                {
+                    sel.gridPos = from;
+                    sel.groupCenterPosition = fromPos;
+                }
+            }
+
+            // 그룹 위치도 서로 바꿔줌
+            toCell.heroGroups[0] = groupFrom;
+            fromCell.heroGroups[0] = groupTo;
+        }
+        else
+        {
+            toCell.heroGroups.Add(groupFrom);
+            fromCell.heroGroups.Remove(groupFrom);
+        }
+
+        Debug.Log($"<color=cyan>그룹 이동 완료: ({from.x}, {from.y}) ? ({to.x}, {to.y})</color>");
+    }
+
+    private bool IsValidCell(Vector2Int cell)
+    {
+        return cell.x >= 0 && cell.x < rows && cell.y >= 0 && cell.y < cols;
     }
 }
