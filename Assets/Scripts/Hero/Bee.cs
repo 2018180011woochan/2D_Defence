@@ -38,6 +38,8 @@ public class Bee : MonoBehaviour
 
         Vector3 dir = (target.transform.position - transform.position).normalized;
         GameObject bullet = PoolManager.instance.GetBullet(transform.position);
+        bullet.GetComponent<Bullet>().SetTarget(target.transform);
+
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.linearVelocity = dir * 5f;
     }
