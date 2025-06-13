@@ -29,8 +29,8 @@ public class SummonManager : MonoBehaviour
     private CellData[,] cellData;
     private float cellWidth;
     private float cellHeight;
-    private static int xindex = 0; // 임시;
-    private static int yindex = 0; // 임시;
+    private static int xindex = 0; 
+    private static int yindex = 0; 
 
     private void Start()
     {
@@ -98,6 +98,7 @@ public class SummonManager : MonoBehaviour
             // 같은 그룹이 있다면 기존 그룹에 추가 소환
             Vector3 offset = GetOffsetForGroup(existingGroup.instances.Count);
             GameObject go = Instantiate(selectHero.prefab, groupPos + offset, Quaternion.identity);
+            SetShadowColor(go, selectHero.grade);
             existingGroup.instances.Add(go);
 
             Debug.Log($"<color=yellow>[합쳐짐]</color> {selectHero.heroName} 그룹에 추가됨 ({existingGroup.instances.Count}마리)");
@@ -120,6 +121,7 @@ public class SummonManager : MonoBehaviour
 
         Vector3 spawnPos = summonPos[yindex, xindex];
         GameObject newObj = Instantiate(selectHero.prefab, spawnPos, Quaternion.identity);
+        SetShadowColor(newObj, selectHero.grade);
 
         HeroGroup newGroup = new HeroGroup();
         newGroup.heroData = selectHero;
@@ -155,5 +157,38 @@ public class SummonManager : MonoBehaviour
         }
 
         return result;
+    }
+
+    private void SetShadowColor(GameObject heroObj, HeroGrade grade)
+    {
+        // 하위 오브젝트 중 이름이 "Shadow"인 자식 찾기
+        Transform shadowTransform = heroObj.transform.Find("Shadow");
+        if (shadowTransform == null) return;
+
+        SpriteRenderer sr = shadowTransform.GetComponent<SpriteRenderer>();
+        if (sr == null) return;
+
+        Color color = Color.gray; 
+
+        switch (grade)
+        {
+            case HeroGrade.Normal:
+                color = Color.gray;
+                break;
+            case HeroGrade.Rare:
+                color = new Color(0f, 0.5f, 1f); // 파랑
+                break;
+            case HeroGrade.Epic:
+                color = new Color(0.6f, 0f, 0.9f); // 보라
+                break;
+            case HeroGrade.Legendary:
+                color = Color.yellow;
+                break;
+            case HeroGrade.Mythic:
+                color = new Color(1f, 0.3f, 0f); // 주황
+                break;
+        }
+
+        sr.color = color;
     }
 }
