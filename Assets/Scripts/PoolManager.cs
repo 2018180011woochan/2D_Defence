@@ -6,7 +6,7 @@ public class PoolManager : MonoBehaviour
     public static PoolManager instance { get; set; }
 
     public GameObject monsterPrefab;
-    public int initSize = 30;
+    public int initSize = 100;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 
@@ -37,7 +37,9 @@ public class PoolManager : MonoBehaviour
         }
         else
         {
-            getMonster = Instantiate(monsterPrefab);
+            //getMonster = Instantiate(monsterPrefab);
+            Debug.Log("게임 종료");
+            return null;
         }
         getMonster.transform.position = position;
         return getMonster;

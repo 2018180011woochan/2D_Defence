@@ -579,7 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 3860563313364115347, guid: 5537e7fe658149d46943b67be6acc806,
     type: 3}
-  initSize: 30
+  initSize: 100
 --- !u!1 &186253527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,6 +1548,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd03ddbaad479ef478f2acb68b3f0098, type: 2}
   - {fileID: 11400000, guid: e6c4e988bc9573e4197ca717d7fbbfce, type: 2}
   - {fileID: 11400000, guid: 86cb8ab9378149846a84df2f5502dfff, type: 2}
+  rows: 3
+  cols: 7
 --- !u!4 &769543402
 Transform:
   m_ObjectHideFlags: 0
