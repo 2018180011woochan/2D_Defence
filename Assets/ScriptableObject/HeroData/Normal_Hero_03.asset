@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Normal_Hero_03
   m_EditorClassIdentifier: 
   heroName: Normal_Hero_03
-  prefab: {fileID: 3506451371824615835, guid: f311017692ac67d418c66742b40d60cb, type: 3}
+  prefab: {fileID: 879016369200529859, guid: c916808933a7e5d419d0be6f21ca4b84, type: 3}
   grade: 0
   attack: 100
   attackSpeed: 1
