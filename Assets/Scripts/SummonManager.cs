@@ -134,14 +134,26 @@ public class SummonManager : MonoBehaviour
 
     private Vector3 GetOffsetForGroup(int index)
     {
-        float offset = 0.3f;
+        float offset = 0.4f;
 
-        return index switch
+        Vector3 result;
+
+        switch (index)
         {
-            0 => Vector3.zero,
-            1 => new Vector3(-offset, -offset, 0f),
-            2 => new Vector3(offset, -offset, 0f),
-            _ => Vector3.zero
-        };
+            case 0:
+                result = Vector3.zero;
+                break;
+            case 1:
+                result = new Vector3(-offset, -offset, 0f);
+                break;
+            case 2:
+                result = new Vector3(offset, -offset, 0f);
+                break;
+            default:
+                result = Vector3.zero;
+                break;
+        }
+
+        return result;
     }
 }
