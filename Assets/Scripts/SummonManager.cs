@@ -161,7 +161,7 @@ public class SummonManager : MonoBehaviour
 
     private void SetShadowColor(GameObject heroObj, HeroGrade grade)
     {
-        // 하위 오브젝트 중 이름이 "Shadow"인 자식 찾기
+        // 하위 오브젝트 중 이름이 Shadow인 자식 찾기
         Transform shadowTransform = heroObj.transform.Find("Shadow");
         if (shadowTransform == null) return;
 
