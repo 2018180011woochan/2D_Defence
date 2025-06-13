@@ -29,8 +29,8 @@ public class SummonManager : MonoBehaviour
     private CellData[,] cellData;
     private float cellWidth;
     private float cellHeight;
-    private static int xindex = 0; 
-    private static int yindex = 0; 
+    private static int xindex = 0;
+    private static int yindex = 0;
 
     private void Start()
     {
@@ -99,6 +99,14 @@ public class SummonManager : MonoBehaviour
             Vector3 offset = GetOffsetForGroup(existingGroup.instances.Count);
             GameObject go = Instantiate(selectHero.prefab, groupPos + offset, Quaternion.identity);
             SetShadowColor(go, selectHero.grade);
+
+            HeroSelectable selectable = go.GetComponent<HeroSelectable>();
+            if (selectable != null)
+            {
+                selectable.groupCenterPosition = groupPos;
+                selectable.heroData = selectHero;
+            }
+
             existingGroup.instances.Add(go);
 
             Debug.Log($"<color=yellow>[합쳐짐]</color> {selectHero.heroName} 그룹에 추가됨 ({existingGroup.instances.Count}마리)");
@@ -117,11 +125,18 @@ public class SummonManager : MonoBehaviour
             return;
         }
 
-        
+
 
         Vector3 spawnPos = summonPos[yindex, xindex];
         GameObject newObj = Instantiate(selectHero.prefab, spawnPos, Quaternion.identity);
         SetShadowColor(newObj, selectHero.grade);
+        HeroSelectable selectable2 = newObj.GetComponent<HeroSelectable>();
+        if (selectable2 != null)
+        {
+            selectable2.groupCenterPosition = spawnPos;
+            selectable2.heroData = selectHero;
+        }
+
 
         HeroGroup newGroup = new HeroGroup();
         newGroup.heroData = selectHero;
@@ -168,7 +183,7 @@ public class SummonManager : MonoBehaviour
         SpriteRenderer sr = shadowTransform.GetComponent<SpriteRenderer>();
         if (sr == null) return;
 
-        Color color = Color.gray; 
+        Color color = Color.gray;
 
         switch (grade)
         {

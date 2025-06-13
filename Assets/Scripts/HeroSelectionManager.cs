@@ -6,7 +6,8 @@ public class HeroSelectionManager : MonoBehaviour
 
     public GameObject rangeIndicatorPrefab;
     private GameObject currentIndicator;
-    private Transform selectedHero;
+    //private Transform selectedHero;
+    private Vector3? selectedPosition = null;
 
     private void Awake()
     {
@@ -35,35 +36,33 @@ public class HeroSelectionManager : MonoBehaviour
         }
     }
 
-    public void ToggleSelection(Transform heroTransform, float range)
+    public void ToggleSelection(Vector3 position, float range)
     {
-        if (selectedHero == heroTransform)
+        if (selectedPosition.HasValue && selectedPosition.Value == position)
         {
-            // 같은 유닛 다시 클릭 → 선택 해제
             Deselect();
         }
         else
         {
-            // 다른 유닛 선택
-            Select(heroTransform, range);
+            Select(position, range);
         }
     }
 
-    private void Select(Transform heroTransform, float range)
+    private void Select(Vector3 position, float range)
     {
         if (currentIndicator != null)
             Destroy(currentIndicator);
 
-        selectedHero = heroTransform;
+        selectedPosition = position;
 
         currentIndicator = Instantiate(rangeIndicatorPrefab);
-        currentIndicator.transform.position = heroTransform.position;
-        currentIndicator.transform.localScale = Vector3.one * range;
+        currentIndicator.transform.position = position;
+        currentIndicator.transform.localScale = Vector3.one * range * 2f;
     }
 
     private void Deselect()
     {
-        selectedHero = null;
+        selectedPosition = null;
 
         if (currentIndicator != null)
             Destroy(currentIndicator);
