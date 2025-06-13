@@ -25,6 +25,13 @@ public class HeroSelectionManager : MonoBehaviour
             {
                 Deselect();
             }
+            else
+            {
+                if (hit.collider.GetComponent<HeroSelectable>() == null)
+                {
+                    Deselect();
+                }
+            }
         }
     }
 
