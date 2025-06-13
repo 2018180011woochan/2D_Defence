@@ -37,8 +37,9 @@ public class Bee : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Vector3 dir = (target.transform.position - transform.position).normalized;
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = dir * 5f;
+        GameObject bullet = PoolManager.instance.GetBullet(transform.position);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = dir * 5f;
     }
 
     private GameObject FindNearestEnemy()

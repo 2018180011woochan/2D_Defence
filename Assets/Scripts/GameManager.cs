@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             {
                 Vector3 spawnPos = WayPoints[0].position;
 
-                GameObject enemy = PoolManager.instance.Get(spawnPos);
+                GameObject enemy = PoolManager.instance.GetMonster(spawnPos);
                 enemy.GetComponent<Enemy>().Initialize(WayPoints);
                 monsterCount++;
 
