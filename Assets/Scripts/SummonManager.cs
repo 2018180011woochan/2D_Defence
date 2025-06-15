@@ -2,15 +2,25 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-class HeroGroup
-{
-    public HeroData heroData;
-    public List<GameObject> instances = new();
-}
-
 class CellData
 {
-    public List<HeroGroup> heroGroups = new();
+    public HeroData heroData;           // 이 칸에 있는 영웅 종류
+    public List<GameObject> instances;  // 이 칸에 있는 영웅 인스턴스들
+
+    public CellData()
+    {
+        instances = new List<GameObject>();
+    }
+
+    public bool IsEmpty => instances.Count == 0;
+    public bool IsFull => instances.Count >= 3;
+    public bool CanAddHero(HeroData newHero)
+    {
+        if (IsEmpty) return true;
+        return heroData.heroName == newHero.heroName &&
+               heroData.grade == newHero.grade &&
+               !IsFull;
+    }
 }
 
 public class SummonManager : MonoBehaviour
@@ -67,9 +77,9 @@ public class SummonManager : MonoBehaviour
         }
     }
 
-    // 전체 필드를 순회하면서 같은 영웅 그룹이 있는지 확인하고
-    // 그 그룹에 영웅이 3마리 미만이면 해당 그룹과 위치를 반환
-    private HeroGroup FindExistingGroupInField(HeroData hero, out Vector3 position)
+    // 전체 필드를 순회하면서 같은 영웅이 있는 칸을 찾고
+    // 그 칸에 영웅이 3마리 미만이면 해당 칸과 위치를 반환
+    private CellData FindExistingCellInField(HeroData hero, out Vector3 position, out Vector2Int cellIndex)
     {
         for (int row = 0; row < rows; row++)
         {
@@ -77,39 +87,34 @@ public class SummonManager : MonoBehaviour
             {
                 CellData cell = cellData[row, col];
 
-                foreach (HeroGroup group in cell.heroGroups)
+                if (cell.CanAddHero(hero))
                 {
-                    bool sameName = group.heroData.heroName == hero.heroName;
-                    bool sameGrade = group.heroData.grade == hero.grade;
-                    bool notFull = group.instances.Count < 3;
-
-                    if (sameName && sameGrade && notFull)
-                    {
-                        position = summonPos[row, col];
-                        return group;
-                    }
+                    position = summonPos[row, col];
+                    cellIndex = new Vector2Int(row, col);
+                    return cell;
                 }
             }
         }
 
         position = Vector3.zero;
+        cellIndex = Vector2Int.zero;
         return null;
     }
-
 
     public void Summon()
     {
         // 임시로 소환시 일반 영웅만 소환
         HeroData selectHero = NormalheroDatas[UnityEngine.Random.Range(0, NormalheroDatas.Count)];
 
-        // 필드위에 같은 영웅 그룹이 있는지 확인
+        // 필드위에 같은 영웅이 있는 칸이 있는지 확인
         Vector3 groupPos;
-        HeroGroup existingGroup = FindExistingGroupInField(selectHero, out groupPos);
+        Vector2Int cellIndex;
+        CellData existingCell = FindExistingCellInField(selectHero, out groupPos, out cellIndex);
 
-        if (existingGroup != null)
+        if (existingCell != null)
         {
-            // 같은 그룹이 있다면 기존 그룹에 추가 소환
-            Vector3 offset = GetOffsetForGroup(existingGroup.instances.Count);
+            // 같은 영웅이 있는 칸이 있다면 해당 칸에 추가 소환
+            Vector3 offset = GetOffsetForGroup(existingCell.instances.Count);
             GameObject go = Instantiate(selectHero.prefab, groupPos + offset, Quaternion.identity);
             SetShadowColor(go, selectHero.grade);
 
@@ -118,15 +123,21 @@ public class SummonManager : MonoBehaviour
             {
                 selectable.groupCenterPosition = groupPos;
                 selectable.heroData = selectHero;
-                selectable.gridPos = GetCellIndexFromWorld(groupPos);
+                selectable.gridPos = cellIndex;
             }
 
-            existingGroup.instances.Add(go);
+            existingCell.instances.Add(go);
+            // 첫 번째 영웅이라면 heroData 설정
+            if (existingCell.heroData == null)
+            {
+                existingCell.heroData = selectHero;
+            }
 
-            Debug.Log($"<color=yellow>[합쳐짐]</color> {selectHero.heroName} 그룹에 추가됨 ({existingGroup.instances.Count}마리)");
+            Debug.Log($"<color=yellow>[합쳐짐]</color> {selectHero.heroName} 그룹에 추가됨 ({existingCell.instances.Count}마리)");
             return;
         }
 
+        // 새로운 위치 찾기
         if (xindex >= cols)
         {
             xindex = 0;
@@ -139,25 +150,22 @@ public class SummonManager : MonoBehaviour
             return;
         }
 
-
-
         Vector3 spawnPos = summonPos[yindex, xindex];
         GameObject newObj = Instantiate(selectHero.prefab, spawnPos, Quaternion.identity);
         SetShadowColor(newObj, selectHero.grade);
+
         HeroSelectable selectable2 = newObj.GetComponent<HeroSelectable>();
         if (selectable2 != null)
         {
             selectable2.groupCenterPosition = spawnPos;
             selectable2.heroData = selectHero;
-            selectable2.gridPos = GetCellIndexFromWorld(spawnPos);
+            selectable2.gridPos = new Vector2Int(yindex, xindex);
         }
 
-
-        HeroGroup newGroup = new HeroGroup();
-        newGroup.heroData = selectHero;
-        newGroup.instances.Add(newObj);
-
-        cellData[yindex, xindex].heroGroups.Add(newGroup);
+        // 새로운 칸에 영웅 배치
+        CellData newCell = cellData[yindex, xindex];
+        newCell.heroData = selectHero;
+        newCell.instances.Add(newObj);
 
         Debug.Log($"<color=green>[새 그룹]</color> {selectHero.heroName} 새로 소환됨");
 
@@ -223,7 +231,7 @@ public class SummonManager : MonoBehaviour
     }
 
     /// <summary>
-    /// /////////////////////////////마우스 끌기로 교체 구현중
+    /// 월드 좌표를 격자 인덱스로 변환
     /// </summary>
     public Vector2Int GetCellIndexFromWorld(Vector3 worldPos)
     {
@@ -240,36 +248,33 @@ public class SummonManager : MonoBehaviour
         var fromCell = cellData[from.x, from.y];
         var toCell = cellData[to.x, to.y];
 
-        if (fromCell.heroGroups.Count == 0) return;
-
-        HeroGroup groupFrom = fromCell.heroGroups[0];
-        HeroGroup groupTo = toCell.heroGroups.Count > 0 ? toCell.heroGroups[0] : null;
+        if (fromCell.IsEmpty) return;
 
         Vector3 fromPos = summonPos[from.x, from.y];
         Vector3 toPos = summonPos[to.x, to.y];
 
         // 각 영웅의 그룹 센터 기준 오프셋을 저장
         List<Vector3> fromOffsets = new List<Vector3>();
-        foreach (GameObject hero in groupFrom.instances)
+        foreach (GameObject hero in fromCell.instances)
         {
             fromOffsets.Add(hero.transform.position - fromPos);
         }
 
         List<Vector3> toOffsets = new List<Vector3>();
-        if (groupTo != null)
+        if (!toCell.IsEmpty)
         {
-            foreach (GameObject hero in groupTo.instances)
+            foreach (GameObject hero in toCell.instances)
             {
                 toOffsets.Add(hero.transform.position - toPos);
             }
         }
 
         // from 그룹을 to 위치로 이동
-        for (int i = 0; i < groupFrom.instances.Count; i++)
+        for (int i = 0; i < fromCell.instances.Count; i++)
         {
-            groupFrom.instances[i].transform.position = toPos + fromOffsets[i];
+            fromCell.instances[i].transform.position = toPos + fromOffsets[i];
 
-            HeroSelectable sel = groupFrom.instances[i].GetComponent<HeroSelectable>();
+            HeroSelectable sel = fromCell.instances[i].GetComponent<HeroSelectable>();
             if (sel != null)
             {
                 sel.gridPos = to;
@@ -278,13 +283,13 @@ public class SummonManager : MonoBehaviour
         }
 
         // to 그룹을 from 위치로 이동 (있는 경우)
-        if (groupTo != null)
+        if (!toCell.IsEmpty)
         {
-            for (int i = 0; i < groupTo.instances.Count; i++)
+            for (int i = 0; i < toCell.instances.Count; i++)
             {
-                groupTo.instances[i].transform.position = fromPos + toOffsets[i];
+                toCell.instances[i].transform.position = fromPos + toOffsets[i];
 
-                HeroSelectable sel = groupTo.instances[i].GetComponent<HeroSelectable>();
+                HeroSelectable sel = toCell.instances[i].GetComponent<HeroSelectable>();
                 if (sel != null)
                 {
                     sel.gridPos = from;
@@ -292,15 +297,24 @@ public class SummonManager : MonoBehaviour
                 }
             }
 
-            // 그룹 데이터 교환
-            toCell.heroGroups[0] = groupFrom;
-            fromCell.heroGroups[0] = groupTo;
+            // 데이터 교환
+            var tempData = fromCell.heroData;
+            var tempInstances = fromCell.instances;
+
+            fromCell.heroData = toCell.heroData;
+            fromCell.instances = toCell.instances;
+
+            toCell.heroData = tempData;
+            toCell.instances = tempInstances;
         }
         else
         {
-            // to 셀이 비어있는 경우
-            toCell.heroGroups.Add(groupFrom);
-            fromCell.heroGroups.Remove(groupFrom);
+            // to 셀이 비어있는 경우 - 단순 이동
+            toCell.heroData = fromCell.heroData;
+            toCell.instances = fromCell.instances;
+
+            fromCell.heroData = null;
+            fromCell.instances = new List<GameObject>();
         }
 
         Debug.Log($"<color=cyan>그룹 이동 완료: ({from.x}, {from.y}) → ({to.x}, {to.y})</color>");
@@ -309,5 +323,24 @@ public class SummonManager : MonoBehaviour
     private bool IsValidCell(Vector2Int cell)
     {
         return cell.x >= 0 && cell.x < rows && cell.y >= 0 && cell.y < cols;
+    }
+
+    /// <summary>
+    /// 디버그용 - 현재 필드 상태 출력
+    /// </summary>
+    public void PrintFieldStatus()
+    {
+        Debug.Log("=== 필드 상태 ===");
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                var cell = cellData[r, c];
+                if (!cell.IsEmpty)
+                {
+                    Debug.Log($"({r}, {c}): {cell.heroData.heroName} x{cell.instances.Count}");
+                }
+            }
+        }
     }
 }
