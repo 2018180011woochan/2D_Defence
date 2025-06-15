@@ -117,6 +117,7 @@ public class SummonManager : MonoBehaviour
             {
                 selectable.groupCenterPosition = groupPos;
                 selectable.heroData = selectHero;
+                selectable.gridPos = GetCellIndexFromWorld(groupPos);
             }
 
             existingGroup.instances.Add(go);
@@ -147,6 +148,7 @@ public class SummonManager : MonoBehaviour
         {
             selectable2.groupCenterPosition = spawnPos;
             selectable2.heroData = selectHero;
+            selectable2.gridPos = GetCellIndexFromWorld(spawnPos);
         }
 
 

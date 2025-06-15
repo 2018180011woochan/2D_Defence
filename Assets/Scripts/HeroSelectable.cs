@@ -27,9 +27,13 @@ public class HeroSelectable : MonoBehaviour
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(dragEndPos);
             Vector2Int targetCell = SummonManager.instance.GetCellIndexFromWorld(worldPos);
 
+            Debug.Log("gridPos : " + gridPos);
+            Debug.Log("targetCell : " + targetCell);
+
             if (targetCell != gridPos)
             {
                 SummonManager.instance.TrySwapGroup(gridPos, targetCell);
+                Debug.Log("²ø±â!");
             }
         }
     }
