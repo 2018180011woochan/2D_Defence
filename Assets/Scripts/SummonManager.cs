@@ -96,6 +96,7 @@ public class SummonManager : MonoBehaviour
         return null;
     }
 
+
     public void Summon()
     {
         // 임시로 소환시 일반 영웅만 소환
@@ -241,20 +242,34 @@ public class SummonManager : MonoBehaviour
 
         if (fromCell.heroGroups.Count == 0) return;
 
-        // 첫 번째 그룹만 이동 대상으로 가정
         HeroGroup groupFrom = fromCell.heroGroups[0];
         HeroGroup groupTo = toCell.heroGroups.Count > 0 ? toCell.heroGroups[0] : null;
 
-        // 위치 교환
         Vector3 fromPos = summonPos[from.x, from.y];
         Vector3 toPos = summonPos[to.x, to.y];
 
+        // 각 영웅의 그룹 센터 기준 오프셋을 저장
+        List<Vector3> fromOffsets = new List<Vector3>();
         foreach (GameObject hero in groupFrom.instances)
         {
-            Vector3 offset = hero.transform.position - groupFrom.instances[0].transform.position;
-            hero.transform.position = toPos + offset;
+            fromOffsets.Add(hero.transform.position - fromPos);
+        }
 
-            HeroSelectable sel = hero.GetComponent<HeroSelectable>();
+        List<Vector3> toOffsets = new List<Vector3>();
+        if (groupTo != null)
+        {
+            foreach (GameObject hero in groupTo.instances)
+            {
+                toOffsets.Add(hero.transform.position - toPos);
+            }
+        }
+
+        // from 그룹을 to 위치로 이동
+        for (int i = 0; i < groupFrom.instances.Count; i++)
+        {
+            groupFrom.instances[i].transform.position = toPos + fromOffsets[i];
+
+            HeroSelectable sel = groupFrom.instances[i].GetComponent<HeroSelectable>();
             if (sel != null)
             {
                 sel.gridPos = to;
@@ -262,14 +277,14 @@ public class SummonManager : MonoBehaviour
             }
         }
 
+        // to 그룹을 from 위치로 이동 (있는 경우)
         if (groupTo != null)
         {
-            foreach (GameObject hero in groupTo.instances)
+            for (int i = 0; i < groupTo.instances.Count; i++)
             {
-                Vector3 offset = hero.transform.position - groupTo.instances[0].transform.position;
-                hero.transform.position = fromPos + offset;
+                groupTo.instances[i].transform.position = fromPos + toOffsets[i];
 
-                HeroSelectable sel = hero.GetComponent<HeroSelectable>();
+                HeroSelectable sel = groupTo.instances[i].GetComponent<HeroSelectable>();
                 if (sel != null)
                 {
                     sel.gridPos = from;
@@ -277,17 +292,18 @@ public class SummonManager : MonoBehaviour
                 }
             }
 
-            // 그룹 위치도 서로 바꿔줌
+            // 그룹 데이터 교환
             toCell.heroGroups[0] = groupFrom;
             fromCell.heroGroups[0] = groupTo;
         }
         else
         {
+            // to 셀이 비어있는 경우
             toCell.heroGroups.Add(groupFrom);
             fromCell.heroGroups.Remove(groupFrom);
         }
 
-        Debug.Log($"<color=cyan>그룹 이동 완료: ({from.x}, {from.y}) ? ({to.x}, {to.y})</color>");
+        Debug.Log($"<color=cyan>그룹 이동 완료: ({from.x}, {from.y}) → ({to.x}, {to.y})</color>");
     }
 
     private bool IsValidCell(Vector2Int cell)
