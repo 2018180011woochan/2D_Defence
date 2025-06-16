@@ -1,13 +1,17 @@
+using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public float speed = 8f;
     private Transform target;
+    private float damage;
+    public TextMeshProUGUI damageTMPPrefab;
 
-    public void SetTarget(Transform t)
+    public void SetTarget(Transform t, float heroDamage)
     {
         target = t;
+        damage = heroDamage;
     }
 
     private void Update()
@@ -33,4 +37,5 @@ public class Bullet : MonoBehaviour
             PoolManager.instance.ReleaseBullet(gameObject);
         }
     }
+
 }

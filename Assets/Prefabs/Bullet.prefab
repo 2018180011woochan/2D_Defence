@@ -176,3 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  damageTMPPrefab: {fileID: 7625721075021920659, guid: a24458814ef6c3c4ea84a07ffc370bdf,
+    type: 3}
