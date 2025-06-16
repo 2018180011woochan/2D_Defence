@@ -57,7 +57,7 @@ public class HeroSelectionManager : MonoBehaviour
 
         currentIndicator = Instantiate(rangeIndicatorPrefab);
         currentIndicator.transform.position = position;
-        currentIndicator.transform.localScale = Vector3.one * range;
+        currentIndicator.transform.localScale = Vector3.one * range * 1.5f;
     }
 
     public void Deselect()
