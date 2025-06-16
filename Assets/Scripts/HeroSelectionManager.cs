@@ -48,7 +48,7 @@ public class HeroSelectionManager : MonoBehaviour
         }
     }
 
-    private void Select(Vector3 position, float range)
+    public void Select(Vector3 position, float range)
     {
         if (currentIndicator != null)
             Destroy(currentIndicator);
@@ -57,10 +57,10 @@ public class HeroSelectionManager : MonoBehaviour
 
         currentIndicator = Instantiate(rangeIndicatorPrefab);
         currentIndicator.transform.position = position;
-        currentIndicator.transform.localScale = Vector3.one * range * 2f;
+        currentIndicator.transform.localScale = Vector3.one * range;
     }
 
-    private void Deselect()
+    public void Deselect()
     {
         selectedPosition = null;
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,6 +44,9 @@ public class SummonManager : MonoBehaviour
     private float cellHeight;
     private static int xindex = 0;
     private static int yindex = 0;
+
+
+    public float moveDuration = 0.5f;
 
     private void Awake()
     {
@@ -133,7 +137,6 @@ public class SummonManager : MonoBehaviour
                 existingCell.heroData = selectHero;
             }
 
-            Debug.Log($"<color=yellow>[합쳐짐]</color> {selectHero.heroName} 그룹에 추가됨 ({existingCell.instances.Count}마리)");
             return;
         }
 
@@ -167,7 +170,6 @@ public class SummonManager : MonoBehaviour
         newCell.heroData = selectHero;
         newCell.instances.Add(newObj);
 
-        Debug.Log($"<color=green>[새 그룹]</color> {selectHero.heroName} 새로 소환됨");
 
         xindex++;
     }
@@ -230,9 +232,7 @@ public class SummonManager : MonoBehaviour
         sr.color = color;
     }
 
-    /// <summary>
     /// 월드 좌표를 격자 인덱스로 변환
-    /// </summary>
     public Vector2Int GetCellIndexFromWorld(Vector3 worldPos)
     {
         int col = Mathf.FloorToInt((worldPos.x - startX) / cellWidth);
@@ -240,6 +240,7 @@ public class SummonManager : MonoBehaviour
 
         return new Vector2Int(row, col);
     }
+
 
     public void TrySwapGroup(Vector2Int from, Vector2Int to)
     {
@@ -250,26 +251,65 @@ public class SummonManager : MonoBehaviour
 
         if (fromCell.IsEmpty) return;
 
+        StartCoroutine(Swap(from, to, fromCell, toCell));
+
+    }
+
+    private IEnumerator Swap(Vector2Int from, Vector2Int to, CellData fromCell, CellData toCell)
+    {
         Vector3 fromPos = summonPos[from.x, from.y];
         Vector3 toPos = summonPos[to.x, to.y];
 
         // 각 영웅의 그룹 센터 기준 오프셋을 저장
         List<Vector3> fromOffsets = new List<Vector3>();
+        List<Vector3> fromStartPositions = new List<Vector3>();
         foreach (GameObject hero in fromCell.instances)
         {
             fromOffsets.Add(hero.transform.position - fromPos);
+            fromStartPositions.Add(hero.transform.position);
         }
 
         List<Vector3> toOffsets = new List<Vector3>();
+        List<Vector3> toStartPositions = new List<Vector3>();
         if (!toCell.IsEmpty)
         {
             foreach (GameObject hero in toCell.instances)
             {
                 toOffsets.Add(hero.transform.position - toPos);
+                toStartPositions.Add(hero.transform.position);
             }
         }
 
-        // from 그룹을 to 위치로 이동
+        float elapsedTime = 0f;
+
+        while (elapsedTime < moveDuration)
+        {
+            float t = elapsedTime / moveDuration;
+
+            // from 그룹을 to 위치로 애니메이션
+            for (int i = 0; i < fromCell.instances.Count; i++)
+            {
+                Vector3 startPos = fromStartPositions[i];
+                Vector3 targetPos = toPos + fromOffsets[i];
+                fromCell.instances[i].transform.position = Vector3.Lerp(startPos, targetPos, t);
+            }
+
+            // to 그룹을 from 위치로 애니메이션 (있는 경우)
+            if (!toCell.IsEmpty)
+            {
+                for (int i = 0; i < toCell.instances.Count; i++)
+                {
+                    Vector3 startPos = toStartPositions[i];
+                    Vector3 targetPos = fromPos + toOffsets[i];
+                    toCell.instances[i].transform.position = Vector3.Lerp(startPos, targetPos, t);
+                }
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 애니메이션 완료 후 정확한 위치로 설정
         for (int i = 0; i < fromCell.instances.Count; i++)
         {
             fromCell.instances[i].transform.position = toPos + fromOffsets[i];
@@ -282,7 +322,6 @@ public class SummonManager : MonoBehaviour
             }
         }
 
-        // to 그룹을 from 위치로 이동 (있는 경우)
         if (!toCell.IsEmpty)
         {
             for (int i = 0; i < toCell.instances.Count; i++)
@@ -316,31 +355,10 @@ public class SummonManager : MonoBehaviour
             fromCell.heroData = null;
             fromCell.instances = new List<GameObject>();
         }
-
-        Debug.Log($"<color=cyan>그룹 이동 완료: ({from.x}, {from.y}) → ({to.x}, {to.y})</color>");
     }
 
     private bool IsValidCell(Vector2Int cell)
     {
         return cell.x >= 0 && cell.x < rows && cell.y >= 0 && cell.y < cols;
-    }
-
-    /// <summary>
-    /// 디버그용 - 현재 필드 상태 출력
-    /// </summary>
-    public void PrintFieldStatus()
-    {
-        Debug.Log("=== 필드 상태 ===");
-        for (int r = 0; r < rows; r++)
-        {
-            for (int c = 0; c < cols; c++)
-            {
-                var cell = cellData[r, c];
-                if (!cell.IsEmpty)
-                {
-                    Debug.Log($"({r}, {c}): {cell.heroData.heroName} x{cell.instances.Count}");
-                }
-            }
-        }
     }
 }
