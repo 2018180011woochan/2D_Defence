@@ -583,6 +583,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 973176100967341466, guid: 85e8b5f6358fb774995ce5a8d137a405,
     type: 3}
   bulletInitSize: 100
+  damageTextPrefab: {fileID: 1128107015682400470, guid: 7098d89019b79b94fb85eb3e3828b7ed,
+    type: 3}
+  damageTextInitSize: 50
 --- !u!1 &186253527
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1223,7 @@ GameObject:
   - component: {fileID: 589829382}
   - component: {fileID: 589829381}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_MainUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
