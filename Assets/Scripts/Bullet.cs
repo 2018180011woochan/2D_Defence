@@ -31,31 +31,37 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && collision.transform == target)
+        if (!collision.CompareTag("Enemy")) return;
+
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            Vector3 worldPos = collision.transform.position + Vector3.up * 0.5f;
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-
-            GameObject damageTextObj = PoolManager.instance.GetDamageText(Vector3.zero);
-
-            Transform canvasTransform = GameObject.Find("Canvas_MainUI").transform;
-            damageTextObj.transform.SetParent(canvasTransform, false);
-
-            RectTransform canvasRect = canvasTransform.GetComponent<RectTransform>();
-            RectTransform damageRect = damageTextObj.GetComponent<RectTransform>();
-
-            Vector2 localPos;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvasRect, screenPos, null, out localPos
-            );
-
-            // 위치 보정
-            float xOffset = 150f;  
-            damageRect.anchoredPosition = localPos + new Vector2(-xOffset, 0);
-
-            damageTextObj.GetComponent<DamageText>().Show(damage);
-
-            PoolManager.instance.ReleaseBullet(gameObject);
+            enemy.GetDamage(damage);
         }
+
+        Vector3 worldPos = collision.transform.position + Vector3.up * 0.5f;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        GameObject damageTextObj = PoolManager.instance.GetDamageText(Vector3.zero);
+
+        Transform canvasTransform = GameObject.Find("Canvas_MainUI").transform;
+        damageTextObj.transform.SetParent(canvasTransform, false);
+
+        RectTransform canvasRect = canvasTransform.GetComponent<RectTransform>();
+        RectTransform damageRect = damageTextObj.GetComponent<RectTransform>();
+
+        Vector2 localPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect, screenPos, null, out localPos
+        );
+
+        // 위치 보정
+        float xOffset = 150f;  
+        damageRect.anchoredPosition = localPos + new Vector2(-xOffset, 0);
+
+        damageTextObj.GetComponent<DamageText>().Show(damage);
+
+        PoolManager.instance.ReleaseBullet(gameObject);
+        
     }
 }

@@ -48,4 +48,14 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) < 0.1f)
             WayPointIndex++;
     }
+    
+    public void GetDamage(float damage)
+    {
+        Hp -= damage;
+
+        if (Hp <= 0f)
+        {
+            PoolManager.instance.ReleaseMonster(this.gameObject);
+        }
+    }
 }
