@@ -30,6 +30,10 @@ public class PoolManager : MonoBehaviour
     public int damageTextInitSize = 50;
     private Queue<GameObject> damageTextPool = new();
 
+    [Header("Coin Popup Pool")]
+    public GameObject coinPopPrefab;     
+    public int coinPopPoolSize = 20;
+    private Queue<GameObject> coinPopPool = new Queue<GameObject>();
 
     private void Awake()
     {
@@ -42,6 +46,7 @@ public class PoolManager : MonoBehaviour
             InitPool(plantBulletPool, plantBulletPrefab, plantBulletPoolSize);
             InitPool(trunkBulletPool, trunkBulletPrefab, trunkBulletPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
+            InitPool(coinPopPool, coinPopPrefab, coinPopPoolSize);
         }
         else Destroy(gameObject);
     }
@@ -80,6 +85,20 @@ public class PoolManager : MonoBehaviour
     public GameObject GetTrunkBullet(Vector3 position)
     {
         return GetFromPool(trunkBulletPool, trunkBulletPrefab, position);
+    }
+
+    public GameObject GetCoinPopup(Vector3 worldPos)
+    {
+        GameObject obj = coinPopPool.Count > 0 ? coinPopPool.Dequeue() : Instantiate(coinPopPrefab);
+        obj.transform.position = worldPos;
+        obj.SetActive(true);
+        return obj;
+    }
+
+    public void ReleaseCoinPopup(GameObject go)
+    {
+        go.SetActive(false);
+        coinPopPool.Enqueue(go);
     }
 
     public void ReleaseBullet(GameObject bullet)

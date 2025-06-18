@@ -16,5 +16,5 @@ MonoBehaviour:
   prefab: {fileID: 3831509301434502711, guid: e410dbec203490c44b48e03de4bd41fb, type: 3}
   grade: 0
   attack: 300
-  attackSpeed: 3
+  attackSpeed: 2.5
   range: 7
