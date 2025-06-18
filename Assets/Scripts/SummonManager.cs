@@ -107,6 +107,9 @@ public class SummonManager : MonoBehaviour
 
     public void Summon()
     {
+        if (!SetUiSummon()) return;
+
+
         // 임시로 소환시 일반 영웅만 소환
         HeroData selectHero = NormalheroDatas[UnityEngine.Random.Range(0, NormalheroDatas.Count)];
 
@@ -172,6 +175,17 @@ public class SummonManager : MonoBehaviour
 
 
         xindex++;
+    }
+
+    private bool SetUiSummon()
+    {
+        if (GameManager.instance.getHeroCnt() >= GameManager.instance.getMaxHeroCnt())
+        {
+            Debug.Log("더이상 영웅을 소환할 수 없습니다.");
+            return false;
+        }
+        GameManager.instance.setCurHeroCnt(GameManager.instance.getHeroCnt() + 1);
+        return true;
     }
 
     private Vector3 GetOffsetForGroup(int index)

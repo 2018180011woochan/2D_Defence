@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
     public Transform WayPointParent;
 
     public List<Transform> WayPoints = new List<Transform>();
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         foreach (Transform t in WayPointParent)
         {
             WayPoints.Add(t);
@@ -47,6 +49,8 @@ public class GameManager : MonoBehaviour
     public void setCurHeroCnt(int heroCnt)
     {
         curHeroCnt = heroCnt;
+
+        UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
     }
 
     private IEnumerator SpawnWaves()

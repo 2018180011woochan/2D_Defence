@@ -28,11 +28,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoinText(int coin)
     {
-        curCoin.text = $"<sprite name=\"CoinIcon\"> {coin}";
+        curCoin.text = coin.ToString();
     }
     public void UpdateDiamondText(int diamond)
     {
-        curDiamond.text = $"<sprite name=\"DiamondIcon\"> {diamond}";
+        curDiamond.text = diamond.ToString();
     }
 
     public void UpdateHeroCountText(int current, int max)
