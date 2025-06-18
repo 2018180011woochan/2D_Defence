@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4432893518644131084}
   - component: {fileID: 2828712244747651451}
   - component: {fileID: 4363184546585196018}
-  - component: {fileID: 8580293322610736217}
+  - component: {fileID: 5678024360418792370}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BeeBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.05, y: 0.08}
   m_EdgeRadius: 0
---- !u!114 &8580293322610736217
+--- !u!114 &5678024360418792370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,9 +172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 973176100967341466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe622264d7e7b734fb5ae6d12689344a, type: 3}
+  m_Script: {fileID: 11500000, guid: f749a7a1daa75304cbcaba97c161ee85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  damageTMPPrefab: {fileID: 7625721075021920659, guid: a24458814ef6c3c4ea84a07ffc370bdf,
-    type: 3}

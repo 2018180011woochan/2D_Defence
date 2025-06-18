@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 384504b880f554b4d8a6f8ee40d12d53, type: 2}
-  bulletPrefab: {fileID: 973176100967341466, guid: 85e8b5f6358fb774995ce5a8d137a405,
+  bulletPrefab: {fileID: 973176100967341466, guid: 3c0bec92404f4424cb4d470c423cd298,
     type: 3}
 --- !u!61 &5887508418224358365
 BoxCollider2D:
@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 384504b880f554b4d8a6f8ee40d12d53, type: 2}
+  groupCenterPosition: {x: 0, y: 0, z: 0}
+  gridPos: {x: 0, y: 0}
 --- !u!1 &5450099565619493487
 GameObject:
   m_ObjectHideFlags: 0

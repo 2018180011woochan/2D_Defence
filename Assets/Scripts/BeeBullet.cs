@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BeeBullet 
+public class BeeBullet : BaseBullet
 {
 
 }

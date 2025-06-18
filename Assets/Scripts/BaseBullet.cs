@@ -1,17 +1,11 @@
 using TMPro;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class BaseBullet : MonoBehaviour
 {
     public float speed = 8f;
     private Transform target;
     private float damage;
-
-    public void SetTarget(Transform t, float heroDamage)
-    {
-        target = t;
-        damage = heroDamage;
-    }
 
     private void OnEnable()
     {
@@ -22,6 +16,12 @@ public class Bullet : MonoBehaviour
     private void AutoRelease()
     {
         PoolManager.instance.ReleaseBullet(gameObject);
+    }
+
+    public void SetTarget(Transform t, float heroDamage)
+    {
+        target = t;
+        damage = heroDamage;
     }
 
     private void Update()
@@ -73,12 +73,12 @@ public class Bullet : MonoBehaviour
         );
 
         // 위치 보정
-        float xOffset = 150f;  
+        float xOffset = 150f;
         damageRect.anchoredPosition = localPos + new Vector2(-xOffset, 0);
 
         damageTextObj.GetComponent<DamageText>().Show(damage);
 
         PoolManager.instance.ReleaseBullet(gameObject);
-        
+
     }
 }
