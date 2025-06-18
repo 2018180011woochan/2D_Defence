@@ -20,6 +20,11 @@ public class PoolManager : MonoBehaviour
     public int plantBulletPoolSize = 100;
     private Queue<GameObject> plantBulletPool = new Queue<GameObject>();
 
+    [Header("Trunk Bullet Pool")]
+    public GameObject trunkBulletPrefab;
+    public int trunkBulletPoolSize = 100;
+    private Queue<GameObject> trunkBulletPool = new Queue<GameObject>();
+
     [Header("Damage Text Pool")]
     public GameObject damageTextPrefab;
     public int damageTextInitSize = 50;
@@ -35,6 +40,7 @@ public class PoolManager : MonoBehaviour
             InitPool(monsterPool, monsterPrefab, monsterInitSize);
             InitPool(beeBulletPool, beeBulletPrefab, beeBulletPoolSize);
             InitPool(plantBulletPool, plantBulletPrefab, plantBulletPoolSize);
+            InitPool(trunkBulletPool, trunkBulletPrefab, trunkBulletPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
         }
         else Destroy(gameObject);
@@ -71,12 +77,19 @@ public class PoolManager : MonoBehaviour
         return GetFromPool(plantBulletPool, plantBulletPrefab, position);
     }
 
+    public GameObject GetTrunkBullet(Vector3 position)
+    {
+        return GetFromPool(trunkBulletPool, trunkBulletPrefab, position);
+    }
+
     public void ReleaseBullet(GameObject bullet)
     {
         bullet.SetActive(false);
         if (bullet.GetComponent<BeeBullet>() != null)
             beeBulletPool.Enqueue(bullet);
         else if (bullet.GetComponent<PlantBullet>() != null)
+            plantBulletPool.Enqueue(bullet);
+        else if (bullet.GetComponent<TrunkBullet>() != null)
             plantBulletPool.Enqueue(bullet);
     }
 

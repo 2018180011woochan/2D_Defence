@@ -6,6 +6,9 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI TimerText;
+    public TextMeshProUGUI curCoin;
+    public TextMeshProUGUI curDiamond;
+    public TextMeshProUGUI curHero;
 
     private void Awake()
     {
@@ -21,5 +24,19 @@ public class UIManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
         TimerText.text = $"{minutes:D2}:{seconds:D2}";
+    }
+
+    public void UpdateCoinText(int coin)
+    {
+        curCoin.text = $"<sprite name=\"CoinIcon\"> {coin}";
+    }
+    public void UpdateDiamondText(int diamond)
+    {
+        curDiamond.text = $"<sprite name=\"DiamondIcon\"> {diamond}";
+    }
+
+    public void UpdateHeroCountText(int current, int max)
+    {
+        curHero.text = $"{current}/{max}";
     }
 }

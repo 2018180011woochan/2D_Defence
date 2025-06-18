@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     private int monsterCount = 0;
 
+    private int Coin = 0;
+    private int Diamond = 0;
+    private int curHeroCnt = 0;
+    private int maxHeroCnt = 28;
+
     private void Awake()
     {
         foreach (Transform t in WayPointParent)
@@ -23,7 +28,25 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UIManager.instance.UpdateCoinText(Coin);
+        UIManager.instance.UpdateDiamondText(Diamond);
+        UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
+
         StartCoroutine(SpawnWaves());
+    }
+
+    public int getMaxHeroCnt()
+    {
+        return maxHeroCnt;
+    }
+
+    public int getHeroCnt()
+    {
+        return curHeroCnt;
+    }
+    public void setCurHeroCnt(int heroCnt)
+    {
+        curHeroCnt = heroCnt;
     }
 
     private IEnumerator SpawnWaves()

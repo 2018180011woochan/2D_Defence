@@ -580,9 +580,15 @@ MonoBehaviour:
   monsterPrefab: {fileID: 3860563313364115347, guid: 5537e7fe658149d46943b67be6acc806,
     type: 3}
   monsterInitSize: 100
-  bulletPrefab: {fileID: 973176100967341466, guid: 85e8b5f6358fb774995ce5a8d137a405,
+  beeBulletPrefab: {fileID: 973176100967341466, guid: 3c0bec92404f4424cb4d470c423cd298,
     type: 3}
-  bulletInitSize: 100
+  beeBulletPoolSize: 100
+  plantBulletPrefab: {fileID: 7572860617871233283, guid: 5a463a21a396a334a987ba88a7738405,
+    type: 3}
+  plantBulletPoolSize: 100
+  trunkBulletPrefab: {fileID: 8681596868245030205, guid: 99b08e4ecc1aa9a43aa479956d311c49,
+    type: 3}
+  trunkBulletPoolSize: 100
   damageTextPrefab: {fileID: 1128107015682400470, guid: 7098d89019b79b94fb85eb3e3828b7ed,
     type: 3}
   damageTextInitSize: 50

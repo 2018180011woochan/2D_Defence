@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6319757415897431511}
   - component: {fileID: 112999583511431474}
   - component: {fileID: 5868642607785583721}
+  - component: {fileID: -1315448225832428463}
   m_Layer: 0
   m_Name: Trunk
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3831509301434502711}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.76857, y: -0.6466, z: 0}
+  m_LocalPosition: {x: -3.72775, y: 0.2567, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 86cb8ab9378149846a84df2f5502dfff, type: 2}
+  groupCenterPosition: {x: 0, y: 0, z: 0}
+  gridPos: {x: 0, y: 0}
 --- !u!61 &5868642607785583721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +176,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.64, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &-1315448225832428463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831509301434502711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6144856d342b22842929b2abc4815858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroData: {fileID: 11400000, guid: 86cb8ab9378149846a84df2f5502dfff, type: 2}
 --- !u!1 &3997494253069892266
 GameObject:
   m_ObjectHideFlags: 0
