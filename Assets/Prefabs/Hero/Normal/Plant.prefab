@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8035842796055469949}
   - component: {fileID: 8568306381454603376}
   - component: {fileID: -2198869692808899327}
+  - component: {fileID: 3675599911481174737}
   m_Layer: 0
   m_Name: Plant
   m_TagString: Untagged
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: e6c4e988bc9573e4197ca717d7fbbfce, type: 2}
+  groupCenterPosition: {x: 0, y: 0, z: 0}
+  gridPos: {x: 0, y: 0}
 --- !u!61 &-2198869692808899327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +176,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.44, y: 0.42}
   m_EdgeRadius: 0
+--- !u!114 &3675599911481174737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347470525053736541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 624a3d9f6ab9b8f49aa91cfee821af18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroData: {fileID: 11400000, guid: e6c4e988bc9573e4197ca717d7fbbfce, type: 2}
 --- !u!1 &1617096507547934320
 GameObject:
   m_ObjectHideFlags: 0

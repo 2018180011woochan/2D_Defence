@@ -54,6 +54,7 @@ public class BaseBullet : MonoBehaviour
         if (enemy != null)
         {
             enemy.GetDamage(damage);
+            OnHit(enemy);
         }
 
         Vector3 worldPos = collision.transform.position + Vector3.up * 0.5f;
@@ -81,4 +82,6 @@ public class BaseBullet : MonoBehaviour
         PoolManager.instance.ReleaseBullet(gameObject);
 
     }
+
+    protected virtual void OnHit(Enemy enemy) { }
 }

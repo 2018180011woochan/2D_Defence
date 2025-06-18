@@ -10,10 +10,15 @@ public class PoolManager : MonoBehaviour
     public int monsterInitSize = 100;
     private Queue<GameObject> monsterPool = new Queue<GameObject>();
 
-    [Header("Bullet Pool")]
-    public GameObject bulletPrefab;
-    public int bulletInitSize = 100;
-    private Queue<GameObject> bulletPool = new();
+    [Header("Bee Bullet Pool")]
+    public GameObject beeBulletPrefab;
+    public int beeBulletPoolSize = 100;
+    private Queue<GameObject> beeBulletPool = new Queue<GameObject>();
+
+    [Header("Plant Bullet Pool")]
+    public GameObject plantBulletPrefab;              
+    public int plantBulletPoolSize = 100;
+    private Queue<GameObject> plantBulletPool = new Queue<GameObject>();
 
     [Header("Damage Text Pool")]
     public GameObject damageTextPrefab;
@@ -28,7 +33,8 @@ public class PoolManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             InitPool(monsterPool, monsterPrefab, monsterInitSize);
-            InitPool(bulletPool, bulletPrefab, bulletInitSize);
+            InitPool(beeBulletPool, beeBulletPrefab, beeBulletPoolSize);
+            InitPool(plantBulletPool, plantBulletPrefab, plantBulletPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
         }
         else Destroy(gameObject);
@@ -55,15 +61,23 @@ public class PoolManager : MonoBehaviour
         monsterPool.Enqueue(monster);
     }
 
-    public GameObject GetBullet(Vector3 position)
+    public GameObject GetBeeBullet(Vector3 position)
     {
-        return GetFromPool(bulletPool, bulletPrefab, position);
+        return GetFromPool(beeBulletPool, beeBulletPrefab, position);
+    }
+
+    public GameObject GetPlantBullet(Vector3 position)
+    {
+        return GetFromPool(plantBulletPool, plantBulletPrefab, position);
     }
 
     public void ReleaseBullet(GameObject bullet)
     {
         bullet.SetActive(false);
-        bulletPool.Enqueue(bullet);
+        if (bullet.GetComponent<BeeBullet>() != null)
+            beeBulletPool.Enqueue(bullet);
+        else if (bullet.GetComponent<PlantBullet>() != null)
+            plantBulletPool.Enqueue(bullet);
     }
 
     public GameObject GetDamageText(Vector3 position)

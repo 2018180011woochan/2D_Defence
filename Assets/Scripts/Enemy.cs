@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour
     private int WayPointIndex = 0;
     private SpriteRenderer spriteRenderer;
 
+    private Coroutine slowRoutine;
+
     public void Initialize(List<Transform> points)
     {
         
@@ -20,6 +23,21 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void ApplySlow(float factor, float duration)
+    {
+        if (slowRoutine != null) StopCoroutine(slowRoutine);
+        slowRoutine = StartCoroutine(SlowCoroutine(factor, duration));
+    }
+
+    private IEnumerator SlowCoroutine(float factor, float duration)
+    {
+        float orig = Speed;
+        Speed *= factor;
+        yield return new WaitForSeconds(duration);
+        Speed = orig;
+        slowRoutine = null;
     }
 
     private void Update()
