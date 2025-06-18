@@ -13,6 +13,17 @@ public class Bullet : MonoBehaviour
         damage = heroDamage;
     }
 
+    private void OnEnable()
+    {
+        Invoke(nameof(AutoRelease), 0.4f);
+    }
+
+
+    private void AutoRelease()
+    {
+        PoolManager.instance.ReleaseBullet(gameObject);
+    }
+
     private void Update()
     {
         if (target == null)
@@ -32,6 +43,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Enemy")) return;
+
+        float minDmg = damage - 10f;
+        float maxDmg = damage + 10f;
+
+        float randDamage = Random.Range(minDmg, maxDmg);
+        damage = randDamage;
 
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy != null)
