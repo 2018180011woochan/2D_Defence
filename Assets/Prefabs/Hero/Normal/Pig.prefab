@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7548079831385690498}
   - component: {fileID: 8755251841505129969}
   - component: {fileID: 8251211142748076994}
+  - component: {fileID: -8937831916461722543}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -175,6 +176,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.36, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &-8937831916461722543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3612727153450303810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f61f1b2dd2d435439728bda48c2a2dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroData: {fileID: 11400000, guid: 95599eecc78de1341ac12f3868cafed4, type: 2}
+  coinChance: 0.1
+  coinAmount: 10
 --- !u!1 &3781163329763532672
 GameObject:
   m_ObjectHideFlags: 0

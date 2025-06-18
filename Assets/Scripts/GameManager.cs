@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
     }
 
+    public void AddCoins(int coin)
+    {
+        Coin += coin;
+        UIManager.instance.UpdateCoinText(Coin);
+    }
+
     private IEnumerator SpawnWaves()
     {
         for (int curRound = 1; curRound <= Round; curRound++)

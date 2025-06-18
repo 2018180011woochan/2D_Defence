@@ -58,6 +58,7 @@ public class BaseBullet : MonoBehaviour
                 OnHit(enemy);
         }
 
+
         Vector3 worldPos = collision.transform.position + Vector3.up * 0.5f;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
