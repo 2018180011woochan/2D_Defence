@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI curCoin;
     public TextMeshProUGUI curDiamond;
     public TextMeshProUGUI curHero;
+    public TextMeshProUGUI SummonPrice;
 
     private void Awake()
     {
@@ -38,6 +39,11 @@ public class UIManager : MonoBehaviour
     public void UpdateHeroCountText(int current, int max)
     {
         curHero.text = $"{current}/{max}";
+    }
+
+    public void UpdateSummonPrice(int price)
+    {
+        SummonPrice.text = price.ToString();
     }
 
     public void ShowDamageTMP(int Damage, GameObject target)

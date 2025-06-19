@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
         Coin -= StartSummonCoin + summonCnt * 2;
         UIManager.instance.UpdateCoinText(Coin);
         summonCnt++;
+        UIManager.instance.UpdateSummonPrice(StartSummonCoin + summonCnt * 2);
         return true;
     }
 
