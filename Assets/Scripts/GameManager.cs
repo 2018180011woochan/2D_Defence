@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Coin = 300;
+        Diamond = 5;
         UIManager.instance.UpdateCoinText(Coin);
         UIManager.instance.UpdateDiamondText(Diamond);
         UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
@@ -65,11 +67,24 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateDiamondText(diamond);
     }
 
+    public int GetCurMonsterCnt()
+    {
+        return monsterCount;
+    }
+
+    public void SetMonsterCnt(int monsterCnt)
+    {
+        monsterCount = monsterCnt;
+    }
+
     private IEnumerator SpawnWaves()
     {
         for (int curRound = 1; curRound <= Round; curRound++)
         {
             UIManager.instance.UpdateRoundText(curRound);
+
+            // 라운드 시작 시 현재 코인의 10%만큼 더해주기
+            AddCoins(Coin / 10);
 
             Debug.Log($"[Round {curRound}] 시작");
             float curTime = 0f;

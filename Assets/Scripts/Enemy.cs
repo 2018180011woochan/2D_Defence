@@ -74,6 +74,11 @@ public class Enemy : MonoBehaviour
         if (Hp <= 0f)
         {
             PoolManager.instance.ReleaseMonster(this.gameObject);
+            GameManager.instance.AddCoins(2);
+
+            int monsterCount = GameManager.instance.GetCurMonsterCnt();
+
+            GameManager.instance.SetMonsterCnt(monsterCount - 1);
         }
     }
 }
