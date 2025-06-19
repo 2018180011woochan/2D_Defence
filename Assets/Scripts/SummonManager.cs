@@ -109,7 +109,7 @@ public class SummonManager : MonoBehaviour
     {
         if (!SetUiSummon()) return;
 
-
+        if (!GameManager.instance.DoSummon()) return;
         // 임시로 소환시 일반 영웅만 소환
         HeroData selectHero = NormalheroDatas[UnityEngine.Random.Range(0, NormalheroDatas.Count)];
 

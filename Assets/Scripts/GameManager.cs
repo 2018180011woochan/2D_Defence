@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
 
     private int monsterCount = 0;
 
+    private int StartSummonCoin = 30;
     private int Coin = 0;
     private int Diamond = 0;
     private int curHeroCnt = 0;
     private int maxHeroCnt = 28;
+    private int summonCnt = 0;
 
     private void Awake()
     {
@@ -75,6 +77,15 @@ public class GameManager : MonoBehaviour
     public void SetMonsterCnt(int monsterCnt)
     {
         monsterCount = monsterCnt;
+    }
+
+    public bool DoSummon()
+    {
+        if (Coin - (StartSummonCoin + summonCnt * 2) < 0) return false;
+        Coin -= StartSummonCoin + summonCnt * 2;
+        UIManager.instance.UpdateCoinText(Coin);
+        summonCnt++;
+        return true;
     }
 
     private IEnumerator SpawnWaves()
