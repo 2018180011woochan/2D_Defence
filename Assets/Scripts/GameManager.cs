@@ -59,6 +59,12 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateCoinText(Coin);
     }
 
+    public void AddDiamonds(int diamond)
+    {
+        Diamond += diamond;
+        UIManager.instance.UpdateDiamondText(diamond);
+    }
+
     private IEnumerator SpawnWaves()
     {
         for (int curRound = 1; curRound <= Round; curRound++)

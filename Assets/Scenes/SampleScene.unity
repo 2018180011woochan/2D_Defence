@@ -729,7 +729,7 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 1128107015682400470, guid: 7098d89019b79b94fb85eb3e3828b7ed,
     type: 3}
   damageTextInitSize: 50
-  coinPopPrefab: {fileID: 6994825517548776849, guid: 028d9dc564a10d74493a5c3c0a0b2a47,
+  coinPopPrefab: {fileID: 5299162399990214849, guid: 028d9dc564a10d74493a5c3c0a0b2a47,
     type: 3}
   coinPopPoolSize: 20
 --- !u!1 &186253527

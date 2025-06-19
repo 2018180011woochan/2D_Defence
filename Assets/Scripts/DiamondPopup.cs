@@ -1,10 +1,11 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class CoinPopup : MonoBehaviour
+
+public class DiamondPopup : MonoBehaviour
 {
-    public Image icon;                   
-    public TextMeshProUGUI text;         
+    public Image icon;
+    public TextMeshProUGUI text;
 
     public float floatSpeed = 40f;       // 위로 떠오르는 속도 
     public float fadeDuration = 1f;     // 사라지는속도
@@ -36,6 +37,6 @@ public class CoinPopup : MonoBehaviour
         icon.color = c;
 
         if (timer <= 0f)
-            PoolManager.instance.ReleaseCoinPopup(gameObject);
+            PoolManager.instance.ReleaseDiamondPopup(gameObject);
     }
 }

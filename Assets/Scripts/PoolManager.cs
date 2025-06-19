@@ -35,6 +35,11 @@ public class PoolManager : MonoBehaviour
     public int coinPopPoolSize = 20;
     private Queue<GameObject> coinPopPool = new Queue<GameObject>();
 
+    [Header("Diamond Popup Pool")]
+    public GameObject diamondPopPrefab;
+    public int diamondPopPoolSize = 20;
+    private Queue<GameObject> diamondPopPool = new Queue<GameObject>();
+
     private void Awake()
     {
         if (instance == null)
@@ -47,6 +52,7 @@ public class PoolManager : MonoBehaviour
             InitPool(trunkBulletPool, trunkBulletPrefab, trunkBulletPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
             InitPool(coinPopPool, coinPopPrefab, coinPopPoolSize);
+            InitPool(diamondPopPool, diamondPopPrefab, diamondPopPoolSize);
         }
         else Destroy(gameObject);
     }
@@ -99,6 +105,22 @@ public class PoolManager : MonoBehaviour
     {
         go.SetActive(false);
         coinPopPool.Enqueue(go);
+    }
+
+    public GameObject GetDiamondPopup(Vector3 worldPos)
+    {
+        GameObject obj = diamondPopPool.Count > 0
+            ? diamondPopPool.Dequeue()
+            : Instantiate(diamondPopPrefab);
+        obj.transform.position = worldPos;
+        obj.SetActive(true);
+        return obj;
+    }
+
+    public void ReleaseDiamondPopup(GameObject go)
+    {
+        go.SetActive(false);
+        diamondPopPool.Enqueue(go);
     }
 
     public void ReleaseBullet(GameObject bullet)
