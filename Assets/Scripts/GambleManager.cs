@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class GambleManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GambleManager instance { get; private set; }
+
+    public GameObject gambleBoard;   
+
+    private void Awake()
     {
-        
+        if (instance == null) instance = this;
+        else Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ToggleGambleBoard()
     {
-        
+        bool isActive = gambleBoard.activeSelf;
+        gambleBoard.SetActive(!isActive);
     }
 }
