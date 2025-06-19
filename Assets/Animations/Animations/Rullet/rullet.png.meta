@@ -1,0 +1,573 @@
+fileFormatVersion: 2
+guid: 7d141dde9014bec43ab53f4894117668
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6819354698493815214
+    second: rullet_0
+  - first:
+      213: 2826254042242162746
+    second: rullet_1
+  - first:
+      213: 3060013413192230723
+    second: rullet_2
+  - first:
+      213: 140819237233877316
+    second: rullet_3
+  - first:
+      213: -3022375544141352630
+    second: rullet_4
+  - first:
+      213: 2619462396475612098
+    second: rullet_5
+  - first:
+      213: 1495837046376277270
+    second: rullet_6
+  - first:
+      213: -7570771776070376337
+    second: rullet_7
+  - first:
+      213: -481049328511904160
+    second: rullet_8
+  - first:
+      213: -1904592120893805237
+    second: rullet_9
+  - first:
+      213: -292604831172710999
+    second: rullet_10
+  - first:
+      213: 1962524481731149911
+    second: rullet_11
+  - first:
+      213: 3696057448150505967
+    second: rullet_12
+  - first:
+      213: -8181736541497091012
+    second: rullet_13
+  - first:
+      213: 8427171389335174958
+    second: rullet_14
+  - first:
+      213: 6738606627686996323
+    second: rullet_15
+  - first:
+      213: 3259124202543523633
+    second: rullet_16
+  - first:
+      213: 9015542283131275305
+    second: rullet_17
+  - first:
+      213: 599604192122812407
+    second: rullet_18
+  - first:
+      213: 5238707840131653188
+    second: rullet_19
+  - first:
+      213: -6476452537306943768
+    second: rullet_20
+  - first:
+      213: 3530332634634363198
+    second: rullet_21
+  - first:
+      213: 2618228703951280841
+    second: rullet_22
+  - first:
+      213: 1888404241809119389
+    second: rullet_23
+  - first:
+      213: 7703579604044976923
+    second: rullet_24
+  - first:
+      213: -4176036639139297732
+    second: rullet_25
+  - first:
+      213: -1461706877826939928
+    second: rullet_26
+  - first:
+      213: -8590571334831916101
+    second: rullet_27
+  - first:
+      213: -5409636762923971364
+    second: rullet_28
+  - first:
+      213: -1438672494785527333
+    second: rullet_29
+  - first:
+      213: 3672813596571677771
+    second: rullet_30
+  - first:
+      213: 6857558334165005899
+    second: rullet_31
+  - first:
+      213: 1737856407700096401
+    second: rullet_32
+  - first:
+      213: -579862280384936063
+    second: rullet_33
+  - first:
+      213: -1077666294731131424
+    second: rullet_34
+  - first:
+      213: 4115429314040387922
+    second: rullet_35
+  - first:
+      213: 1488684962819902649
+    second: rullet_36
+  - first:
+      213: -2446794212450234612
+    second: rullet_37
+  - first:
+      213: -3369329326268479499
+    second: rullet_38
+  - first:
+      213: -8037452207697583187
+    second: rullet_39
+  - first:
+      213: -6347329657586441043
+    second: rullet_40
+  - first:
+      213: 8099743877045087040
+    second: rullet_41
+  - first:
+      213: -6657805096598692398
+    second: rullet_42
+  - first:
+      213: -2027156529537205638
+    second: rullet_43
+  - first:
+      213: -6382165081682710330
+    second: rullet_44
+  - first:
+      213: 3198074612054210535
+    second: rullet_45
+  - first:
+      213: 2407247943841683847
+    second: rullet_46
+  - first:
+      213: -4821572407696056794
+    second: rullet_47
+  - first:
+      213: -899961537084333718
+    second: rullet_48
+  - first:
+      213: 8937152227562272257
+    second: rullet_49
+  - first:
+      213: -100334804338123431
+    second: rullet_50
+  - first:
+      213: -3443619423368118536
+    second: rullet_51
+  - first:
+      213: -2134098302591160994
+    second: rullet_52
+  - first:
+      213: -2694012039775038877
+    second: rullet_53
+  - first:
+      213: 6732740243440819088
+    second: rullet_54
+  - first:
+      213: -9056613534821780837
+    second: rullet_55
+  - first:
+      213: -5278233759938330282
+    second: rullet_56
+  - first:
+      213: -257818890958927779
+    second: rullet_57
+  - first:
+      213: -3475980289923611910
+    second: rullet_58
+  - first:
+      213: -2818799058329082250
+    second: rullet_59
+  - first:
+      213: -9121383746076640164
+    second: rullet_60
+  - first:
+      213: -2608434861748672555
+    second: rullet_61
+  - first:
+      213: -886225348584340632
+    second: rullet_62
+  - first:
+      213: -437880176341224714
+    second: rullet_63
+  - first:
+      213: -1195205376029710120
+    second: rullet_64
+  - first:
+      213: 1825846439734189421
+    second: rullet_65
+  - first:
+      213: -7260114687420787155
+    second: rullet_66
+  - first:
+      213: -8791127796538562809
+    second: rullet_67
+  - first:
+      213: 6656189673695822465
+    second: rullet_68
+  - first:
+      213: 1359399180888655449
+    second: rullet_69
+  - first:
+      213: 3169436255554842212
+    second: rullet_70
+  - first:
+      213: -2342605587370560839
+    second: rullet_71
+  - first:
+      213: 4826714946841845599
+    second: rullet_72
+  - first:
+      213: -7039731603179285037
+    second: rullet_73
+  - first:
+      213: 5930748927952612759
+    second: rullet_74
+  - first:
+      213: 371522690376256677
+    second: rullet_75
+  - first:
+      213: 8345563496790787802
+    second: rullet_76
+  - first:
+      213: -909853350515906422
+    second: rullet_77
+  - first:
+      213: 1119797518997466271
+    second: rullet_78
+  - first:
+      213: -398686591918612185
+    second: rullet_79
+  - first:
+      213: -7102055582760008902
+    second: rullet_80
+  - first:
+      213: 5602828245124169055
+    second: rullet_81
+  - first:
+      213: -2834951717143035538
+    second: rullet_82
+  - first:
+      213: 1169597532944469300
+    second: rullet_83
+  - first:
+      213: -8730815741446627498
+    second: rullet_84
+  - first:
+      213: -4322082005946753441
+    second: rullet_85
+  - first:
+      213: -2569312562540922623
+    second: rullet_86
+  - first:
+      213: -1111140613356653675
+    second: rullet_87
+  - first:
+      213: -398038765487616173
+    second: rullet_88
+  - first:
+      213: 5940102867574229594
+    second: rullet_89
+  - first:
+      213: -3456735532112714929
+    second: rullet_90
+  - first:
+      213: -2216993640030627883
+    second: rullet_91
+  - first:
+      213: 5503474114534864655
+    second: rullet_92
+  - first:
+      213: -822572613476792190
+    second: rullet_93
+  - first:
+      213: -6191480461619039213
+    second: rullet_94
+  - first:
+      213: -1171949597644619255
+    second: rullet_95
+  - first:
+      213: 7180869917776233141
+    second: rullet_96
+  - first:
+      213: 857377287255810579
+    second: rullet_97
+  - first:
+      213: 701314845677394906
+    second: rullet_98
+  - first:
+      213: -2966442077112850044
+    second: rullet_99
+  - first:
+      213: 7835987993052082931
+    second: rullet_100
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: rullet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28342e42bd9e04c45ae368b29c83365b
+      internalID: -1652378495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rullet_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1349c7e70bc7e4409761601914e88d2
+      internalID: 2003075303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rullet_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 512
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14d0e891629e284db2f7ef50a070662
+      internalID: 895386478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rullet_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b6f81b14de738645973811f5ff11f6e
+      internalID: 192697407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rullet_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c318b75e8fbac524093073a93e66ffcf
+      internalID: 1996621959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: rullet_5
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c34b117fbb92c49833b12e1980da19
+      internalID: -2119145056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d2128dab3815c5a4e97a7e96da7c5ee2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":512.0,"y":512.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      rullet_0: -1652378495
+      rullet_1: 2003075303
+      rullet_2: 895386478
+      rullet_3: 192697407
+      rullet_4: 1996621959
+      rullet_5: -2119145056
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
