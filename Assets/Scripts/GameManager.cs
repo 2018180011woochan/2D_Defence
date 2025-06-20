@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Coin = 300;
+        Coin = 30000;
         Diamond = 5;
         UIManager.instance.UpdateCoinText(Coin);
         UIManager.instance.UpdateDiamondText(Diamond);

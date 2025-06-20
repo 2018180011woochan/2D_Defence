@@ -28,7 +28,7 @@ public class SummonManager : MonoBehaviour
 {
     public static SummonManager instance { get; set; }
 
-    public List<HeroData> NormalheroDatas;
+    public List<HeroData> heroDatas;
 
     public int rows = 3;
     public int cols = 7;
@@ -107,11 +107,12 @@ public class SummonManager : MonoBehaviour
 
     public void Summon()
     {
+        if (!GameManager.instance.DoSummon()) return;
         if (!SetUiSummon()) return;
 
-        if (!GameManager.instance.DoSummon()) return;
         // 임시로 소환시 일반 영웅만 소환
-        HeroData selectHero = NormalheroDatas[UnityEngine.Random.Range(0, NormalheroDatas.Count)];
+        //HeroData selectHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
+        HeroData selectHero = SelectRandomHero();
 
         // 필드위에 같은 영웅이 있는 칸이 있는지 확인
         Vector3 groupPos;
@@ -175,6 +176,21 @@ public class SummonManager : MonoBehaviour
 
 
         xindex++;
+    }
+
+    private HeroData SelectRandomHero()
+    {
+        HeroData baseHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
+
+        HeroData runtimeHero = Instantiate(baseHero);
+
+        int randVal = UnityEngine.Random.Range(0, 10);
+        if (randVal < 5) runtimeHero.grade = HeroGrade.Normal;
+        else if (randVal < 7) runtimeHero.grade = HeroGrade.Rare;
+        else if (randVal == 8) runtimeHero.grade = HeroGrade.Epic;
+        else runtimeHero.grade = HeroGrade.Legendary;
+
+        return runtimeHero;
     }
 
     private bool SetUiSummon()

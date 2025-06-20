@@ -9,6 +9,15 @@ public class Pinkman : BaseHero
     // 성공시 얻는 다이아 양
     public int diamondAmount = 1;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        if (heroData.grade == HeroGrade.Normal) diamondChance = 0.05f;
+        if (heroData.grade == HeroGrade.Rare) diamondChance = 0.1f;
+        if (heroData.grade == HeroGrade.Epic) diamondChance = 0.15f;
+        if (heroData.grade == HeroGrade.Legendary) diamondChance = 0.2f;
+    }
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
         yield return new WaitForSeconds(attackCooldown);

@@ -8,6 +8,17 @@ public class Pig : BaseHero
 
     // 성공 시 얻는 코인 양
     public int coinAmount = 10;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (heroData.grade == HeroGrade.Normal) coinChance = 0.05f;
+        if (heroData.grade == HeroGrade.Rare) coinChance = 0.1f;
+        if (heroData.grade == HeroGrade.Epic) coinChance = 0.15f;
+        if (heroData.grade == HeroGrade.Legendary) coinChance = 0.2f;
+    }
+
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
         yield return new WaitForSeconds(attackCooldown);
