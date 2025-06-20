@@ -6,8 +6,8 @@ using UnityEngine;
 [Serializable]
 class CellData
 {
-    public HeroData heroData;           // 이 칸에 있는 영웅 종류
-    public List<GameObject> instances;  // 이 칸에 있는 영웅 인스턴스들
+    public HeroData heroData;
+    public List<GameObject> instances;
 
     public CellData()
     {
@@ -51,6 +51,10 @@ public class SummonManager : MonoBehaviour
     [Header("Animation Settings")]
     public float moveDuration = 0.5f;
 
+    [Header("Sell Button UI")]
+    public GameObject sellButtonPrefab;
+    private SellButton[,] sellButtons;
+
     private void Awake()
     {
         if (instance == null)
@@ -63,11 +67,12 @@ public class SummonManager : MonoBehaviour
 
     private void Start()
     {
+        // 그리드 초기화
         cellWidth = Mathf.Abs(endX - startX) / cols;
         cellHeight = Mathf.Abs(endY - startY) / rows;
-
         summonPos = new Vector3[rows, cols];
         cellData = new CellData[rows, cols];
+        sellButtons = new SellButton[rows, cols];
 
         for (int r = 0; r < rows; r++)
         {
@@ -83,26 +88,26 @@ public class SummonManager : MonoBehaviour
         }
     }
 
-    // 기존 Summon 버튼용
+    /// <summary>기존 일반 소환 버튼에서 호출</summary>
     public void Summon()
     {
         if (!GameManager.instance.DoSummon()) return;
         if (!SetUiSummon()) return;
-
         HeroData selectHero = SelectRandomHero();
         SummonHero(selectHero);
     }
 
-    // 필드에 영웅 배치
+    /// <summary>실제 필드에 영웅을 배치</summary>
     public void SummonHero(HeroData selectHero)
     {
-        // 1) 같은 종류·등급 칸 찾기
+        // 같은 종류·등급 칸 검색
         Vector3 groupPos;
         Vector2Int cellIdx;
         CellData existing = FindExistingCellInField(selectHero, out groupPos, out cellIdx);
 
         if (existing != null)
         {
+            // 그룹에 추가 배치
             Vector3 offset = GetOffsetForGroup(existing.instances.Count);
             GameObject go = Instantiate(selectHero.prefab, groupPos + offset, Quaternion.identity);
             SetShadowColor(go, selectHero.grade);
@@ -115,10 +120,13 @@ public class SummonManager : MonoBehaviour
             existing.instances.Add(go);
             if (existing.heroData == null)
                 existing.heroData = selectHero;
+
+            // 버튼 위치 갱신
+            //ShowSellButton(cellIdx.x, cellIdx.y);
             return;
         }
 
-        // 2) 빈 칸에 배치
+        // 빈 칸에 배치
         if (xindex >= cols)
         {
             xindex = 0;
@@ -143,22 +151,98 @@ public class SummonManager : MonoBehaviour
         newCell.heroData = selectHero;
         newCell.instances.Add(newObj);
 
+        // 버튼 생성
+        //ShowSellButton(yindex, xindex);
+
         xindex++;
     }
 
-    // 룰렛 결과 호출용
+    /// <summary>룰렛 결과 호출용: 등급만 넘기면 랜덤 영웅 소환</summary>
     public void SummonResult(HeroGrade grade)
     {
+        // 1) 랜덤 에셋 pick
         HeroData baseHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
-
+        // 2) 복제본 만들어서 grade 덮어쓰기
         HeroData runtimeHero = Instantiate(baseHero);
-
         runtimeHero.grade = grade;
-
+        // 3) 실제 소환
         SummonHero(runtimeHero);
+        // 4) UI 갱신
+        GameManager.instance.setCurHeroCnt(GameManager.instance.getHeroCnt() + 1);
+        UIManager.instance.UpdateHeroCountText(
+            GameManager.instance.getHeroCnt(),
+            GameManager.instance.getMaxHeroCnt());
+    }
+
+    public void ShowSellButton(int row, int col)
+    {
+        if (sellButtons[row, col] == null)
+        {
+            GameObject go = Instantiate(sellButtonPrefab, Vector3.zero, Quaternion.identity);
+            go.transform.SetParent(GameObject.Find("Canvas_MainUI").transform, false);
+            var sb = go.GetComponent<SellButton>();
+            sb.row = row;
+            sb.col = col;
+            sellButtons[row, col] = sb;
+        }
+        UpdateSellButtonPosition(row, col);
+    }
+
+    public void HideSellButton(int row, int col)
+    {
+        if (sellButtons[row, col] != null)
+        {
+            sellButtons[row, col].Hide();
+            sellButtons[row, col] = null;
+        }
+    }
+
+    private void UpdateSellButtonPosition(int row, int col)
+    {
+        Vector3 worldCenter = summonPos[row, col];
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldCenter + Vector3.up * 0.5f);
+
+        RectTransform canvasRect = GameObject
+            .Find("Canvas_MainUI")
+            .GetComponent<RectTransform>();
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect, screenPos, null, out Vector2 localPos);
+
+        sellButtons[row, col]
+            .GetComponent<RectTransform>().anchoredPosition = localPos;
+    }
+
+    public void SellOne(int row, int col)
+    {
+        var cell = cellData[row, col];
+        if (cell.IsEmpty) return;
+
+        // 하나 제거
+        var go = cell.instances[cell.instances.Count - 1];
+        Destroy(go);
+        cell.instances.RemoveAt(cell.instances.Count - 1);
+
+        // 보상 예: grade * 10 코인
+        int refund = (int)cell.heroData.grade * 10;
+        GameManager.instance.AddCoins(refund);
+
+        // 남은 수 처리
+        if (cell.instances.Count == 0)
+        {
+            cell.heroData = null;
+            HideSellButton(row, col);
+        }
+        else
+        {
+            for (int i = 0; i < cell.instances.Count; i++)
+                cell.instances[i].transform.position =
+                    summonPos[row, col] + GetOffsetForGroup(i);
+            UpdateSellButtonPosition(row, col);
+        }
 
         GameManager.instance.setCurHeroCnt(
-            GameManager.instance.getHeroCnt() + 1);
+            GameManager.instance.getHeroCnt() - 1);
         UIManager.instance.UpdateHeroCountText(
             GameManager.instance.getHeroCnt(),
             GameManager.instance.getMaxHeroCnt());
@@ -181,18 +265,14 @@ public class SummonManager : MonoBehaviour
     private CellData FindExistingCellInField(HeroData hero, out Vector3 position, out Vector2Int cellIndex)
     {
         for (int row = 0; row < rows; row++)
-        {
             for (int col = 0; col < cols; col++)
-            {
-                CellData cell = cellData[row, col];
-                if (cell.CanAddHero(hero))
+                if (cellData[row, col].CanAddHero(hero))
                 {
                     position = summonPos[row, col];
                     cellIndex = new Vector2Int(row, col);
-                    return cell;
+                    return cellData[row, col];
                 }
-            }
-        }
+
         position = Vector3.zero;
         cellIndex = Vector2Int.zero;
         return null;
@@ -278,31 +358,25 @@ public class SummonManager : MonoBehaviour
             }
         }
 
-        float elapsedTime = 0f;
-        while (elapsedTime < moveDuration)
+        float elapsed = 0f;
+        while (elapsed < moveDuration)
         {
-            float t = elapsedTime / moveDuration;
+            float t = elapsed / moveDuration;
 
             for (int i = 0; i < fromCell.instances.Count; i++)
-            {
                 fromCell.instances[i].transform.position =
                     Vector3.Lerp(fromStartPositions[i], toPos + fromOffsets[i], t);
-            }
 
             if (!toCell.IsEmpty)
-            {
                 for (int i = 0; i < toCell.instances.Count; i++)
-                {
                     toCell.instances[i].transform.position =
                         Vector3.Lerp(toStartPositions[i], fromPos + toOffsets[i], t);
-                }
-            }
 
-            elapsedTime += Time.deltaTime;
+            elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // 애니메이션 완료 후 정확한 위치 설정 & 데이터 교환
+        // 위치 최종 보정 및 데이터 교환
         for (int i = 0; i < fromCell.instances.Count; i++)
         {
             fromCell.instances[i].transform.position = toPos + fromOffsets[i];
