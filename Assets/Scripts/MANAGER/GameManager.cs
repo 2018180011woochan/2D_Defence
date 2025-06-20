@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Coin = 30000;
-        Diamond = 5;
+        Diamond = 500;
         UIManager.instance.UpdateCoinText(Coin);
         UIManager.instance.UpdateDiamondText(Diamond);
         UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
@@ -67,6 +67,16 @@ public class GameManager : MonoBehaviour
     {
         Diamond += diamond;
         UIManager.instance.UpdateDiamondText(diamond);
+    }
+
+    public bool SpendDiamonds(int diamond)
+    {
+        if (Diamond < diamond) return false;
+        else
+        {
+            Diamond -= diamond;
+            return true;
+        }
     }
 
     public int GetCurMonsterCnt()
