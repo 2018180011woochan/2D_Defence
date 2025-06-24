@@ -53,6 +53,7 @@ public class HeroSelectionManager : MonoBehaviour
         {
             var prev = selectedCell.Value;
             SummonManager.instance.HideSellButton(prev.x, prev.y);
+            SummonManager.instance.HideCombineButton(prev.x, prev.y);
         }
 
         selectedCell = cell;
@@ -62,6 +63,7 @@ public class HeroSelectionManager : MonoBehaviour
         currentIndicator.transform.localScale = Vector3.one * range * 1.5f;
 
         SummonManager.instance.ShowSellButton(cell.x, cell.y);
+        SummonManager.instance.ShowCombineButton(cell.x, cell.y);
     }
 
     public void Deselect()
@@ -76,6 +78,7 @@ public class HeroSelectionManager : MonoBehaviour
         {
             var c = selectedCell.Value;
             SummonManager.instance.HideSellButton(c.x, c.y);
+            SummonManager.instance.HideCombineButton(c.x, c.y);
         }
 
         selectedCell = null;

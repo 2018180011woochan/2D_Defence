@@ -54,6 +54,10 @@ public class SummonManager : MonoBehaviour
     [Header("Sell Button UI")]
     public GameObject sellButtonPrefab;
     private SellButton[,] sellButtons;
+    [Header("Combine Button UI")]
+    public GameObject combineButtonPrefab;
+    private CombineButton[,] combineButtons;
+
 
     private void Awake()
     {
@@ -73,6 +77,7 @@ public class SummonManager : MonoBehaviour
         summonPos = new Vector3[rows, cols];
         cellData = new CellData[rows, cols];
         sellButtons = new SellButton[rows, cols];
+        combineButtons = new CombineButton[rows, cols];
 
         for (int r = 0; r < rows; r++)
         {
@@ -121,8 +126,6 @@ public class SummonManager : MonoBehaviour
             if (existing.heroData == null)
                 existing.heroData = selectHero;
 
-            // 버튼 위치 갱신
-            //ShowSellButton(cellIdx.x, cellIdx.y);
             return;
         }
 
@@ -151,13 +154,9 @@ public class SummonManager : MonoBehaviour
         newCell.heroData = selectHero;
         newCell.instances.Add(newObj);
 
-        // 버튼 생성
-        //ShowSellButton(yindex, xindex);
-
         xindex++;
     }
 
-    /// <summary>룰렛 결과 호출용: 등급만 넘기면 랜덤 영웅 소환</summary>
     public void SummonResult(HeroGrade grade)
     {
         HeroData baseHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
@@ -193,9 +192,31 @@ public class SummonManager : MonoBehaviour
         }
     }
 
+    public void ShowCombineButton(int row, int col)
+    {
+        if (combineButtons[row, col] == null)
+        {
+            GameObject go = Instantiate(combineButtonPrefab, Vector3.zero, Quaternion.identity);
+            go.transform.SetParent(GameObject.Find("Canvas_MainUI").transform, false);
+            var cb = go.GetComponent<CombineButton>();
+            cb.row = row;
+            cb.col = col;
+            combineButtons[row, col] = cb;
+        }
+        UpdateCombineButtonPosition(row, col);
+    }
+
+    public void HideCombineButton(int row, int col)
+    {
+        if (combineButtons[row, col] != null)
+        {
+            combineButtons[row, col].Hide();
+            combineButtons[row, col] = null;
+        }
+    }
+
     private void UpdateSellButtonPosition(int row, int col)
     {
-        //float worldYOffset = 0.5f;
         Vector3 worldCenter = summonPos[row, col];
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldCenter + Vector3.up * 1.5f);
 
@@ -208,6 +229,27 @@ public class SummonManager : MonoBehaviour
 
         sellButtons[row, col]
             .GetComponent<RectTransform>().anchoredPosition = localPos;
+    }
+
+    private void UpdateCombineButtonPosition(int row, int col)
+    {
+        Vector3 worldCenter = summonPos[row, col];
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldCenter + Vector3.up * -2.0f);
+
+        RectTransform canvasRect = GameObject
+            .Find("Canvas_MainUI")
+            .GetComponent<RectTransform>();
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect, screenPos, null, out Vector2 localPos);
+
+        combineButtons[row, col]
+            .GetComponent<RectTransform>().anchoredPosition = localPos;
+    }
+
+    public void Combine(int row, int col)
+    {
+
     }
 
     public void SellOne(int row, int col)
@@ -228,6 +270,7 @@ public class SummonManager : MonoBehaviour
         {
             cell.heroData = null;
             HideSellButton(row, col);
+            HeroSelectionManager.instance.Deselect();
         }
         else
         {
