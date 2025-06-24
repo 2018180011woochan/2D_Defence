@@ -63,7 +63,8 @@ public class HeroSelectionManager : MonoBehaviour
         currentIndicator.transform.localScale = Vector3.one * range * 1.5f;
 
         SummonManager.instance.ShowSellButton(cell.x, cell.y);
-        SummonManager.instance.ShowCombineButton(cell.x, cell.y);
+        if (SummonManager.instance.GetGroupCount(cell.x, cell.y) == 3)
+            SummonManager.instance.ShowCombineButton(cell.x, cell.y);
     }
 
     public void Deselect()

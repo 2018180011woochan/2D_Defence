@@ -93,6 +93,9 @@ public class SummonManager : MonoBehaviour
         }
     }
 
+    public int GetGroupCount(int row, int col)
+    => cellData[row, col].instances.Count;
+
     /// <summary>기존 일반 소환 버튼에서 호출</summary>
     public void Summon()
     {
@@ -249,7 +252,44 @@ public class SummonManager : MonoBehaviour
 
     public void Combine(int row, int col)
     {
+        var cell = cellData[row, col];
+        int curCount = cell.instances.Count;
+        HeroGrade curGrade = cell.heroData.grade;
+        HeroGrade nextGrade = (HeroGrade)Mathf.Min((int)curGrade + 1, (int)HeroGrade.Mythic);
+        if (nextGrade == HeroGrade.Mythic) return;
 
+        // 그룹 내의 모든 영웅 제거 
+        foreach (var go in cell.instances)
+            Destroy(go);
+        cell.instances.Clear();
+        cell.heroData = null;
+
+        // 랜덤 생성
+        HeroData baseHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
+        HeroData newHeroData = Instantiate(baseHero);
+        newHeroData.grade = nextGrade;
+
+        Vector3 center = summonPos[row, col];
+        GameObject newGO = Instantiate(newHeroData.prefab, center, Quaternion.identity);
+        SetShadowColor(newGO, nextGrade);
+
+        // 영웅 정보 세팅
+        var sel = newGO.GetComponent<HeroSelectable>();
+        sel.heroData = newHeroData;
+        sel.gridPos = new Vector2Int(row, col);
+        sel.groupCenterPosition = center;
+
+        // 셀 데이터에 등록
+        cell.heroData = newHeroData;
+        cell.instances.Add(newGO);
+
+        // UI 업데이트
+        GameManager gm = GameManager.instance;
+        gm.setCurHeroCnt(gm.getHeroCnt() - 2);
+        UIManager.instance.UpdateHeroCountText(
+            gm.getHeroCnt(), gm.getMaxHeroCnt());
+
+        HeroSelectionManager.instance.Deselect();
     }
 
     public void SellOne(int row, int col)
@@ -285,6 +325,8 @@ public class SummonManager : MonoBehaviour
         UIManager.instance.UpdateHeroCountText(
             GameManager.instance.getHeroCnt(),
             GameManager.instance.getMaxHeroCnt());
+
+        HideCombineButton(row, col);
     }
 
     private HeroData SelectRandomHero()
