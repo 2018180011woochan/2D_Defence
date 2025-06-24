@@ -160,14 +160,10 @@ public class SummonManager : MonoBehaviour
     /// <summary>룰렛 결과 호출용: 등급만 넘기면 랜덤 영웅 소환</summary>
     public void SummonResult(HeroGrade grade)
     {
-        // 1) 랜덤 에셋 pick
         HeroData baseHero = heroDatas[UnityEngine.Random.Range(0, heroDatas.Count)];
-        // 2) 복제본 만들어서 grade 덮어쓰기
         HeroData runtimeHero = Instantiate(baseHero);
         runtimeHero.grade = grade;
-        // 3) 실제 소환
         SummonHero(runtimeHero);
-        // 4) UI 갱신
         GameManager.instance.setCurHeroCnt(GameManager.instance.getHeroCnt() + 1);
         UIManager.instance.UpdateHeroCountText(
             GameManager.instance.getHeroCnt(),
@@ -199,8 +195,9 @@ public class SummonManager : MonoBehaviour
 
     private void UpdateSellButtonPosition(int row, int col)
     {
+        //float worldYOffset = 0.5f;
         Vector3 worldCenter = summonPos[row, col];
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldCenter + Vector3.up * 0.5f);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldCenter + Vector3.up * 1.5f);
 
         RectTransform canvasRect = GameObject
             .Find("Canvas_MainUI")
@@ -223,7 +220,6 @@ public class SummonManager : MonoBehaviour
         Destroy(go);
         cell.instances.RemoveAt(cell.instances.Count - 1);
 
-        // 보상 예: grade * 10 코인
         int refund = (int)cell.heroData.grade * 10;
         GameManager.instance.AddCoins(refund);
 
