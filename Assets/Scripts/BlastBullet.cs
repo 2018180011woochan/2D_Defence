@@ -22,5 +22,26 @@ public class BlastBullet : MonoBehaviour
         life -= Time.deltaTime;
         if (life <= 0f) PoolManager.instance.ReleaseBlastBullet(gameObject);
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Enemy")) return;
 
+        var enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
+            enemy.GetDamage(damage);
+
+        Vector3 worldPos = other.transform.position + Vector3.up * 0.5f;
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        var txt = PoolManager.instance.GetDamageText(Vector3.zero);
+        var canvas = GameObject.Find("Canvas_MainUI").transform;
+        txt.transform.SetParent(canvas, false);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.GetComponent<RectTransform>(),
+            screenPos, null, out Vector2 localPos);
+        float xOffset = 150f;
+        txt.GetComponent<RectTransform>().anchoredPosition = localPos + new Vector2(-xOffset, 0);
+        txt.GetComponent<DamageText>().Show(damage);
+
+        PoolManager.instance.ReleaseBlastBullet(gameObject);
+    }
 }

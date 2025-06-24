@@ -5,8 +5,9 @@ public class DragonWarior : BaseHero
 {
     public float strikeChance = 0.9f;   
     public float strikeAnimDelay = 0.3f;                 
-    public float blastDamageMultiplier = 10f;            
+    public float blastDamageMultiplier = 10f;
 
+    private bool hasUsedStrike = false;
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
         animator.SetTrigger("Attack");
@@ -14,6 +15,7 @@ public class DragonWarior : BaseHero
 
         if (Random.value <= strikeChance)
         {
+            hasUsedStrike = true;
             animator.SetTrigger("Strike");
             yield return new WaitForSeconds(1.0f);
             yield return new WaitForSeconds(strikeAnimDelay);
