@@ -5,7 +5,7 @@ public abstract class BaseHero : MonoBehaviour
 {
     public HeroData heroData;
 
-    private Animator animator;
+    protected Animator animator;
     protected float attackCooldown;
 
     protected virtual void Start()

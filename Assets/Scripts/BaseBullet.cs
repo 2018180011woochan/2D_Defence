@@ -6,7 +6,8 @@ public class BaseBullet : MonoBehaviour
     public float speed = 8f;
     private Transform target;
     private float damage;
-
+    [SerializeField]
+    protected float spriteOffset = 90f;
     private void OnEnable()
     {
         Invoke(nameof(AutoRelease), 0.4f);
@@ -36,7 +37,7 @@ public class BaseBullet : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
+        transform.rotation = Quaternion.Euler(0f, 0f, angle + spriteOffset);
 
     }
 

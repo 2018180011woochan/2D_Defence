@@ -25,6 +25,16 @@ public class PoolManager : MonoBehaviour
     public int trunkBulletPoolSize = 100;
     private Queue<GameObject> trunkBulletPool = new Queue<GameObject>();
 
+    [Header("DW Bullet Pool")]
+    public GameObject DWBulletPrefab;
+    public int DWBulletPoolSize = 100;
+    private Queue<GameObject> DWBulletPool = new Queue<GameObject>();
+
+    [Header("Blast Bullet Pool")]
+    public GameObject blastBulletPrefab;
+    public int blastPoolSize = 50;
+    private Queue<GameObject> blastPool = new Queue<GameObject>();
+
     [Header("Damage Text Pool")]
     public GameObject damageTextPrefab;
     public int damageTextInitSize = 50;
@@ -50,6 +60,8 @@ public class PoolManager : MonoBehaviour
             InitPool(beeBulletPool, beeBulletPrefab, beeBulletPoolSize);
             InitPool(plantBulletPool, plantBulletPrefab, plantBulletPoolSize);
             InitPool(trunkBulletPool, trunkBulletPrefab, trunkBulletPoolSize);
+            InitPool(DWBulletPool, DWBulletPrefab, DWBulletPoolSize);
+            InitPool(blastPool, blastBulletPrefab, blastPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
             InitPool(coinPopPool, coinPopPrefab, coinPopPoolSize);
             InitPool(diamondPopPool, diamondPopPrefab, diamondPopPoolSize);
@@ -93,6 +105,16 @@ public class PoolManager : MonoBehaviour
         return GetFromPool(trunkBulletPool, trunkBulletPrefab, position);
     }
 
+    public GameObject GetDWBullet(Vector3 position)
+    {
+        return GetFromPool(DWBulletPool, DWBulletPrefab, position);
+    }
+
+    public GameObject GetBlastBullet(Vector3 pos)
+    {
+        return GetFromPool(blastPool, blastBulletPrefab, pos);
+    }
+
     public GameObject GetCoinPopup(Vector3 worldPos)
     {
         GameObject obj = coinPopPool.Count > 0 ? coinPopPool.Dequeue() : Instantiate(coinPopPrefab);
@@ -132,6 +154,16 @@ public class PoolManager : MonoBehaviour
             plantBulletPool.Enqueue(bullet);
         else if (bullet.GetComponent<TrunkBullet>() != null)
             plantBulletPool.Enqueue(bullet);
+        else if (bullet.GetComponent<DWBullet>() != null)
+            DWBulletPool.Enqueue(bullet);
+        else if (bullet.GetComponent<BlastBullet>() != null)
+            DWBulletPool.Enqueue(bullet);
+    }
+
+    public void ReleaseBlastBullet(GameObject go)
+    {
+        go.SetActive(false);
+        blastPool.Enqueue(go);
     }
 
     public GameObject GetDamageText(Vector3 position)
