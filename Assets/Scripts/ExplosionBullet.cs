@@ -6,7 +6,8 @@ public class ExplosionBullet : MonoBehaviour
     public float speed = 6f;
     public float damage;
     public float radius;
-
+    public float maxLifetime = 2f;
+    private float lifeTimer;
     private Vector3 targetPos;
     private bool isExploding = false;
     private Animator animator;
@@ -18,6 +19,7 @@ public class ExplosionBullet : MonoBehaviour
         damage = dmg;
         radius = splashRadius;
         isExploding = false;
+        lifeTimer = maxLifetime;
 
         // 콜라이더 · 렌더러 다시 활성화
         if (col2d == null) col2d = GetComponent<Collider2D>();
@@ -39,18 +41,29 @@ public class ExplosionBullet : MonoBehaviour
 
     private void Update()
     {
-        // 폭발 중이면 이동 중단
         if (isExploding) return;
 
-        // 목표 방향으로 직진
+        lifeTimer -= Time.deltaTime;
+        if (lifeTimer <= 0f)
+        {
+            PoolManager.instance.ReleaseExplosionBullet(gameObject);
+            return;
+        }
+
         Vector3 dir = (targetPos - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
-
-        // 목표 근처 도달 시 폭발
-        if (Vector3.Distance(transform.position, targetPos) < 0.2f)
-            Explode();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+       if (isExploding) return;
+       if (!other.CompareTag("Enemy")) return;
+       Explode();
     }
 
+    public void OnBoomEnd()
+    {
+        PoolManager.instance.ReleaseExplosionBullet(gameObject);
+    }
     private void Explode()
     {
         isExploding = true;
@@ -63,21 +76,5 @@ public class ExplosionBullet : MonoBehaviour
             if (hit.CompareTag("Enemy"))
                 hit.GetComponent<Enemy>()?.GetDamage(damage);
 
-        // 애니 길이만큼 기다렸다가 반납
-        float boomDuration = animator.GetCurrentAnimatorStateInfo(0).length;
-        StartCoroutine(ReleaseAfter(boomDuration));
-    }
-
-    private IEnumerator ReleaseAfter(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        PoolManager.instance.ReleaseExplosionBullet(gameObject);
-    }
-
-    // 씬 뷰에서 폭발 반경 시각화
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

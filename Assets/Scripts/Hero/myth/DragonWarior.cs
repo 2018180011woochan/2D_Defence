@@ -46,8 +46,8 @@ public class DragonWarior : BaseHero
         }
         else if (r < 0.8f)
         {
-            animator.SetTrigger("Strike");
-            yield return new WaitForSeconds(strikeAnimDelay);
+            animator.SetTrigger("Explosion");
+            yield return new WaitForSeconds(explosionAnimDelay);
 
             Vector3 targetPos = target.transform.position;
             GameObject expl = PoolManager.instance.GetExplosionBullet(transform.position);
