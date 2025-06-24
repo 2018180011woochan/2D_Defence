@@ -5,7 +5,7 @@ public class BlastBullet : MonoBehaviour
     public float speed;
     private Vector3 dir;
     private float damage;
-    private float life = 1f;
+    private float life = 2f;
 
     public void Init(Vector3 direction, float dmg)
     {

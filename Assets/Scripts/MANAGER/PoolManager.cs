@@ -50,6 +50,11 @@ public class PoolManager : MonoBehaviour
     public int diamondPopPoolSize = 20;
     private Queue<GameObject> diamondPopPool = new Queue<GameObject>();
 
+    [Header("Explosion Bullet Pool")]
+    public GameObject explosionBulletPrefab;
+    public int explosionBulletPoolSize = 20;
+    private Queue<GameObject> explosionBulletPool = new Queue<GameObject>();
+
     private void Awake()
     {
         if (instance == null)
@@ -62,6 +67,7 @@ public class PoolManager : MonoBehaviour
             InitPool(trunkBulletPool, trunkBulletPrefab, trunkBulletPoolSize);
             InitPool(DWBulletPool, DWBulletPrefab, DWBulletPoolSize);
             InitPool(blastPool, blastBulletPrefab, blastPoolSize);
+            InitPool(explosionBulletPool, explosionBulletPrefab, explosionBulletPoolSize);
             InitPool(damageTextPool, damageTextPrefab, damageTextInitSize);
             InitPool(coinPopPool, coinPopPrefab, coinPopPoolSize);
             InitPool(diamondPopPool, diamondPopPrefab, diamondPopPoolSize);
@@ -115,6 +121,10 @@ public class PoolManager : MonoBehaviour
         return GetFromPool(blastPool, blastBulletPrefab, pos);
     }
 
+    public GameObject GetExplosionBullet(Vector3 pos)
+    {
+        return GetFromPool(explosionBulletPool, explosionBulletPrefab, pos);
+    }
     public GameObject GetCoinPopup(Vector3 worldPos)
     {
         GameObject obj = coinPopPool.Count > 0 ? coinPopPool.Dequeue() : Instantiate(coinPopPrefab);
@@ -166,6 +176,11 @@ public class PoolManager : MonoBehaviour
         blastPool.Enqueue(go);
     }
 
+    public void ReleaseExplosionBullet(GameObject go)
+    {
+        go.SetActive(false);
+        explosionBulletPool.Enqueue(go);
+    }
     public GameObject GetDamageText(Vector3 position)
     {
         //return GetFromPool(damageTextPool, damageTextPrefab, position);

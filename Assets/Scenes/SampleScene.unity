@@ -15731,7 +15731,7 @@ PrefabInstance:
     - target: {fileID: 468346116397252771, guid: 77092dda5322bd3489df0cd148717df1,
         type: 3}
       propertyPath: strikeChance
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5879993249115690653, guid: 77092dda5322bd3489df0cd148717df1,
         type: 3}
