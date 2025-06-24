@@ -46,7 +46,7 @@ public class ExplosionBullet : MonoBehaviour
         lifeTimer -= Time.deltaTime;
         if (lifeTimer <= 0f)
         {
-            PoolManager.instance.ReleaseExplosionBullet(gameObject);
+            Explode();
             return;
         }
 
@@ -73,8 +73,34 @@ public class ExplosionBullet : MonoBehaviour
         // 스플래시 데미지 즉시
         var hits = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (var hit in hits)
-            if (hit.CompareTag("Enemy"))
-                hit.GetComponent<Enemy>()?.GetDamage(damage);
+        {
+            if (!hit.CompareTag("Enemy")) continue;
+            var enemy = hit.GetComponent<Enemy>();
+            if (enemy == null) continue;
 
+            // 실제 데미지 적용
+            enemy.GetDamage(damage);
+
+            // 데미지 텍스트 띄우기
+            Vector3 worldPos = hit.transform.position + Vector3.up * 0.5f;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+            // PoolManager 에서 꺼내고 캔버스에 붙이기
+            GameObject txt = PoolManager.instance.GetDamageText(Vector3.zero);
+            var canvas = GameObject.Find("Canvas_MainUI").transform;
+            txt.transform.SetParent(canvas, false);
+
+            // 로컬 좌표로 변환
+            RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvasRect, screenPos, null, out Vector2 localPos);
+
+            // 텍스트 위치 & 내용 세팅
+            var rt = txt.GetComponent<RectTransform>();
+            float xOffset = 150f; // 기존 오프셋이 필요하다면 그대로
+            rt.anchoredPosition = localPos + new Vector2(-xOffset, 0f);
+
+            txt.GetComponent<DamageText>().Show(damage);
+        }
     }
 }

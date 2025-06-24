@@ -14,10 +14,12 @@ public class DragonWarior : BaseHero
 
     private bool hasUsedStrike = false;
     private bool hasUsedExplosion = false;
+
+    private float explosionSpawnYOffset = -1.3f;
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
-        animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(0.5f);
+        
+        
 
         float r = Random.value; // 0.0 ~ 1.0
 
@@ -49,8 +51,10 @@ public class DragonWarior : BaseHero
             animator.SetTrigger("Explosion");
             yield return new WaitForSeconds(explosionAnimDelay);
 
+            Vector3 spawnPos = transform.position + Vector3.up * explosionSpawnYOffset;
+
             Vector3 targetPos = target.transform.position;
-            GameObject expl = PoolManager.instance.GetExplosionBullet(transform.position);
+            GameObject expl = PoolManager.instance.GetExplosionBullet(spawnPos);
             expl.GetComponent<ExplosionBullet>()
                 .Init(targetPos,
                       heroData.attack * explosionDamageMultiplier,
@@ -60,6 +64,8 @@ public class DragonWarior : BaseHero
         }
         else
         {
+            animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(0.5f);
             Vector3 dir = (target.transform.position - transform.position).normalized;
             GameObject bullet = PoolManager.instance.GetDWBullet(transform.position);
 
