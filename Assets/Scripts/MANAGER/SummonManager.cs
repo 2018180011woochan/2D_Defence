@@ -96,6 +96,9 @@ public class SummonManager : MonoBehaviour
     public int GetGroupCount(int row, int col)
     => cellData[row, col].instances.Count;
 
+    public HeroGrade GetGroupGrade(int row, int col)
+    => cellData[row, col].heroData.grade;
+
     /// <summary>기존 일반 소환 버튼에서 호출</summary>
     public void Summon()
     {
