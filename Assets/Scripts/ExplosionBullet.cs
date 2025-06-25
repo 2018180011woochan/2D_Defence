@@ -67,8 +67,8 @@ public class ExplosionBullet : MonoBehaviour
     private void Explode()
     {
         isExploding = true;
-        col2d.enabled = false;              // 추가 데미지 방지
-        animator.SetTrigger("Boom");        // 애니메이터 내 “Boom” 트리거
+        col2d.enabled = false;              
+        animator.SetTrigger("Boom");         
 
         // 스플래시 데미지 즉시
         var hits = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -78,26 +78,21 @@ public class ExplosionBullet : MonoBehaviour
             var enemy = hit.GetComponent<Enemy>();
             if (enemy == null) continue;
 
-            // 실제 데미지 적용
             enemy.GetDamage(damage);
 
-            // 데미지 텍스트 띄우기
             Vector3 worldPos = hit.transform.position + Vector3.up * 0.5f;
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-            // PoolManager 에서 꺼내고 캔버스에 붙이기
             GameObject txt = PoolManager.instance.GetDamageText(Vector3.zero);
             var canvas = GameObject.Find("Canvas_MainUI").transform;
             txt.transform.SetParent(canvas, false);
 
-            // 로컬 좌표로 변환
             RectTransform canvasRect = canvas.GetComponent<RectTransform>();
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvasRect, screenPos, null, out Vector2 localPos);
 
-            // 텍스트 위치 & 내용 세팅
             var rt = txt.GetComponent<RectTransform>();
-            float xOffset = 150f; // 기존 오프셋이 필요하다면 그대로
+            float xOffset = 150f; 
             rt.anchoredPosition = localPos + new Vector2(-xOffset, 0f);
 
             txt.GetComponent<DamageText>().Show(damage);

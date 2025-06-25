@@ -16,14 +16,17 @@ public class DragonWarior : BaseHero
     private bool hasUsedExplosion = false;
 
     private float explosionSpawnYOffset = -1.3f;
+
+    private Vector3 spawnPos;
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
-        
-        
+        spawnPos = transform.position + Vector3.up * explosionSpawnYOffset;
+        float r = Random.value;
 
-        float r = Random.value; // 0.0 ~ 1.0
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+        spriteRenderer.flipX = (dir.x < 0);
 
-        if (r < 0.1f)
+        if (r < 0.2f)
         {
             animator.SetTrigger("Strike");
             yield return new WaitForSeconds(strikeAnimDelay);
@@ -36,7 +39,7 @@ public class DragonWarior : BaseHero
                     Mathf.Sin(angle * Mathf.Deg2Rad),
                     0f);
 
-                GameObject blast = PoolManager.instance.GetBlastBullet(transform.position);
+                GameObject blast = PoolManager.instance.GetBlastBullet(spawnPos);
                 var bb = blast.GetComponent<BlastBullet>();
                 bb.Init(dir8, heroData.attack * blastDamageMultiplier);
 
@@ -46,12 +49,10 @@ public class DragonWarior : BaseHero
 
             yield break;
         }
-        else if (r < 0.8f)
+        else if (r < 0.4f)
         {
             animator.SetTrigger("Explosion");
             yield return new WaitForSeconds(explosionAnimDelay);
-
-            Vector3 spawnPos = transform.position + Vector3.up * explosionSpawnYOffset;
 
             Vector3 targetPos = target.transform.position;
             GameObject expl = PoolManager.instance.GetExplosionBullet(spawnPos);
@@ -66,8 +67,8 @@ public class DragonWarior : BaseHero
         {
             animator.SetTrigger("Attack");
             yield return new WaitForSeconds(0.5f);
-            Vector3 dir = (target.transform.position - transform.position).normalized;
-            GameObject bullet = PoolManager.instance.GetDWBullet(transform.position);
+            //Vector3 dir = (target.transform.position - transform.position).normalized;
+            GameObject bullet = PoolManager.instance.GetDWBullet(spawnPos);
 
             var bw = bullet.GetComponent<DWBullet>();
             bw.SetTarget(target.transform, heroData.attack);

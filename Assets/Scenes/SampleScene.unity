@@ -925,6 +925,9 @@ MonoBehaviour:
   diamondPopPrefab: {fileID: 4607960542599551914, guid: 1e23f5b59746d994397c529d6187109e,
     type: 3}
   diamondPopPoolSize: 20
+  explosionBulletPrefab: {fileID: 8793269901745385000, guid: 31e50e7eddbc23248bb18d7718c968cf,
+    type: 3}
+  explosionBulletPoolSize: 20
 --- !u!1 &186253527
 GameObject:
   m_ObjectHideFlags: 0
@@ -15736,12 +15739,12 @@ PrefabInstance:
     - target: {fileID: 5879993249115690653, guid: 77092dda5322bd3489df0cd148717df1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.57
+      value: -9.16
       objectReference: {fileID: 0}
     - target: {fileID: 5879993249115690653, guid: 77092dda5322bd3489df0cd148717df1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.02
       objectReference: {fileID: 0}
     - target: {fileID: 5879993249115690653, guid: 77092dda5322bd3489df0cd148717df1,
         type: 3}

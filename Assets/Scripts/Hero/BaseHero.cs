@@ -7,10 +7,12 @@ public abstract class BaseHero : MonoBehaviour
 
     protected Animator animator;
     protected float attackCooldown;
+    protected SpriteRenderer spriteRenderer;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         attackCooldown = heroData.attackSpeed;
     }
 
