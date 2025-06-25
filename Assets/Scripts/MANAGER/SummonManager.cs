@@ -533,7 +533,9 @@ public class SummonManager : MonoBehaviour
             for (int c = 0; c < cols; c++)
             {
                 var cell = cellData[r, c];
-                if (!cell.IsEmpty && cell.heroData.heroName == hero.heroName)
+                if (!cell.IsEmpty &&
+                    cell.heroData.heroName == hero.heroName &&
+                    cell.heroData.grade == hero.grade)
                 {
                     var go = cell.instances[cell.instances.Count - 1];
                     Destroy(go);
@@ -559,10 +561,6 @@ public class SummonManager : MonoBehaviour
                     UIManager.instance.UpdateHeroCountText(
                         GameManager.instance.getHeroCnt(),
                         GameManager.instance.getMaxHeroCnt());
-
-                    // 선택 해제
-                    //HeroSelectionManager.instance.Deselect();
-
                     return true;
                 }
             }

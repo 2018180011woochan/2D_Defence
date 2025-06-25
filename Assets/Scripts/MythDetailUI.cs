@@ -7,6 +7,7 @@ public class MythDetailUI : MonoBehaviour
     public Image heroIcon;
     public TextMeshProUGUI heroName;
     public GameObject mythAppearedPrefab;
+    public Button summonButton;
 
     public Transform requirementsContainer;
     public GameObject reqSlotPrefab;
@@ -22,6 +23,8 @@ public class MythDetailUI : MonoBehaviour
         foreach (Transform t in requirementsContainer)
             Destroy(t.gameObject);
 
+        bool canSummon = true;
+
         foreach (var reqHero in recipe.requiredHeroes)
         {
             var slot = Instantiate(reqSlotPrefab, requirementsContainer);
@@ -33,7 +36,15 @@ public class MythDetailUI : MonoBehaviour
             bool isHave = SummonManager.instance.GetisHaveHero(reqHero);
             var haveText = slot.transform.Find("isHave")
                                 .GetComponent<TextMeshProUGUI>();
-            haveText.text = isHave ? "보유" : "미보유";
+            if (isHave)
+            {
+                haveText.text = "보유";
+            }
+            else
+            {
+                haveText.text = "미보유";
+                canSummon = false;
+            }
 
             var checkGO = slot.transform.Find("Check").gameObject;
             checkGO.SetActive(isHave);
@@ -58,6 +69,8 @@ public class MythDetailUI : MonoBehaviour
                 .Find("Icon").GetComponent<Image>()
                 .sprite = reqHero.iconThumbnail;
         }
+
+        summonButton.interactable = canSummon;
     }
 
     public void OnClickSummon()
