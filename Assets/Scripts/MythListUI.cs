@@ -9,7 +9,7 @@ public class MythListUI : MonoBehaviour
 
     public GameObject buttonPrefab;
     public System.Action<HeroData> onClickHero; // 클릭된 영웅 콜백
-
+    public MythDetailUI detailUI;
     void Start()
     {
         foreach (var hd in Myths)
@@ -19,10 +19,9 @@ public class MythListUI : MonoBehaviour
             go.transform.Find("Icon")
               .GetComponent<Image>().sprite = hd.iconThumbnail;
 
-            // 클릭 시 콜백
             go.GetComponent<Button>().onClick.AddListener(() =>
             {
-                onClickHero?.Invoke(hd);
+                detailUI.Show(hd);
             });
         }
     }
