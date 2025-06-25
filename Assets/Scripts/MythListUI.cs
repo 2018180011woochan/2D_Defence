@@ -22,6 +22,9 @@ public class MythListUI : MonoBehaviour
             {
                 detailUI.Show(recipe);
             });
+
+            if (recipes.Count > 0)
+                detailUI.Show(recipes[0]);
         }
     }
 }

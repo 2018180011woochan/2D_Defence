@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DragonWarior
   m_EditorClassIdentifier: 
   heroName: DragonWarior
-  prefab: {fileID: 9034422807111464824, guid: 77092dda5322bd3489df0cd148717df1, type: 3}
+  prefab: {fileID: 4054044474545540386, guid: 77092dda5322bd3489df0cd148717df1, type: 3}
   grade: 4
   attack: 1000
   attackSpeed: 0.5

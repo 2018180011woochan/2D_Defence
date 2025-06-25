@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -244,10 +244,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1255
     y: 0
-    width: 300
+    width: 299
     height: 586
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -268,12 +268,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1555
+    x: 1554
     y: 0
-    width: 365
+    width: 366
     height: 586
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 79
     width: 460
     height: 560
   m_SerializedDataModeController:
@@ -924,9 +924,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 1128.9982, y: 727.29285, z: -1.678902}
+    m_Target: {x: 1156.8558, y: 1319.3043, z: -15.581286}
     speed: 2
-    m_Value: {x: 1128.9982, y: 727.29285, z: -1.678902}
+    m_Value: {x: 1156.8558, y: 1319.3043, z: -15.581286}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -976,9 +976,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 270.9673
+    m_Target: 1558.993
     speed: 2
-    m_Value: 270.9673
+    m_Value: 1558.993
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1279,8 +1279,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 462
-    y: 24
+    x: 461
+    y: 79
     width: 792
     height: 560
   m_SerializedDataModeController:
@@ -1381,9 +1381,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Hierarchy\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1256
-    y: 24
-    width: 298
+    x: 1255
+    y: 79
+    width: 297
     height: 560
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1399,9 +1399,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: b0b0f7ff42b2f7ff9e1efaff7a10fbffe4e8fcffb4d5fdff54dcfdffd8dcfdff7af9fdff86fffdffcc94feff04fbffff50b60000cab6000062b70000eab70000
+      m_SelectedIDs: fabc0000
+      m_LastClickedID: 48378
+      m_ExpandedIDs: c283eeff2284eeffb267f0ff72a4fdff1ef8ffff10bb0000bcbb000008bc000072bc0000fabc000008bd0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1418,7 +1418,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 10}
+        m_ClientGUIView: {fileID: 8}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1448,9 +1448,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1556
-    y: 24
-    width: 364
+    x: 1554
+    y: 79
+    width: 365
     height: 560
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 610
+    y: 665
     width: 1920
     height: 321
   m_SerializedDataModeController:
@@ -1540,10 +1540,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 571}
-    m_SelectedIDs: 80bd0000
-    m_LastClickedID: 48512
-    m_ExpandedIDs: 0000000058c000005ac000005cc000005ec0000060c0000062c0000064c0000066c0000068c000006ac000006cc000006ec0000070c0000072c0000074c0000076c0000078c000007ac000007cc000007ec0000080c0000082c0000084c00000
+    scrollPos: {x: 0, y: 451}
+    m_SelectedIDs: 66c00000
+    m_LastClickedID: 49254
+    m_ExpandedIDs: 0000000058c000005ac000005cc000005ec0000060c0000062c0000064c0000066c0000068c000006ac000006cc000006ec0000070c0000072c0000074c0000076c0000078c000007ac000007cc000007ec0000080c0000082c0000084c0000018c1000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1669,4 +1669,4 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -132742
+  m_LastSelectedObjectID: 48378

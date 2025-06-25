@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultHero: {fileID: 11400000, guid: e8ebb43781a0c4b40989fef27bc15f1a, type: 2}
   requiredHeroes:
+  - {fileID: 11400000, guid: 257b0600cbfdc004ea685a80943f29d7, type: 2}
   - {fileID: 11400000, guid: 249ae596c5afe804fbc78a5ac7b9937a, type: 2}
-  - {fileID: 11400000, guid: cfe0e6c98575e1f4ea535d93fe4507f2, type: 2}
-  - {fileID: 11400000, guid: c6e5d0dffa676cf4cae169ec2dea1bee, type: 2}
+  - {fileID: 11400000, guid: 64685582ebb69f44988395a99c8b392f, type: 2}
   requiredCount: 1

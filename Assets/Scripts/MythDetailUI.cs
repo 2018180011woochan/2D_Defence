@@ -92,6 +92,4 @@ public class MythDetailUI : MonoBehaviour
         // UI ´Ý±â
         gameObject.SetActive(false);
     }
-
-
 }
