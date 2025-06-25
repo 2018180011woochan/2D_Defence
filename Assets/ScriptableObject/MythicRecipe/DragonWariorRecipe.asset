@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
-  m_Name: Normal_Hero_01
+  m_Script: {fileID: 11500000, guid: 958f8685afc6a33438b74952f91e8c2a, type: 3}
+  m_Name: DragonWariorRecipe
   m_EditorClassIdentifier: 
-  heroName: Normal_Hero_01
-  prefab: {fileID: 78028225729063240, guid: f311017692ac67d418c66742b40d60cb, type: 3}
-  grade: 0
-  attack: 100
-  attackSpeed: 0.5
-  range: 5
+  resultHero: {fileID: 0}
+  requiredHeroes:
+  - {fileID: 0}
+  requiredCount: 1

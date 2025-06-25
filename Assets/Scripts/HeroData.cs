@@ -17,4 +17,5 @@ public class HeroData : ScriptableObject
     public int attack;
     public float attackSpeed;
     public float range;
+    public Sprite iconThumbnail;
 }

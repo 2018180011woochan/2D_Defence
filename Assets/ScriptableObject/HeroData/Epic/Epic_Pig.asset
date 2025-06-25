@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
-  m_Name: Normal_Hero_03
+  m_Name: Epic_Pig
   m_EditorClassIdentifier: 
-  heroName: Normal_Hero_03
-  prefab: {fileID: 6167722340051479110, guid: 761d3c8c661c0d748ab60b5a41db3d60, type: 3}
-  grade: 0
+  heroName: Normal_Hero_02
+  prefab: {fileID: 3612727153450303810, guid: c916808933a7e5d419d0be6f21ca4b84, type: 3}
+  grade: 2
   attack: 100
-  attackSpeed: 0.5
+  attackSpeed: 1
   range: 3

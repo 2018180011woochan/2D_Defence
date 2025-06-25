@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
-  m_Name: Normal_Hero_04
+  m_Name: Legendary_Plant
   m_EditorClassIdentifier: 
   heroName: Normal_Hero_04
   prefab: {fileID: 347470525053736541, guid: 7d452276697bc3a4a9e745fcb95f0477, type: 3}
-  grade: 0
+  grade: 3
   attack: 100
   attackSpeed: 0.8
   range: 5
