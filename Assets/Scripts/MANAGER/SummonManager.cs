@@ -65,13 +65,13 @@ public class SummonManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            InitGrid();
         }
         else Destroy(gameObject);
     }
 
-    private void Start()
+    private void InitGrid()
     {
-        // 그리드 초기화
         cellWidth = Mathf.Abs(endX - startX) / cols;
         cellHeight = Mathf.Abs(endY - startY) / rows;
         summonPos = new Vector3[rows, cols];
@@ -80,7 +80,6 @@ public class SummonManager : MonoBehaviour
         combineButtons = new CombineButton[rows, cols];
 
         for (int r = 0; r < rows; r++)
-        {
             for (int c = 0; c < cols; c++)
             {
                 summonPos[r, c] = new Vector3(
@@ -90,7 +89,6 @@ public class SummonManager : MonoBehaviour
                 );
                 cellData[r, c] = new CellData();
             }
-        }
     }
 
     public int GetGroupCount(int row, int col)
@@ -507,5 +505,89 @@ public class SummonManager : MonoBehaviour
     {
         return cell.x >= 0 && cell.x < rows
             && cell.y >= 0 && cell.y < cols;
+    }
+
+    public bool GetisHaveHero(HeroData hero)
+    {
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                var cell = cellData[r, c];
+                if (cell.heroData != null
+                    && cell.heroData.heroName == hero.heroName
+                    && cell.heroData.grade == hero.grade)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 신화 소환 시 재료 영웅 지우기
+    public bool RemoveOneHero(HeroData hero)
+    {
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                var cell = cellData[r, c];
+                if (!cell.IsEmpty && cell.heroData.heroName == hero.heroName)
+                {
+                    var go = cell.instances[cell.instances.Count - 1];
+                    Destroy(go);
+                    cell.instances.RemoveAt(cell.instances.Count - 1);
+
+                    if (cell.instances.Count == 0)
+                    {
+                        cell.heroData = null;
+                        HideSellButton(r, c);
+                        HideCombineButton(r, c);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < cell.instances.Count; i++)
+                        {
+                            cell.instances[i].transform.position =
+                                summonPos[r, c] + GetOffsetForGroup(i);
+                        }
+                    }
+
+                    GameManager.instance.setCurHeroCnt(
+                        GameManager.instance.getHeroCnt() - 1);
+                    UIManager.instance.UpdateHeroCountText(
+                        GameManager.instance.getHeroCnt(),
+                        GameManager.instance.getMaxHeroCnt());
+
+                    // 선택 해제
+                    //HeroSelectionManager.instance.Deselect();
+
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void SummonMythic(MythicRecipe recipe)
+    {
+        foreach (var req in recipe.requiredHeroes)
+        {
+            for (int i = 0; i < recipe.requiredCount; i++)
+            {
+                RemoveOneHero(req);
+            }
+        }
+
+        HeroData runtime = Instantiate(recipe.resultHero);
+        runtime.grade = HeroGrade.Mythic;
+        SummonHero(runtime);
+
+        GameManager.instance.setCurHeroCnt(
+            GameManager.instance.getHeroCnt() + 1);
+        UIManager.instance.UpdateHeroCountText(
+            GameManager.instance.getHeroCnt(),
+            GameManager.instance.getMaxHeroCnt());
     }
 }
