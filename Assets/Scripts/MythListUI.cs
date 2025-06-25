@@ -5,23 +5,22 @@ using UnityEngine.UI;
 public class MythListUI : MonoBehaviour
 {
     [Header("신화 목록")]
-    public List<HeroData> Myths;
+    public List<MythicRecipe> recipes;
 
     public GameObject buttonPrefab;
-    public System.Action<HeroData> onClickHero; // 클릭된 영웅 콜백
     public MythDetailUI detailUI;
     void Start()
     {
-        foreach (var hd in Myths)
+        foreach (var recipe in recipes)
         {
             var go = Instantiate(buttonPrefab, transform);
-            // 아이콘 이미지 설정
+
             go.transform.Find("Icon")
-              .GetComponent<Image>().sprite = hd.iconThumbnail;
+              .GetComponent<Image>().sprite = recipe.resultHero.iconThumbnail;
 
             go.GetComponent<Button>().onClick.AddListener(() =>
             {
-                detailUI.Show(hd);
+                detailUI.Show(recipe);
             });
         }
     }

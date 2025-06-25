@@ -18,3 +18,5 @@ MonoBehaviour:
   attack: 300
   attackSpeed: 2.5
   range: 7
+  iconThumbnail: {fileID: -5219337101871392587, guid: bf4df7b2c9cda4c44b372e2b47a5cb8f,
+    type: 3}

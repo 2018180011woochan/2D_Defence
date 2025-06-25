@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 958f8685afc6a33438b74952f91e8c2a, type: 3}
-  m_Name: DragonWariorRecipe
+  m_Name: test
   m_EditorClassIdentifier: 
   resultHero: {fileID: 11400000, guid: e8ebb43781a0c4b40989fef27bc15f1a, type: 2}
   requiredHeroes:
