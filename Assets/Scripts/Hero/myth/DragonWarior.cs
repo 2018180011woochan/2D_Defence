@@ -12,12 +12,19 @@ public class DragonWarior : BaseHero
     public float explosionDamageMultiplier = 30f;   
     public float explosionRadius = 2f;
 
-    private bool hasUsedStrike = false;
-    private bool hasUsedExplosion = false;
-
     private float explosionSpawnYOffset = -1.3f;
 
     private Vector3 spawnPos;
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        animator = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
         spawnPos = transform.position + Vector3.up * explosionSpawnYOffset;

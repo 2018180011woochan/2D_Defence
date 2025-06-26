@@ -51,10 +51,20 @@ public class RulletManager : MonoBehaviour
         if (Random.value < rate)
         {
             SummonManager.instance.SummonResult(grade);
+            Color msgColor;
+            switch (grade)
+            {
+                case HeroGrade.Rare: msgColor = Color.blue; break;
+                case HeroGrade.Epic: msgColor = new Color(0.6f, 0f, 0.9f); break; 
+                case HeroGrade.Legendary: msgColor = Color.yellow; break;
+                default: msgColor = Color.white; break;
+            }
+            RulletLogUI.instance.AddMessage($"{grade} ·ê·¿ ¼º°ø! ¿µ¿õÀ» ¼ÒÈ¯Çß½À´Ï´Ù.", msgColor);
         }
         else
         {
-            Debug.Log($"{grade} ·ê·¿ ½ÇÆÐ!");
+            RulletLogUI.instance.AddMessage(
+                "<color=red>·ê·¿ ½ÇÆÐ...</color>");
         }
 
         isSpinning = false;

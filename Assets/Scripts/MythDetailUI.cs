@@ -13,6 +13,12 @@ public class MythDetailUI : MonoBehaviour
     public GameObject reqSlotPrefab;
     MythicRecipe selectedRecipe;
 
+    private void OnEnable()
+    {
+        if (selectedRecipe != null)
+            Show(selectedRecipe);
+    }
+
     public void Show(MythicRecipe recipe)
     {
         gameObject.SetActive(true);

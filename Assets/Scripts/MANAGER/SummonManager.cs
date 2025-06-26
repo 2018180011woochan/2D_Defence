@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -129,36 +130,41 @@ public class SummonManager : MonoBehaviour
             existing.instances.Add(go);
             if (existing.heroData == null)
                 existing.heroData = selectHero;
-
-            return;
         }
-
-        // 빈 칸에 배치
-        if (xindex >= cols)
+        else
         {
-            xindex = 0;
-            yindex++;
+            // 빈 칸에 배치
+            if (xindex >= cols)
+            {
+                xindex = 0;
+                yindex++;
+            }
+            if (yindex >= rows)
+            {
+                Debug.LogWarning("필드에 더 이상 빈 칸이 없습니다!");
+                return;
+            }
+
+            Vector3 spawnPos = summonPos[yindex, xindex];
+            GameObject newObj = Instantiate(selectHero.prefab, spawnPos, Quaternion.identity);
+            SetShadowColor(newObj, selectHero.grade);
+
+            var sel2 = newObj.GetComponent<HeroSelectable>();
+            sel2.groupCenterPosition = spawnPos;
+            sel2.heroData = selectHero;
+            sel2.gridPos = new Vector2Int(yindex, xindex);
+
+            CellData newCell = cellData[yindex, xindex];
+            newCell.heroData = selectHero;
+            newCell.instances.Add(newObj);
+
+            xindex++;
         }
-        if (yindex >= rows)
-        {
-            Debug.LogWarning("필드에 더 이상 빈 칸이 없습니다!");
-            return;
-        }
 
-        Vector3 spawnPos = summonPos[yindex, xindex];
-        GameObject newObj = Instantiate(selectHero.prefab, spawnPos, Quaternion.identity);
-        SetShadowColor(newObj, selectHero.grade);
+        
 
-        var sel2 = newObj.GetComponent<HeroSelectable>();
-        sel2.groupCenterPosition = spawnPos;
-        sel2.heroData = selectHero;
-        sel2.gridPos = new Vector2Int(yindex, xindex);
-
-        CellData newCell = cellData[yindex, xindex];
-        newCell.heroData = selectHero;
-        newCell.instances.Add(newObj);
-
-        xindex++;
+        var quick = FindObjectOfType<QuickMythUI>();
+        if (quick != null) quick.Refresh();
     }
 
     public void SummonResult(HeroGrade grade)
@@ -255,9 +261,12 @@ public class SummonManager : MonoBehaviour
     {
         var cell = cellData[row, col];
         int curCount = cell.instances.Count;
+
         HeroGrade curGrade = cell.heroData.grade;
         HeroGrade nextGrade = (HeroGrade)Mathf.Min((int)curGrade + 1, (int)HeroGrade.Mythic);
         if (nextGrade == HeroGrade.Mythic) return;
+
+        string heroName = cell.heroData.heroName;
 
         // 그룹 내의 모든 영웅 제거 
         foreach (var go in cell.instances)
@@ -270,27 +279,67 @@ public class SummonManager : MonoBehaviour
         HeroData newHeroData = Instantiate(baseHero);
         newHeroData.grade = nextGrade;
 
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                var other = cellData[r, c];
+                if (!other.IsEmpty
+                    && other.heroData.heroName == newHeroData.heroName
+                    && other.heroData.grade == nextGrade
+                    && other.instances.Count < 3)
+                {
+                    // 편입할 그룹의 중심 및 오프셋 계산
+                    Vector3 groupPos = summonPos[r, c];
+                    Vector3 offset = GetOffsetForGroup(other.instances.Count);
+
+                    // 인스턴스 생성 및 세팅
+                    GameObject go = Instantiate(newHeroData.prefab, groupPos + offset, Quaternion.identity);
+                    SetShadowColor(go, nextGrade);
+                    var sel = go.GetComponent<HeroSelectable>();
+                    sel.heroData = newHeroData;
+                    sel.gridPos = new Vector2Int(r, c);
+                    sel.groupCenterPosition = groupPos;
+
+                    other.instances.Add(go);
+
+                    // UI 업데이트 
+                    GameManager gm = GameManager.instance;
+                    gm.setCurHeroCnt(gm.getHeroCnt() - 2);
+                    UIManager.instance.UpdateHeroCountText(
+                        gm.getHeroCnt(), gm.getMaxHeroCnt());
+
+                    HeroSelectionManager.instance.Deselect();
+                    return;
+                }
+            }
+        }
+
+        // 편입되지 않은 경우 
         Vector3 center = summonPos[row, col];
         GameObject newGO = Instantiate(newHeroData.prefab, center, Quaternion.identity);
         SetShadowColor(newGO, nextGrade);
 
         // 영웅 정보 세팅
-        var sel = newGO.GetComponent<HeroSelectable>();
-        sel.heroData = newHeroData;
-        sel.gridPos = new Vector2Int(row, col);
-        sel.groupCenterPosition = center;
+        var sel2 = newGO.GetComponent<HeroSelectable>();
+        sel2.heroData = newHeroData;
+        sel2.gridPos = new Vector2Int(row, col);
+        sel2.groupCenterPosition = center;
 
         // 셀 데이터에 등록
         cell.heroData = newHeroData;
         cell.instances.Add(newGO);
 
         // UI 업데이트
-        GameManager gm = GameManager.instance;
-        gm.setCurHeroCnt(gm.getHeroCnt() - 2);
+        GameManager gm2 = GameManager.instance;
+        gm2.setCurHeroCnt(gm2.getHeroCnt() - 2);
         UIManager.instance.UpdateHeroCountText(
-            gm.getHeroCnt(), gm.getMaxHeroCnt());
+            gm2.getHeroCnt(), gm2.getMaxHeroCnt());
 
         HeroSelectionManager.instance.Deselect();
+
+        var quick = FindObjectOfType<QuickMythUI>();
+        if (quick != null) quick.Refresh();
     }
 
     public void SellOne(int row, int col)
@@ -347,13 +396,32 @@ public class SummonManager : MonoBehaviour
     private CellData FindExistingCellInField(HeroData hero, out Vector3 position, out Vector2Int cellIndex)
     {
         for (int row = 0; row < rows; row++)
+        {
             for (int col = 0; col < cols; col++)
-                if (cellData[row, col].CanAddHero(hero))
+            {
+                var cell = cellData[row, col];
+                if (!cell.IsEmpty && cell.CanAddHero(hero))
                 {
                     position = summonPos[row, col];
                     cellIndex = new Vector2Int(row, col);
-                    return cellData[row, col];
+                    return cell;
                 }
+            }
+        }
+
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
+            {
+                var cell = cellData[row, col];
+                if (cell.IsEmpty)
+                {
+                    position = summonPos[row, col];
+                    cellIndex = new Vector2Int(row, col);
+                    return cell;
+                }
+            }
+        }
 
         position = Vector3.zero;
         cellIndex = Vector2Int.zero;
@@ -587,5 +655,28 @@ public class SummonManager : MonoBehaviour
         UIManager.instance.UpdateHeroCountText(
             GameManager.instance.getHeroCnt(),
             GameManager.instance.getMaxHeroCnt());
+    }
+
+    public bool IsRecipeReady(MythicRecipe recipe)
+    {
+        foreach (var hero in recipe.requiredHeroes)
+        {
+            int have = 0;
+            // 필드 전부 순회하며 heroData 일치 수 세기
+            for (int r = 0; r < rows; r++)
+                for (int c = 0; c < cols; c++)
+                {
+                    var cell = cellData[r, c];
+                    if (cell.heroData != null
+                     && cell.heroData.heroName == hero.heroName
+                     && cell.heroData.grade == hero.grade)
+                    {
+                        have += cell.instances.Count;
+                    }
+                }
+            if (have < recipe.requiredCount)
+                return false;
+        }
+        return true;
     }
 }

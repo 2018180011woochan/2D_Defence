@@ -12,6 +12,7 @@ public class HeroSelectable : MonoBehaviour
     private static Vector2Int currentDraggedGroup = new Vector2Int(-1, -1);
     private static bool isAnyGroupBeingDragged = false;
 
+
     private void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject())
