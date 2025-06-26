@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.EventSystems;
 public class HeroSelectable : MonoBehaviour
 {
     public HeroData heroData;
@@ -14,10 +14,11 @@ public class HeroSelectable : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         dragStartPos = Input.mousePosition;
         isDragging = true;
 
-        // ← 여기 수정: 세 번째 인자로 gridPos를 넘겨줍니다.
         HeroSelectionManager.instance
             .ToggleSelection(groupCenterPosition, heroData.range, gridPos);
     }

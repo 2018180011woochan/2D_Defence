@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 112999583511431474}
   - component: {fileID: 5868642607785583721}
   - component: {fileID: -1315448225832428463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8888431447583253967}
   - component: {fileID: 8864149633587862720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

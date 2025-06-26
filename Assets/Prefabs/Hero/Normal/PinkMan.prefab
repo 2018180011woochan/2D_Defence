@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6242074016887032539}
   - component: {fileID: -966554306099344347}
   - component: {fileID: -8850763386111994933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PinkMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7915240503071568831}
   - component: {fileID: 7460949964243252974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

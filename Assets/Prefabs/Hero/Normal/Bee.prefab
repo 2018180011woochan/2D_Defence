@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5279189581508106918}
   - component: {fileID: 5887508418224358365}
   - component: {fileID: 6513494752882531319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,8 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 384504b880f554b4d8a6f8ee40d12d53, type: 2}
-  bulletPrefab: {fileID: 973176100967341466, guid: 3c0bec92404f4424cb4d470c423cd298,
-    type: 3}
 --- !u!61 &5887508418224358365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -201,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3026224733017917751}
   - component: {fileID: 3517750666724563488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

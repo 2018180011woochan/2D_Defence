@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8755251841505129969}
   - component: {fileID: 8251211142748076994}
   - component: {fileID: -8937831916461722543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3976248974481286188}
   - component: {fileID: 8165519383892763880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

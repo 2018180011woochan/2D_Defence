@@ -12814,6 +12814,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6c2fbeaed090649b28090ee4fb4f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   rangeIndicatorPrefab: {fileID: 321286393302231193, guid: f307627cfec7bce42bf63ab104a8f119,
     type: 3}
 --- !u!1 &1281602280
@@ -13015,8 +13018,8 @@ Transform:
   - {fileID: 2084354564}
   - {fileID: 108193048}
   - {fileID: 402879665}
-  - {fileID: 137918160}
   - {fileID: 794060083}
+  - {fileID: 137918160}
   m_Father: {fileID: 2054136301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1466645137

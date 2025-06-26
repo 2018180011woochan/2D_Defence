@@ -1,11 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HeroSelectionManager : MonoBehaviour
 {
     public static HeroSelectionManager instance;
 
-    [Header("Range Indicator")]
+    [Header("영웅 전용 레이어 마스크")]
+    public LayerMask heroLayerMask;
+
+    [Header("사거리 표시")]
     public GameObject rangeIndicatorPrefab;
     private GameObject currentIndicator;
 
@@ -20,10 +25,19 @@ public class HeroSelectionManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
 
+            // Hero 레이어만 찍도록 Raycast
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hit = Physics2D.Raycast(ray.origin, ray.direction);
+            RaycastHit2D hit = Physics2D.Raycast(
+                ray.origin,
+                ray.direction, 
+                Mathf.Infinity,
+                heroLayerMask);
+
 
             if (hit.collider == null ||
                 hit.collider.GetComponent<HeroSelectable>() == null)
