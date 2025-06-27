@@ -66,12 +66,10 @@ public class StoneGolem : BaseHero
             Vector3 basePos = target.transform.position + Vector3.up * rockSpawnHeight;
             for (int i = 0; i < rockCount; i++)
             {
-                // 랜덤 오프셋
                 float dx = Random.Range(-rockSpreadX, rockSpreadX);
                 float dy = Random.Range(-rockSpreadY, rockSpreadY);
                 Vector3 spawnPos = basePos + new Vector3(dx, dy, 0);
 
-                // 돌 생성 & 초기화
                 var rock = Instantiate(rockPrefab, spawnPos, Quaternion.identity);
                 var proj = rock.GetComponent<RockProjectile>();
                 proj.Init(

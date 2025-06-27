@@ -18,7 +18,6 @@ public class RockProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        // 타겟(또는 바닥)에 부딪히면
         if (!col.CompareTag("Enemy")) return;
 
         if (impactEffectPrefab != null)
@@ -26,7 +25,6 @@ public class RockProjectile : MonoBehaviour
                         transform.position,
                         Quaternion.identity);
 
-        // 2) 범위 데미지
         var hits = Physics2D.OverlapCircleAll(transform.position, areaRange);
         foreach (var hit in hits)
         {
