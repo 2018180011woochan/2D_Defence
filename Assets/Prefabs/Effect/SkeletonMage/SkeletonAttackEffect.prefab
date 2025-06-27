@@ -9580,6 +9580,7 @@ GameObject:
   - component: {fileID: 5133420146145265893}
   - component: {fileID: 8093075944328507906}
   - component: {fileID: 7705912549030809273}
+  - component: {fileID: 177352213678909259}
   m_Layer: 0
   m_Name: SkeletonAttackEffect
   m_TagString: Untagged
@@ -14622,6 +14623,18 @@ MonoBehaviour:
     perlinColor: 0
     perlinColorSpeed: 1
   fadeOutReference: {fileID: 5133420146145265893}
+--- !u!210 &177352213678909259
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885684793579534097}
+  m_Enabled: 1
+  m_SortingLayerID: -105541197
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &5028012623289230182
 GameObject:
   m_ObjectHideFlags: 0
