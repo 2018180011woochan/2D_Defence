@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958f8685afc6a33438b74952f91e8c2a, type: 3}
+  m_Name: SkeletonMage
+  m_EditorClassIdentifier: 
+  resultHero: {fileID: 11400000, guid: c5fdd2f898ac8be42b96883c71946690, type: 2}
+  requiredHeroes:
+  - {fileID: 11400000, guid: 257b0600cbfdc004ea685a80943f29d7, type: 2}
+  - {fileID: 11400000, guid: 60d40d47d5774ed44a42ece0f7990b19, type: 2}
+  - {fileID: 11400000, guid: dd03ddbaad479ef478f2acb68b3f0098, type: 2}
+  requiredCount: 1
