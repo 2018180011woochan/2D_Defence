@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: dd03ddbaad479ef478f2acb68b3f0098, type: 2}
+  isAttackBuff: 0
   diamondChance: 0.1
   diamondAmount: 1
 --- !u!1 &7444498831951396591
@@ -201,6 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7915240503071568831}
   - component: {fileID: 7460949964243252974}
+  - component: {fileID: 7800735865111471208}
   m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
@@ -279,3 +281,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7800735865111471208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7444498831951396591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb799d7c23c9d04aa5224e097a4fd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowRenderer: {fileID: 7460949964243252974}

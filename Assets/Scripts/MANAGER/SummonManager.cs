@@ -453,19 +453,21 @@ public class SummonManager : MonoBehaviour
 
     private void SetShadowColor(GameObject heroObj, HeroGrade grade)
     {
-        Transform shadow = heroObj.transform.Find("Shadow");
-        if (shadow == null) return;
-        SpriteRenderer sr = shadow.GetComponent<SpriteRenderer>();
-        if (sr == null) return;
+        var sc = heroObj.GetComponentInChildren<ShadowController>(true);
+        if (sc == null) return;
 
+        Color c;
         switch (grade)
         {
-            case HeroGrade.Normal: sr.color = Color.gray; break;
-            case HeroGrade.Rare: sr.color = new Color(0f, 0.5f, 1f); break;
-            case HeroGrade.Epic: sr.color = new Color(0.6f, 0f, 0.9f); break;
-            case HeroGrade.Legendary: sr.color = Color.yellow; break;
-            case HeroGrade.Mythic: sr.color = new Color(1f, 0.3f, 0f); break;
+            case HeroGrade.Normal: c = Color.gray; break;
+            case HeroGrade.Rare: c = new Color(0f, 0.5f, 1f); break;
+            case HeroGrade.Epic: c = new Color(0.6f, 0f, 0.9f); break;
+            case HeroGrade.Legendary: c = Color.yellow; break;
+            case HeroGrade.Mythic: c = new Color(1f, 0.3f, 0f); break;
+            default: c = Color.white; break;
         }
+
+        sc.SetColor(c);
     }
 
     public Vector2Int GetCellIndexFromWorld(Vector3 worldPos)
