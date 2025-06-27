@@ -5012,6 +5012,7 @@ GameObject:
   - component: {fileID: 1827010927221301124}
   - component: {fileID: 303249007380954480}
   - component: {fileID: 6646533596036103019}
+  - component: {fileID: -5310844558793253421}
   m_Layer: 0
   m_Name: AttackBuff
   m_TagString: Untagged
@@ -9903,3 +9904,15 @@ MonoBehaviour:
     perlinColor: 1
     perlinColorSpeed: 3
   fadeOutReference: {fileID: 1827010927221301124}
+--- !u!210 &-5310844558793253421
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856942342784684615}
+  m_Enabled: 1
+  m_SortingLayerID: -105541197
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
