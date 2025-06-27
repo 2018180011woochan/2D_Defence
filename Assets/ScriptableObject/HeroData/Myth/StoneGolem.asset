@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
   heroName: StoneGolem
-  prefab: {fileID: 3780849813803274022, guid: f61a5f672e1a21246816847d9b050737, type: 3}
+  prefab: {fileID: 3050614234660197763, guid: f61a5f672e1a21246816847d9b050737, type: 3}
   grade: 4
   attack: 1000
   attackSpeed: 0.5
   range: 3
-  iconThumbnail: {fileID: 0}
+  iconThumbnail: {fileID: -5860724047505487328, guid: c2b8e98bb66729a419cd0be1a5df20de,
+    type: 3}

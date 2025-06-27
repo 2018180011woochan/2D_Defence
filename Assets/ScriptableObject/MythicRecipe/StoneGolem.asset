@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958f8685afc6a33438b74952f91e8c2a, type: 3}
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
-  resultHero: {fileID: 0}
-  requiredHeroes: []
+  resultHero: {fileID: 11400000, guid: 629d0df3a59bf2a4d995b964dc8eda7d, type: 2}
+  requiredHeroes:
+  - {fileID: 11400000, guid: cc18a99bafda1de4aaedbe2b1f875874, type: 2}
+  - {fileID: 11400000, guid: e4d8acfb28b6cf645857909b651da611, type: 2}
+  - {fileID: 11400000, guid: cfe0e6c98575e1f4ea535d93fe4507f2, type: 2}
   requiredCount: 1
