@@ -41,6 +41,9 @@ public abstract class BaseHero : MonoBehaviour
 
         foreach (var e in enemies)
         {
+            if (!e.activeInHierarchy)
+                continue;
+
             float d = Vector3.Distance(transform.position, e.transform.position);
             if (d < minDist && d <= heroData.range)
             {

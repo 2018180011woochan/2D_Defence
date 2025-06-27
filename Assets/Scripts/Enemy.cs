@@ -67,15 +67,12 @@ public class Enemy : MonoBehaviour
             WayPointIndex++;
     }
 
-    static int idx = 0;
     public void GetDamage(float damage)
     {
         Hp -= damage;
 
         if (Hp <= 0f)
         {
-            Debug.Log(idx);
-            idx++;
             PoolManager.instance.ReleaseMonster(this.gameObject);
             GameManager.instance.AddCoins(2);
 
