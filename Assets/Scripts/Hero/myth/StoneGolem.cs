@@ -49,7 +49,7 @@ public class StoneGolem : BaseHero
                 if (enemy != null)
                 {
                     float dmg = heroData.attack * SpcialAttackDamageMultiplier;
-                    enemy.GetDamage(dmg);
+                    //enemy.GetDamage(dmg);
                     UIManager.instance.ShowDamageTMP((int)dmg, enemy.gameObject);
                 }
             }
@@ -99,6 +99,7 @@ public class StoneGolem : BaseHero
                     UIManager.instance.ShowDamageTMP(heroData.attack, target);
                 }
             }
+            yield break;
         }
 
     }

@@ -48,17 +48,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowDamageTMP(int Damage, GameObject target)
     {
-        float minDmg = Damage - 10f;
-        float maxDmg = Damage + 10f;
-
-        float randDamage = Random.Range(minDmg, maxDmg);
-
-        Enemy enemy = target.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.GetDamage(randDamage);
-        }
-
         Vector3 worldPos = target.transform.position + Vector3.up * 0.5f;
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
@@ -79,6 +68,6 @@ public class UIManager : MonoBehaviour
         float xOffset = 150f;
         damageRect.anchoredPosition = localPos + new Vector2(-xOffset, 0);
 
-        damageTextObj.GetComponent<DamageText>().Show(randDamage);
+        damageTextObj.GetComponent<DamageText>().Show(Damage);
     }
 }

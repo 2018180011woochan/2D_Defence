@@ -22,7 +22,20 @@ public class Pig : BaseHero
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
         yield return new WaitForSeconds(attackCooldown);
-        UIManager.instance.ShowDamageTMP(heroData.attack, target);
+        
+
+        float minDmg = heroData.attack - 10f;
+        float maxDmg = heroData.attack + 10f;
+
+        float randDamage = Random.Range(minDmg, maxDmg);
+
+        Enemy enemy = target.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.GetDamage(randDamage);
+        }
+
+        UIManager.instance.ShowDamageTMP((int)randDamage, target);
 
         if (Random.value < coinChance)
         {

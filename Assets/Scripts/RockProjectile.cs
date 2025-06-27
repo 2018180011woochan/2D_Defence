@@ -30,7 +30,7 @@ public class RockProjectile : MonoBehaviour
         {
             if (!hit.CompareTag("Enemy")) continue;
             float dmg = baseAttack * multiplier;
-            hit.GetComponent<Enemy>()?.GetDamage(dmg);
+            //hit.GetComponent<Enemy>()?.GetDamage(dmg);
             UIManager.instance.ShowDamageTMP((int)dmg, hit.gameObject);
         }
 

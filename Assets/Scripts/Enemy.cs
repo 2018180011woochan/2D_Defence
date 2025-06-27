@@ -66,13 +66,16 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) < 0.1f)
             WayPointIndex++;
     }
-    
+
+    static int idx = 0;
     public void GetDamage(float damage)
     {
         Hp -= damage;
 
         if (Hp <= 0f)
         {
+            Debug.Log(idx);
+            idx++;
             PoolManager.instance.ReleaseMonster(this.gameObject);
             GameManager.instance.AddCoins(2);
 
