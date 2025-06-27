@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
   m_Name: SkeletonMage
   m_EditorClassIdentifier: 
-  heroName: 
-  prefab: {fileID: 0}
-  grade: 0
-  attack: 0
-  attackSpeed: 0
-  range: 0
+  heroName: SkeletonMage
+  prefab: {fileID: 2240540719407822160, guid: 68c90a2fb6a428347a3223ca04dcc3ba, type: 3}
+  grade: 4
+  attack: 150
+  attackSpeed: 1
+  range: 5
   iconThumbnail: {fileID: 0}

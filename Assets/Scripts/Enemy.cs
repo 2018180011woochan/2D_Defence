@@ -6,12 +6,13 @@ public class Enemy : MonoBehaviour
 {
     public float Speed = 2f;
     public float Hp = 200f;
-
+    private bool isStunned = false;
     private List<Transform> WayPoints;
     private int WayPointIndex = 0;
     private SpriteRenderer spriteRenderer;
 
     private Coroutine slowRoutine;
+    private Coroutine stunRoutine;
 
     public void Initialize(List<Transform> points)
     {
@@ -42,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (isStunned) return;
         if (WayPoints == null) return;
         
         if (WayPointIndex >= WayPoints.Count)
@@ -80,5 +82,20 @@ public class Enemy : MonoBehaviour
 
             GameManager.instance.SetMonsterCnt(monsterCount - 1);
         }
+    }
+
+    public void Stun(float duration)
+    {
+        // 이미 기절 중이면 연장
+        if (stunRoutine != null) StopCoroutine(stunRoutine);
+        stunRoutine = StartCoroutine(StunCoroutine(duration));
+    }
+
+    private IEnumerator StunCoroutine(float duration)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
+        stunRoutine = null;
     }
 }
