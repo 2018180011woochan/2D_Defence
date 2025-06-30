@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private int maxHeroCnt = 28;
     private int summonCnt = 0;
 
+    public GameObject bossPrefab;
+
     private void Awake()
     {
         instance = this;
@@ -110,6 +112,16 @@ public class GameManager : MonoBehaviour
 
             Debug.Log($"[Round {curRound}] 시작");
             float curTime = 0f;
+
+            //if (curRound % 2 == 0)
+            if (curRound  == 1)
+            {
+                Vector3 bossSpawnPos = WayPoints[0].position;
+                GameObject boss = Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity);
+
+                boss.GetComponent<Enemy>().Initialize(WayPoints);
+                Debug.Log("보스소환");
+            }
 
             while (curTime < roundTime)
             {

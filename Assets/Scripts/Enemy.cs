@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private List<Transform> WayPoints;
     private int WayPointIndex = 0;
     private SpriteRenderer spriteRenderer;
+    private Vector3 _origScale;
 
     private Coroutine slowRoutine;
     private Coroutine stunRoutine;
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _origScale = transform.localScale;
     }
 
     public void ApplySlow(float factor, float duration)
@@ -41,7 +43,7 @@ public class Enemy : MonoBehaviour
         slowRoutine = null;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (isStunned) return;
         if (WayPoints == null) return;
@@ -54,11 +56,15 @@ public class Enemy : MonoBehaviour
         // 방향 설정
         if (WayPointIndex == 3 || WayPointIndex == 0)
         {
-            transform.localScale = new Vector3(-0.1f, 0.1f, 0.1f);
+            transform.localScale = new Vector3(_origScale.x * -1,
+                                   _origScale.y,
+                                   _origScale.z);
         }
         else
         {
-            transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            transform.localScale = new Vector3(_origScale.x,
+                                   _origScale.y,
+                                   _origScale.z);
         }
 
         Transform target = WayPoints[WayPointIndex];
