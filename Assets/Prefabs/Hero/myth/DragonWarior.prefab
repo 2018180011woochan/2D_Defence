@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: e8ebb43781a0c4b40989fef27bc15f1a, type: 2}
   isAttackBuff: 0
+  AttackbuffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
+    type: 3}
   strikeChance: 0.2
   strikeAnimDelay: 0.3
   blastDamageMultiplier: 10

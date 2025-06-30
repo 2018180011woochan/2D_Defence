@@ -13,6 +13,7 @@ public abstract class BaseHero : MonoBehaviour
     public bool isAttackBuff = false;
     protected float buffTimer = 0f;                        // 남은 버프 시간
     private int originalAttack;                          // 원래 공격력
+    public GameObject AttackbuffEffectPrefab;    // Inspector 에 연결
     private GameObject buffEffectInstance;                 // 버프 이펙트 인스턴스
 
     protected virtual void Start()
@@ -54,27 +55,34 @@ public abstract class BaseHero : MonoBehaviour
         }
     }
 
-    public void ApplyAttackBuff(int multiplier, float duration, GameObject effectPrefab, Vector3 effectPos)
+    public void ApplyAttackBuff(float multiplier, float duration)
     {
-        // 이미 버프 중이면 타이머만 리셋하고 이펙트 교체
-        if (isAttackBuff)
-        {
-            buffTimer = duration;
-            if (buffEffectInstance != null)
-                Destroy(buffEffectInstance);
-        }
-        else
-        {
-            isAttackBuff = true;
-            heroData.attack *= multiplier;
-            buffTimer = duration;
-        }
+        if (buffEffectInstance != null)
+            Destroy(buffEffectInstance);
 
-        // 버프 이펙트
-        if (effectPrefab != null)
-            buffEffectInstance = Instantiate(effectPrefab, effectPos, Quaternion.identity);
+        buffEffectInstance = Instantiate(
+            AttackbuffEffectPrefab,
+            transform.position,
+            Quaternion.identity
+        );
+
+        buffEffectInstance.transform.localScale = Vector3.one;
+
+        buffEffectInstance.transform.SetParent(transform, true);
+
+        isAttackBuff = true;
+        buffTimer = duration;
+        heroData.attack = Mathf.RoundToInt(originalAttack * multiplier);
+
+        StartCoroutine(RemoveBuffEffectAfter(duration));
     }
 
+    private IEnumerator RemoveBuffEffectAfter(float t)
+    {
+        yield return new WaitForSeconds(t);
+        if (buffEffectInstance != null)
+            Destroy(buffEffectInstance);
+    }
 
     protected abstract IEnumerator ShootAfterDelay(GameObject target);
 

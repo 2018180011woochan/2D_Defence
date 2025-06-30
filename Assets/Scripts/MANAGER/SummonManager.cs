@@ -21,6 +21,9 @@ class CellData
 
     public bool CanAddHero(HeroData newHero)
     {
+        if (newHero.grade == HeroGrade.Mythic)
+            return IsEmpty;
+
         if (IsEmpty) return true;
         return heroData.heroName == newHero.heroName
             && heroData.grade == newHero.grade

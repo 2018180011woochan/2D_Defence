@@ -244,14 +244,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: c5fdd2f898ac8be42b96883c71946690, type: 2}
   isAttackBuff: 0
+  AttackbuffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
+    type: 3}
   hitEffectPrefab: {fileID: 4885684793579534097, guid: 46d4eb7c93714fb4da138f25e9a85e2f,
     type: 3}
   hitDelay: 1
   buffChance: 0.2
   buffMultiplier: 2
   buffDuration: 3
-  buffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
-    type: 3}
   buffAnimDelay: 2
   stunChance: 0.2
   stunZonePrefab: {fileID: 3120184086745879231, guid: b6b0fe0feae274d4d9a4b80dcf00ff6a,

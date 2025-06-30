@@ -129,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 384504b880f554b4d8a6f8ee40d12d53, type: 2}
   isAttackBuff: 0
+  AttackbuffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
+    type: 3}
 --- !u!61 &5887508418224358365
 BoxCollider2D:
   m_ObjectHideFlags: 0

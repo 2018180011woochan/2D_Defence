@@ -11,7 +11,7 @@ public class SkeletonMage : BaseHero
     [Range(0, 1)] public float buffChance = 0.2f;          // 발동 확률 
     public int buffMultiplier = 2;                   // 공격력 배수
     public float buffDuration = 3f;                     // 버프 지속 시간
-    public GameObject buffEffectPrefab;                 // 버프 이펙트 프리팹
+    //public GameObject buffEffectPrefab;                 // 버프 이펙트 프리팹
     public float buffAnimDelay = 2f;
 
     [Header("스킬2: 스턴 존")]
@@ -41,10 +41,7 @@ public class SkeletonMage : BaseHero
                 {
                     Vector3 effectPos = ally.transform.position;
                     ally.ApplyAttackBuff(
-                        buffMultiplier,
-                        buffDuration,
-                        buffEffectPrefab,
-                        effectPos
+                        buffMultiplier, buffDuration
                     );
                 }
             }

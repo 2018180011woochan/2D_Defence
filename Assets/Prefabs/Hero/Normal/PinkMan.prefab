@@ -190,6 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: dd03ddbaad479ef478f2acb68b3f0098, type: 2}
   isAttackBuff: 0
+  AttackbuffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
+    type: 3}
   diamondChance: 0.1
   diamondAmount: 1
 --- !u!1 &7444498831951396591

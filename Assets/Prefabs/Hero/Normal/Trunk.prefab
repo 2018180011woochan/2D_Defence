@@ -190,6 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: 86cb8ab9378149846a84df2f5502dfff, type: 2}
   isAttackBuff: 0
+  AttackbuffEffectPrefab: {fileID: 4856942342784684615, guid: 6c77daa524e858049a3f1183d7eabdab,
+    type: 3}
 --- !u!1 &3997494253069892266
 GameObject:
   m_ObjectHideFlags: 0
