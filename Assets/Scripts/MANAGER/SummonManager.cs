@@ -65,7 +65,7 @@ public class SummonManager : MonoBehaviour
     public GameObject linePrefab;           
     public RectTransform summonButtonRT;     
     public RectTransform canvasRect;         
-    public float lineThickness = 4f;         
+    public float lineThickness = 10f;         
 
     private void Awake()
     {
@@ -313,6 +313,8 @@ public class SummonManager : MonoBehaviour
                     sel.groupCenterPosition = groupPos;
 
                     other.instances.Add(go);
+
+                    StartCoroutine(ShowSummonLine(nextGrade, groupPos + offset));
 
                     // UI 업데이트 
                     GameManager gm = GameManager.instance;
@@ -717,13 +719,12 @@ public class SummonManager : MonoBehaviour
         {
             case HeroGrade.Normal: img.color = Color.gray; break;
             case HeroGrade.Rare: img.color = Color.blue; break;
-            case HeroGrade.Epic: img.color = new Color(0.6f, 0, 0.9f); break; // 보라
+            case HeroGrade.Epic: img.color = new Color(0.6f, 0, 0.9f); break; 
             case HeroGrade.Legendary: img.color = Color.yellow; break;
             case HeroGrade.Mythic: img.color = new Color(1f, 0.3f, 0f); break;
         }
 
-        // 5) 1초 대기 후 삭제
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         Destroy(lineGO);
     }
 
