@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
   m_Name: StoneGolem
   m_EditorClassIdentifier: 
-  heroName: StoneGolem
+  heroName: "\uC2A4\uD1A4 \uACE8\uB818"
   prefab: {fileID: 3050614234660197763, guid: f61a5f672e1a21246816847d9b050737, type: 3}
   grade: 4
   attack: 1000

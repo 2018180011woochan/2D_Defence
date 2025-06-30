@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
-class CellData
+public class CellData
 {
     public HeroData heroData;
     public List<GameObject> instances;
@@ -47,11 +47,12 @@ public class SummonManager : MonoBehaviour
     public static float endY = -3.7f;
 
     private Vector3[,] summonPos;
-    private CellData[,] cellData;
+    public CellData[,] cellData;
     private float cellWidth;
     private float cellHeight;
     private static int xindex = 0;
     private static int yindex = 0;
+
 
     [Header("Animation Settings")]
     public float moveDuration = 0.5f;
@@ -68,7 +69,7 @@ public class SummonManager : MonoBehaviour
     public GameObject linePrefab;           
     public RectTransform summonButtonRT;     
     public RectTransform canvasRect;         
-    public float lineThickness = 10f;         
+    public float lineThickness = 10f;
 
     private void Awake()
     {
@@ -108,7 +109,9 @@ public class SummonManager : MonoBehaviour
     public HeroGrade GetGroupGrade(int row, int col)
     => cellData[row, col].heroData.grade;
 
-    /// <summary>기존 일반 소환 버튼에서 호출</summary>
+    public Vector3 GetCellWorldPosition(int row, int col)
+    => summonPos[row, col];
+
     public void Summon()
     {
         if (!GameManager.instance.DoSummon()) return;

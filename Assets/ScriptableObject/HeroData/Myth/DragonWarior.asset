@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9513bc38996eb0349b38fb1da57381ed, type: 3}
   m_Name: DragonWarior
   m_EditorClassIdentifier: 
-  heroName: DragonWarior
+  heroName: "\uC6A9 \uC804\uC0AC"
   prefab: {fileID: 4054044474545540386, guid: 77092dda5322bd3489df0cd148717df1, type: 3}
   grade: 4
   attack: 1000

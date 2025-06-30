@@ -2695,8 +2695,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2642f9672ac1f1944b792a7a67614835, type: 2}
   - {fileID: 11400000, guid: 994d0c540a3cc2943ac93e241fbae0bb, type: 2}
   - {fileID: 11400000, guid: 9d05cb3fc2139b84cb55780e054c60a5, type: 2}
-  - {fileID: 11400000, guid: f31153a97ca6065498810668a2099a4e, type: 2}
-  - {fileID: 11400000, guid: 2642f9672ac1f1944b792a7a67614835, type: 2}
   buttonPrefab: {fileID: 1245941314144382384, guid: 1fec0635fb63df04386403cc2809d5fa,
     type: 3}
   detailUI: {fileID: 2009819456}
@@ -3083,6 +3081,11 @@ MonoBehaviour:
     type: 3}
   combineButtonPrefab: {fileID: 8102219480710958360, guid: 495d815d85109394ba641fb2115a2cfe,
     type: 3}
+  linePrefab: {fileID: 7001364668024235039, guid: ebe9cbc3c6b5f9f4f9ff7dc93a28f7b0,
+    type: 3}
+  summonButtonRT: {fileID: 2084354564}
+  canvasRect: {fileID: 589829384}
+  lineThickness: 4
 --- !u!4 &769543402
 Transform:
   m_ObjectHideFlags: 0
@@ -12592,6 +12595,8 @@ MonoBehaviour:
   WayPoints: []
   Round: 80
   roundTime: 15
+  bossPrefab: {fileID: 3332485319052191573, guid: 7c086df2d673da84fa6273df3f6d3f99,
+    type: 3}
 --- !u!1 &997239632
 GameObject:
   m_ObjectHideFlags: 0
@@ -16890,6 +16895,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!1001 &1985932276530984778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.17364
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.06538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1632664346882056426, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629357611820521416, guid: f4823c32dfdb0284fa9db4b253ad6e0e,
+        type: 3}
+      propertyPath: m_Name
+      value: ExplosionEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4823c32dfdb0284fa9db4b253ad6e0e, type: 3}
 --- !u!224 &5053047482048763911
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16965,3 +17038,4 @@ SceneRoots:
   - {fileID: 316212941}
   - {fileID: 153646013}
   - {fileID: 589829384}
+  - {fileID: 1985932276530984778}

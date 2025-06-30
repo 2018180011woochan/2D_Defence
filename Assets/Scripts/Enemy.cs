@@ -5,10 +5,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float Speed = 2f;
+    private float _baseSpeed;
     public float Hp = 200f;
     private bool isStunned = false;
     private List<Transform> WayPoints;
-    private int WayPointIndex = 0;
+    protected int WayPointIndex = 0;
     private SpriteRenderer spriteRenderer;
     private Vector3 _origScale;
 
@@ -17,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(List<Transform> points)
     {
-        
+        _baseSpeed = Speed;
         WayPoints = points;
         transform.position = WayPoints[0].position;
     }
@@ -36,10 +37,9 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator SlowCoroutine(float factor, float duration)
     {
-        float orig = Speed;
-        Speed *= factor;
+        Speed = _baseSpeed * factor;     
         yield return new WaitForSeconds(duration);
-        Speed = orig;
+        Speed = _baseSpeed;              
         slowRoutine = null;
     }
 
