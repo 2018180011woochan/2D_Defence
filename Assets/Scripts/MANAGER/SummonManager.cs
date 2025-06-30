@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [Serializable]
 class CellData
@@ -60,6 +61,12 @@ public class SummonManager : MonoBehaviour
     private CombineButton[,] combineButtons;
 
 
+    [Header("소환 궤적")]
+    public GameObject linePrefab;           
+    public RectTransform summonButtonRT;     
+    public RectTransform canvasRect;         
+    public float lineThickness = 4f;         
+
     private void Awake()
     {
         if (instance == null)
@@ -107,7 +114,6 @@ public class SummonManager : MonoBehaviour
         SummonHero(selectHero);
     }
 
-    /// <summary>실제 필드에 영웅을 배치</summary>
     public void SummonHero(HeroData selectHero)
     {
         // 같은 종류·등급 칸 검색
@@ -130,6 +136,8 @@ public class SummonManager : MonoBehaviour
             existing.instances.Add(go);
             if (existing.heroData == null)
                 existing.heroData = selectHero;
+
+            StartCoroutine(ShowSummonLine(selectHero.grade, groupPos));
         }
         else
         {
@@ -159,7 +167,9 @@ public class SummonManager : MonoBehaviour
             newCell.instances.Add(newObj);
 
             xindex++;
+            StartCoroutine(ShowSummonLine(selectHero.grade, spawnPos));
         }
+
 
         
 
@@ -177,6 +187,7 @@ public class SummonManager : MonoBehaviour
         UIManager.instance.UpdateHeroCountText(
             GameManager.instance.getHeroCnt(),
             GameManager.instance.getMaxHeroCnt());
+
     }
 
     public void ShowSellButton(int row, int col)
@@ -680,5 +691,46 @@ public class SummonManager : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    private IEnumerator ShowSummonLine(HeroGrade grade, Vector3 worldSpawnPos)
+    {
+        Vector2 btnScreen = RectTransformUtility
+            .WorldToScreenPoint(null, summonButtonRT.position);
+        Vector2 btnLocal = ToCanvasLocal(btnScreen);
+
+        Vector2 spawnScreen = Camera.main.WorldToScreenPoint(worldSpawnPos);
+        Vector2 spawnLocal = ToCanvasLocal(spawnScreen);
+
+        Vector2 diff = spawnLocal - btnLocal;
+        float distance = diff.magnitude;
+        float angleDeg = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+
+        var lineGO = Instantiate(linePrefab, canvasRect, false);
+        var rt = lineGO.GetComponent<RectTransform>();
+        rt.anchoredPosition = btnLocal + diff * 0.5f;
+        rt.sizeDelta = new Vector2(distance, lineThickness);
+        rt.localEulerAngles = new Vector3(0, 0, angleDeg);
+
+        var img = lineGO.GetComponent<Image>();
+        switch (grade)
+        {
+            case HeroGrade.Normal: img.color = Color.gray; break;
+            case HeroGrade.Rare: img.color = Color.blue; break;
+            case HeroGrade.Epic: img.color = new Color(0.6f, 0, 0.9f); break; // 보라
+            case HeroGrade.Legendary: img.color = Color.yellow; break;
+            case HeroGrade.Mythic: img.color = new Color(1f, 0.3f, 0f); break;
+        }
+
+        // 5) 1초 대기 후 삭제
+        yield return new WaitForSeconds(1f);
+        Destroy(lineGO);
+    }
+
+    private Vector2 ToCanvasLocal(Vector2 screenPos)
+    {
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvasRect, screenPos, null, out Vector2 localPos);
+        return localPos;
     }
 }
