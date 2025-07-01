@@ -12599,6 +12599,8 @@ MonoBehaviour:
     type: 3}
   roundUIPrefab: {fileID: 7501960224760310264, guid: 9d99d2d036ec3f242ba2eac526629843,
     type: 3}
+  BossAppearPrefab: {fileID: 8787971559329507878, guid: 3cddd8354bca3bf4ab9b73c41a59ac1c,
+    type: 3}
 --- !u!1 &997239632
 GameObject:
   m_ObjectHideFlags: 0

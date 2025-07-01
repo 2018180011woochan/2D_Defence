@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject roundUIPrefab;       
     private Transform _uiCanvas;
 
+    public GameObject BossAppearPrefab;
     private void Awake()
     {
         instance = this;
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
 
             if (isBossRound)
             {
+                Instantiate(BossAppearPrefab, _uiCanvas, false);
                 Vector3 bossSpawnPos = WayPoints[0].position;
                 GameObject boss = Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity);
 
