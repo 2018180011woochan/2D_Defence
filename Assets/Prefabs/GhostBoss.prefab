@@ -555,38 +555,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6112932267003584307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3291714726382446804
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7092185954992717270}
-  m_Layer: 6
-  m_Name: BossRoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7092185954992717270
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3291714726382446804}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2568506405017407726}
-  m_Father: {fileID: 8518358443754259341}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3332485319052191573
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +589,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7092185954992717270}
+  - {fileID: 2568506405017407726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &138043859738940559
@@ -714,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  Hp: 200000
+  Hp: 1500000
   healthBarPrefab: {fileID: 505677686052318394, guid: 6f0cb400cf2c95249aa598a5c0a97fc7,
     type: 3}
   warningEffectPrefab: {fileID: 8543765047616738880, guid: 37cfd8e0b57d35d4e9d200360e42cdfd,
@@ -869,7 +837,7 @@ Transform:
   - {fileID: 3167891233473381908}
   - {fileID: 6408825281976389776}
   - {fileID: 4526118209095319844}
-  m_Father: {fileID: 7092185954992717270}
+  m_Father: {fileID: 8518358443754259341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3903950201299997951
 GameObject:

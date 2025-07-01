@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +24,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject bossPrefab;
 
+    [Header("Round UI")]
+    public GameObject roundUIPrefab;       
+    private Transform _uiCanvas;
+
     private void Awake()
     {
         instance = this;
@@ -30,6 +35,8 @@ public class GameManager : MonoBehaviour
         {
             WayPoints.Add(t);
         }
+
+        _uiCanvas = GameObject.Find("Canvas_MainUI").transform;
     }
 
     private void Start()
@@ -105,6 +112,11 @@ public class GameManager : MonoBehaviour
     {
         for (int curRound = 1; curRound <= Round; curRound++)
         {
+            ShowRoundUI(curRound);
+            //bool isBossRound = (curRound % 5 == 0);
+            bool isBossRound = (curRound == 2); // 테스트용
+
+
             UIManager.instance.UpdateRoundText(curRound);
 
             // 라운드 시작 시 현재 코인의 10%만큼 더해주기
@@ -113,31 +125,54 @@ public class GameManager : MonoBehaviour
             Debug.Log($"[Round {curRound}] 시작");
             float curTime = 0f;
 
-            //if (curRound % 2 == 0)
-            if (curRound  == 1)
+            if (isBossRound)
             {
                 Vector3 bossSpawnPos = WayPoints[0].position;
                 GameObject boss = Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity);
 
                 boss.GetComponent<Enemy>().Initialize(WayPoints);
-                Debug.Log("보스소환");
-            }
 
-            while (curTime < roundTime)
+                int bossTime = 60;
+                while (bossTime > 0)
+                {
+                    UIManager.instance.UpdateTimerText(bossTime);
+                    yield return new WaitForSeconds(1f);
+                    bossTime--;
+                }
+
+                // 보스를 잡지 못했다면 게임 오버 로직 실행
+                if (boss != null)
+                    Destroy(boss);
+            }
+            else
             {
-                Vector3 spawnPos = WayPoints[0].position;
+                while (curTime < roundTime)
+                {
+                    
+                    Vector3 spawnPos = WayPoints[0].position;
 
-                GameObject enemy = PoolManager.instance.GetMonster(spawnPos);
-                enemy.GetComponent<Enemy>().Initialize(WayPoints);
-                monsterCount++;
+                    GameObject enemy = PoolManager.instance.GetMonster(spawnPos);
+                    enemy.GetComponent<Enemy>().Initialize(WayPoints);
+                    monsterCount++;
 
-                MonsterBarUI.instance.UpdateMonsterCount(monsterCount);
+                    MonsterBarUI.instance.UpdateMonsterCount(monsterCount);
 
-                yield return new WaitForSeconds(1f);
-                curTime += 1f;
-                UIManager.instance.UpdateTimerText(roundTime - curTime);
+                    yield return new WaitForSeconds(1f);
+                    curTime += 1f;
+                    UIManager.instance.UpdateTimerText(roundTime - curTime);
+                }
+                Debug.Log($"[Round {curRound}] 종료");
             }
-            Debug.Log($"[Round {curRound}] 종료");
         }
+    }
+
+    private void ShowRoundUI(int curRound)
+    {
+        GameObject uiGo = Instantiate(roundUIPrefab, _uiCanvas, false);
+
+        var tmp = uiGo.GetComponentInChildren<TextMeshProUGUI>();
+        if (tmp != null)
+            tmp.text = $"Round {curRound}";
+
     }
 }

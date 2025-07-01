@@ -39,11 +39,12 @@ public class GhostBoss : Enemy
             false                 
         );
         _barRect = _healthBarGO.GetComponent<RectTransform>();
+        StartCoroutine(BossAttackRoutine());
     }
 
     private void OnEnable()
     {
-        StartCoroutine(BossAttackRoutine());
+        
     }
     protected override void Update()
     {
@@ -107,6 +108,7 @@ public class GhostBoss : Enemy
                 Instantiate(warningEffectPrefab, pos, Quaternion.identity);
             }
             _animator.SetTrigger("Attack");
+
             yield return new WaitForSeconds(warningDuration);
 
             foreach (var idx in chosen)
