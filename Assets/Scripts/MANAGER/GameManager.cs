@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,14 +47,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(SpawnWaves());
         Coin = 30000;
         Diamond = 500;
         UIManager.instance.UpdateCoinText(Coin);
         UIManager.instance.UpdateDiamondText(Diamond);
         UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
-
-        StartCoroutine(SpawnWaves());
     }
+
 
     public int getMaxHeroCnt()
     {
@@ -170,6 +171,17 @@ public class GameManager : MonoBehaviour
                     monsterCount++;
 
                     MonsterBarUI.instance.UpdateMonsterCount(monsterCount);
+
+                    if (monsterCount >= 100)
+                    {
+                        isGameOver = true;
+                        Instantiate(GameOverNotionPrefab, _uiCanvas, false);
+
+                        yield return new WaitForSeconds(2f);
+
+                        Instantiate(ResultUIPrefab, _uiCanvas, false);
+                        yield break;
+                    }
 
                     yield return new WaitForSeconds(1f);
                     curTime += 1f;
