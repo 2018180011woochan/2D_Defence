@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject BossAppearPrefab;
     public GameObject GameOverNotionPrefab;
+    public GameObject ResultUIPrefab;
 
     public bool isGameOver = false;
     private void Awake()
@@ -148,8 +149,13 @@ public class GameManager : MonoBehaviour
                 // 보스를 잡지 못했다면 게임 오버 로직 실행
                 if (boss != null)
                 {
-                    Instantiate(GameOverNotionPrefab, _uiCanvas, false);
                     isGameOver = true;
+                    Instantiate(GameOverNotionPrefab, _uiCanvas, false);
+
+                    yield return new WaitForSeconds(2f);
+
+                    Instantiate(ResultUIPrefab, _uiCanvas, false);
+                    yield break;
                 }
             }
             else
