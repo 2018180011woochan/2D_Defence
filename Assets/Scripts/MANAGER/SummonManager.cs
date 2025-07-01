@@ -114,6 +114,7 @@ public class SummonManager : MonoBehaviour
 
     public void Summon()
     {
+        if (!GameManager.instance.isStart) return;
         if (!GameManager.instance.DoSummon()) return;
         if (!SetUiSummon()) return;
         HeroData selectHero = SelectRandomHero();

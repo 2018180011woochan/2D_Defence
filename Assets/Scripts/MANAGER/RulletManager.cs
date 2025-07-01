@@ -34,6 +34,7 @@ public class RulletManager : MonoBehaviour
 
     void TrySpin(float rate, int cost, HeroGrade grade, Animator wheelAnimator)
     {
+        if (!GameManager.instance.isStart) return;
         if (isSpinning) return;
         if (!GameManager.instance.SpendDiamonds(cost)) return;  
         StartCoroutine(SpinRoutine(rate, grade, wheelAnimator));

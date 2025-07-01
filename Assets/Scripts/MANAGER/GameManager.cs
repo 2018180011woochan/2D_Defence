@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject countdownPrefab;
 
     public bool isGameOver = false;
+    public bool isStart = false;
     private void Awake()
     {
         instance = this;
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         GameObject cdGO = Instantiate(countdownPrefab, _uiCanvas, false);
         CountDown cd = cdGO.GetComponent<CountDown>();
         yield return cd.Play();
+        isStart = true;
         StartCoroutine(SpawnWaves());
     }
 
