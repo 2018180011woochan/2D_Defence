@@ -21,6 +21,10 @@ public class StoneGolem : BaseHero
     public float hitDelay = 1.0f;
     private bool isSkillPlaying = false;
 
+    protected override void Start()
+    {
+        base.Start();
+    }
     protected override void Update()
     {
         if (isSkillPlaying) return;
@@ -29,6 +33,16 @@ public class StoneGolem : BaseHero
 
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
+
+        if (target != null)
+        {
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            float sign = dir.x < 0 ? 1f : -1f;
+            transform.localScale = new Vector3(_origScale.x * sign,
+                                               _origScale.y,
+                                               _origScale.z);
+        }
+
         float r = Random.value;
         if (r < SpcialAttackChance)
         {

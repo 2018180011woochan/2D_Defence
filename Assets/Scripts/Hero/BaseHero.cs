@@ -16,6 +16,8 @@ public abstract class BaseHero : MonoBehaviour
     public GameObject AttackbuffEffectPrefab;    // Inspector 에 연결
     private GameObject buffEffectInstance;                 // 버프 이펙트 인스턴스
 
+    protected Vector3 _origScale;
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,6 +25,7 @@ public abstract class BaseHero : MonoBehaviour
         attackCooldown = heroData.attackSpeed;
 
         originalAttack = heroData.attack;
+        _origScale = transform.localScale;
     }
 
     protected virtual void Update()

@@ -198,6 +198,10 @@ public class SummonManager : MonoBehaviour
 
     public void ShowSellButton(int row, int col)
     {
+        var cell = cellData[row, col];
+        if (cell.heroData != null && cell.heroData.grade == HeroGrade.Mythic)
+            return;
+
         if (sellButtons[row, col] == null)
         {
             GameObject go = Instantiate(sellButtonPrefab, Vector3.zero, Quaternion.identity);

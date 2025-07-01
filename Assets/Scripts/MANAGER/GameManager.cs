@@ -128,8 +128,8 @@ public class GameManager : MonoBehaviour
         for (int curRound = 1; curRound <= Round; curRound++)
         {
             ShowRoundUI(curRound);
-            //bool isBossRound = (curRound % 5 == 0);
-            bool isBossRound = (curRound == 2); // 테스트용
+            bool isBossRound = (curRound % 5 == 0);
+            //bool isBossRound = (curRound == 2); // 테스트용
 
 
             UIManager.instance.UpdateRoundText(curRound);
