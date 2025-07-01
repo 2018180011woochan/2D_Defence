@@ -118,15 +118,18 @@ public class GhostBoss : Enemy
 
                 var cell = mgr.cellData[idx.x, idx.y];
                 foreach (var hero in cell.instances)
+                {
                     Destroy(hero);
+
+                    GameManager.instance.setCurHeroCnt(
+                        GameManager.instance.getHeroCnt() - 1);
+                }
                 cell.instances.Clear();
                 cell.heroData = null;
 
                 mgr.HideSellButton(idx.x, idx.y);
                 mgr.HideCombineButton(idx.x, idx.y);
 
-                GameManager.instance.setCurHeroCnt(
-                    GameManager.instance.getHeroCnt() - 1);
             }
         }
     }

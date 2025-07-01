@@ -12650,6 +12650,8 @@ MonoBehaviour:
     type: 3}
   ResultUIPrefab: {fileID: 4305502114435554296, guid: a0ba03c962f1ba74490f9af744fed2c2,
     type: 3}
+  countdownPrefab: {fileID: 7641860354529315845, guid: 7e34935b6c1bb2b4b957cd0cb6676580,
+    type: 3}
   isGameOver: 0
 --- !u!1 &997239632
 GameObject:

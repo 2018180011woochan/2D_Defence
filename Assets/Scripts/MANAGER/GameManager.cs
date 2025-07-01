@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject BossAppearPrefab;
     public GameObject GameOverNotionPrefab;
     public GameObject ResultUIPrefab;
+    public GameObject countdownPrefab;
 
     public bool isGameOver = false;
     private void Awake()
@@ -47,7 +48,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawnWaves());
+        //StartCoroutine(SpawnWaves());
+        StartCoroutine(CountdownAndStart());
         Coin = 30000;
         Diamond = 500;
         UIManager.instance.UpdateCoinText(Coin);
@@ -55,6 +57,13 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateHeroCountText(curHeroCnt, maxHeroCnt);
     }
 
+    private IEnumerator CountdownAndStart()
+    {
+        GameObject cdGO = Instantiate(countdownPrefab, _uiCanvas, false);
+        CountDown cd = cdGO.GetComponent<CountDown>();
+        yield return cd.Play();
+        StartCoroutine(SpawnWaves());
+    }
 
     public int getMaxHeroCnt()
     {
@@ -139,7 +148,7 @@ public class GameManager : MonoBehaviour
 
                 boss.GetComponent<Enemy>().Initialize(WayPoints);
 
-                int bossTime = 5;
+                int bossTime = 60;
                 while (bossTime > 0)
                 {
                     UIManager.instance.UpdateTimerText(bossTime);
