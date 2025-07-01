@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     private Transform _uiCanvas;
 
     public GameObject BossAppearPrefab;
+    public GameObject GameOverNotionPrefab;
+
+    public bool isGameOver = false;
     private void Awake()
     {
         instance = this;
@@ -134,7 +137,7 @@ public class GameManager : MonoBehaviour
 
                 boss.GetComponent<Enemy>().Initialize(WayPoints);
 
-                int bossTime = 60;
+                int bossTime = 5;
                 while (bossTime > 0)
                 {
                     UIManager.instance.UpdateTimerText(bossTime);
@@ -144,7 +147,10 @@ public class GameManager : MonoBehaviour
 
                 // 보스를 잡지 못했다면 게임 오버 로직 실행
                 if (boss != null)
-                    Destroy(boss);
+                {
+                    Instantiate(GameOverNotionPrefab, _uiCanvas, false);
+                    isGameOver = true;
+                }
             }
             else
             {

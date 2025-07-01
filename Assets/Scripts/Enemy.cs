@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GameManager.instance.isGameOver) return;
         if (isStunned) return;
         if (WayPoints == null) return;
         

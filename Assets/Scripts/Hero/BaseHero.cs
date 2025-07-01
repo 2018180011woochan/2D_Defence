@@ -27,6 +27,8 @@ public abstract class BaseHero : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GameManager.instance.isGameOver) return;
+
         // 스켈레톤 법사에 의해 버프가 걸려잇을 때
         if (isAttackBuff)
         {
