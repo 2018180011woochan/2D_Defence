@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 6402892640280983125}
   - component: {fileID: 8076093677486865643}
   - component: {fileID: -2427674475016490130}
+  - component: {fileID: 7417388843366335587}
   m_Layer: 0
   m_Name: SellButton
   m_TagString: Untagged
@@ -273,3 +274,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 0
+--- !u!114 &7417388843366335587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102219480710958360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e4f245fed6f6d489724c7a132394bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: abdbbfd33a46f4549987385f85c536b5, type: 3}

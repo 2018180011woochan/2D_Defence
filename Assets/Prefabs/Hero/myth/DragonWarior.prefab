@@ -160,6 +160,9 @@ MonoBehaviour:
   explosionAnimDelay: 0.5
   explosionDamageMultiplier: 30
   explosionRadius: 2
+  BoneSound: {fileID: 8300000, guid: fe3d7efe3b60f9240aaf80ce3928c0b2, type: 3}
+  StrikeSound: {fileID: 8300000, guid: 83829ff414f47a048b5387e4ab33571c, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
 --- !u!114 &-7486365289731660877
 MonoBehaviour:
   m_ObjectHideFlags: 0

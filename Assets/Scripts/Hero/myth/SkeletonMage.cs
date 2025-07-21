@@ -20,9 +20,14 @@ public class SkeletonMage : BaseHero
     public float stunDuration = 3f;                         // 3√ 
     public float stunAnimDelay = 2f;
 
+    public AudioClip BoneSound;
+    public AudioClip BuffSound;
+    public AudioClip StunSound;
+
     protected override void Start()
     {
         base.Start();
+        SFXManager.instance.PlaySFX(BoneSound);
     }
     protected override IEnumerator ShootAfterDelay(GameObject target)
     {
@@ -38,8 +43,8 @@ public class SkeletonMage : BaseHero
         float r = Random.value;
         if (r < buffChance)
         {
-            animator.SetTrigger("BuffTrigger");  
-
+            animator.SetTrigger("BuffTrigger");
+            SFXManager.instance.PlaySFX(BuffSound);
             int heroLayerMask = LayerMask.GetMask("Hero");
             Collider2D[] hits = Physics2D.OverlapCircleAll(
                 transform.position,
@@ -65,7 +70,7 @@ public class SkeletonMage : BaseHero
         else if (r < stunChance + buffChance)
         {
             animator.SetTrigger("StunTrigger");
-
+            SFXManager.instance.PlaySFX(StunSound);
             Vector3 zonePos = target.transform.position;
             var zone = Instantiate(stunZonePrefab, zonePos, Quaternion.identity);
             yield return new WaitForSeconds(stunAnimDelay);

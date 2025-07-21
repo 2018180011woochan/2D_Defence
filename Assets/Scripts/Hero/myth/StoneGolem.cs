@@ -21,9 +21,14 @@ public class StoneGolem : BaseHero
     public float hitDelay = 1.0f;
     private bool isSkillPlaying = false;
 
+    public AudioClip BoneSound;
+    public AudioClip RumbleSound;
+    public AudioClip StoneSound;
+
     protected override void Start()
     {
         base.Start();
+        SFXManager.instance.PlaySFX(BoneSound);
     }
     protected override void Update()
     {
@@ -48,7 +53,7 @@ public class StoneGolem : BaseHero
         {
             isSkillPlaying = true;
             animator.SetTrigger("SpecialATrigger");
-
+            SFXManager.instance.PlaySFX(RumbleSound);
             yield return new WaitForSeconds(specialADelay);
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(
@@ -75,7 +80,7 @@ public class StoneGolem : BaseHero
         {
             isSkillPlaying = true;
             animator.SetTrigger("ClimbTrigger");
-
+            SFXManager.instance.PlaySFX(StoneSound);
 
             Vector3 basePos = target.transform.position + Vector3.up * rockSpawnHeight;
             for (int i = 0; i < rockCount; i++)

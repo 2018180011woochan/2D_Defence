@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 6402892640280983125}
   - component: {fileID: 8076093677486865643}
   - component: {fileID: 1858974961785636121}
+  - component: {fileID: 669797957154910132}
   m_Layer: 0
   m_Name: CombineButton
   m_TagString: Untagged
@@ -273,3 +274,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: 0
   col: 0
+--- !u!114 &669797957154910132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8102219480710958360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e4f245fed6f6d489724c7a132394bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}

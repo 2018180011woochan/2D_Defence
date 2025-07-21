@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
 
             if (isBossRound)
             {
+                BGMController.Instance.PlayBossBGM();
                 Instantiate(BossAppearPrefab, _uiCanvas, false);
                 Vector3 bossSpawnPos = WayPoints[0].position;
                 GameObject boss = Instantiate(bossPrefab, bossSpawnPos, Quaternion.identity);
@@ -173,6 +174,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                BGMController.Instance.PlayNormalBGM();
                 while (curTime < roundTime)
                 {
                     

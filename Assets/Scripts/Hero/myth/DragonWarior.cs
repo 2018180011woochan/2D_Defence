@@ -16,13 +16,17 @@ public class DragonWarior : BaseHero
 
     private Vector3 spawnPos;
 
-
+    public AudioClip BoneSound;
+    public AudioClip StrikeSound;
+    public AudioClip ExplosionSound;
     protected override void Start()
     {
         base.Start();
 
         animator = GetComponentInChildren<Animator>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        SFXManager.instance.PlaySFX(BoneSound);
     }
 
     protected override IEnumerator ShootAfterDelay(GameObject target)
@@ -36,6 +40,7 @@ public class DragonWarior : BaseHero
         if (r < 0.2f)
         {
             animator.SetTrigger("Strike");
+            SFXManager.instance.PlaySFX(StrikeSound);
             yield return new WaitForSeconds(strikeAnimDelay);
 
             for (int i = 0; i < 8; i++)
@@ -59,6 +64,7 @@ public class DragonWarior : BaseHero
         else if (r < 0.4f)
         {
             animator.SetTrigger("Explosion");
+            SFXManager.instance.PlaySFX(ExplosionSound);
             yield return new WaitForSeconds(explosionAnimDelay);
 
             Vector3 targetPos = target.transform.position;

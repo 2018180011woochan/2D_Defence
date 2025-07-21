@@ -258,6 +258,9 @@ MonoBehaviour:
     type: 3}
   stunDuration: 3
   stunAnimDelay: 2
+  BoneSound: {fileID: 8300000, guid: 5d29e8e0ae0ec30488915efc0bab08f2, type: 3}
+  BuffSound: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+  StunSound: {fileID: 8300000, guid: c91fcf414acc0344cb03b13996f1bf3b, type: 3}
 --- !u!114 &5111205050761944908
 MonoBehaviour:
   m_ObjectHideFlags: 0

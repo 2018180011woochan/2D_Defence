@@ -148,6 +148,9 @@ MonoBehaviour:
   rockSpreadX: 1
   rockSpreadY: 0.5
   hitDelay: 1
+  BoneSound: {fileID: 8300000, guid: 737fb279dfeec744389748850cacdde7, type: 3}
+  RumbleSound: {fileID: 8300000, guid: b7f8695cf65a4f24eb37544298821146, type: 3}
+  StoneSound: {fileID: 8300000, guid: d1afd3f4d23c24f418ffc315afb04965, type: 3}
 --- !u!114 &2905797231941173493
 MonoBehaviour:
   m_ObjectHideFlags: 0
