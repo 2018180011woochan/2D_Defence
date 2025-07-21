@@ -37,11 +37,6 @@ public class HeroSelectable : MonoBehaviour
                 Debug.Log("이미 이 그룹이 드래그 처리 중입니다.");
                 return;
             }
-            if (isAnyGroupBeingDragged && currentDraggedGroup != gridPos)
-            {
-                Debug.Log("다른 그룹이 드래그 중입니다.");
-                return;
-            }
 
             isAnyGroupBeingDragged = true;
             currentDraggedGroup = gridPos;
