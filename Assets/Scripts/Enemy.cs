@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     public float Speed = 2f;
     private float _baseSpeed;
-    public float Hp = 200f;
+    public float Hp = 2000f;
     private bool isStunned = false;
+    private bool isDead = false;
     private List<Transform> WayPoints;
     protected int WayPointIndex = 0;
     private SpriteRenderer spriteRenderer;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
         _baseSpeed = Speed;
         WayPoints = points;
         transform.position = WayPoints[0].position;
+        isDead = false;
     }
 
     private void Awake()
@@ -47,6 +49,7 @@ public class Enemy : MonoBehaviour
     {
         if (GameManager.instance.isGameOver) return;
         if (isStunned) return;
+        if (isDead) return;
         if (WayPoints == null) return;
         
         if (WayPointIndex >= WayPoints.Count)
@@ -78,16 +81,18 @@ public class Enemy : MonoBehaviour
 
     public void GetDamage(float damage)
     {
+        if (isDead) return;
         Hp -= damage;
 
         if (Hp <= 0f)
         {
+            isDead = true;
             PoolManager.instance.ReleaseMonster(this.gameObject);
             GameManager.instance.AddCoins(2);
 
-            int monsterCount = GameManager.instance.GetCurMonsterCnt();
+            //int monsterCount = GameManager.instance.GetCurMonsterCnt();
 
-            GameManager.instance.SetMonsterCnt(monsterCount - 1);
+            GameManager.instance.SetMonsterCnt(GameManager.instance.GetCurMonsterCnt() - 1);
         }
     }
 

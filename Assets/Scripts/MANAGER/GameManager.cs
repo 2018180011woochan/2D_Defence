@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     public void AddDiamonds(int diamond)
     {
         Diamond += diamond;
-        UIManager.instance.UpdateDiamondText(diamond);
+        UIManager.instance.UpdateDiamondText(Diamond);
     }
 
     public bool SpendDiamonds(int diamond)
@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
     public void SetMonsterCnt(int monsterCnt)
     {
         monsterCount = monsterCnt;
+        MonsterBarUI.instance.UpdateMonsterCount(monsterCount);
     }
 
     public bool DoSummon()

@@ -489,7 +489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &108193048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12653,6 +12653,7 @@ MonoBehaviour:
   countdownPrefab: {fileID: 7641860354529315845, guid: 7e34935b6c1bb2b4b957cd0cb6676580,
     type: 3}
   isGameOver: 0
+  isStart: 0
 --- !u!1 &997239632
 GameObject:
   m_ObjectHideFlags: 0
