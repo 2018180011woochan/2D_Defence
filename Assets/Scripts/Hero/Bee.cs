@@ -9,6 +9,7 @@ public class Bee : BaseHero
 
         Vector3 dir = (target.transform.position - transform.position).normalized;
         GameObject bullet = PoolManager.instance.GetBeeBullet(transform.position);
+        Debug.Log("°ø°Ý·Â" + heroData.attack);
         bullet.GetComponent<BeeBullet>().SetTarget(target.transform, heroData.attack);
 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();

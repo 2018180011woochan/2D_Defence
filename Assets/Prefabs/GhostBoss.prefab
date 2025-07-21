@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 2
-  Hp: 1500000
+  Hp: 2000000
   healthBarPrefab: {fileID: 505677686052318394, guid: 6f0cb400cf2c95249aa598a5c0a97fc7,
     type: 3}
   warningEffectPrefab: {fileID: 8543765047616738880, guid: 37cfd8e0b57d35d4e9d200360e42cdfd,

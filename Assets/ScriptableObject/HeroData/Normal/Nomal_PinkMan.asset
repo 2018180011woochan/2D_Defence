@@ -15,7 +15,7 @@ MonoBehaviour:
   heroName: Normal_Hero_03
   prefab: {fileID: 6167722340051479110, guid: 761d3c8c661c0d748ab60b5a41db3d60, type: 3}
   grade: 0
-  attack: 100
+  attack: 50
   attackSpeed: 0.5
   range: 3
   iconThumbnail: {fileID: -6367560908665664636, guid: d348dff3819df794186a80cb95777629,
